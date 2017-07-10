@@ -224,8 +224,7 @@ void FTC_DT::Data_Exchange(void)
 		for(u8 i=0;i<6;i++)
 			Moto_PWM[i] -= 1000;
 
-		//Send_MotoPWM(Moto_PWM[0], Moto_PWM[1], Moto_PWM[2], Moto_PWM[3], Moto_PWM[4], Moto_PWM[5],0,0);
-		Send_MotoPWM(800, 800, 800, 800, 800, 800,0,0);
+		Send_MotoPWM(Moto_PWM[0], Moto_PWM[1], Moto_PWM[2], Moto_PWM[3], Moto_PWM[4], Moto_PWM[5],0,0);
 	}	
 /////////////////////////////////////////////////////////////////////////////////////
 	else if(f.send_power)
