@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_Drv_SPI2.cpp
- * ÃèÊö    £ºSPI2
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Drv_SPI2.cpp
+ * æè¿°    ï¼šSPI2
 **********************************************************************************/
 #include "board.h"
 #include "FTC_Drv_SPI2.h"
@@ -16,12 +16,12 @@ void FTC_SPI2::Init(void)
 	RCC_APB2PeriphClockCmd(RCC_GPIO_CE2, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
 	 
-	/*ÅäÖÃ SPI_NRF_SPIµÄ SCK,MISO,MOSIÒı½Å */ 
+	/*é…ç½® SPI_NRF_SPIçš„ SCK,MISO,MOSIå¼•è„š */ 
 	GPIO_InitStructure.GPIO_Pin = SPI2_Pin_SCK| SPI2_Pin_MISO| SPI2_Pin_MOSI; 
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz; 
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; //¸´ÓÃ¹¦ÄÜ 
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; //å¤ç”¨åŠŸèƒ½ 
 	GPIO_Init(FTC_GPIO_SPI2, &GPIO_InitStructure);
-	/*ÅäÖÃSPI_NRF_SPIµÄCEÒı½Å£¬ºÍSPI_NRF_SPIµÄ CSN Òı½Å:*/
+	/*é…ç½®SPI_NRF_SPIçš„CEå¼•è„šï¼Œå’ŒSPI_NRF_SPIçš„ CSN å¼•è„š:*/
 	GPIO_InitStructure.GPIO_Pin = SPI2_Pin_CE2; 
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz; 
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 
@@ -30,22 +30,22 @@ void FTC_SPI2::Init(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz; 
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 
 	GPIO_Init(FTC_GPIO_SPI2, &GPIO_InitStructure);	
-//	/*ÅäÖÃSPI_NRF_SPIµÄIRQÒı½Å£¬*/ 
+//	/*é…ç½®SPI_NRF_SPIçš„IRQå¼•è„šï¼Œ*/ 
 //	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1; 
 //	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU ; //ÉÏÀ­ÊäÈë 
+//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU ; //ä¸Šæ‹‰è¾“å…¥ 
 //	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	
 	GPIO_SetBits(FTC_GPIO_SPI2, SPI2_Pin_CSN);
 	
-	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //Ë«ÏßÈ«Ë«¹¤ 
-	SPI_InitStructure.SPI_Mode = SPI_Mode_Master; //Ö÷Ä£Ê½ 
-	SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; //Êı¾İ´óĞ¡8Î» 
-	SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low; //Ê±ÖÓ¼«ĞÔ£¬¿ÕÏĞÊ±ÎªµÍ 
-	SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge; //µÚ1¸ö±ßÑØÓĞĞ§£¬ÉÏÉıÑØÎª²ÉÑùÊ±¿Ì 
-	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft; //NSSĞÅºÅÓÉÈí¼ş²úÉú 
-	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4; //4·ÖÆµ£¬9MHz 
-	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; //¸ßÎ»ÔÚÇ° 
+	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //åŒçº¿å…¨åŒå·¥ 
+	SPI_InitStructure.SPI_Mode = SPI_Mode_Master; //ä¸»æ¨¡å¼ 
+	SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b; //æ•°æ®å¤§å°8ä½ 
+	SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low; //æ—¶é’Ÿææ€§ï¼Œç©ºé—²æ—¶ä¸ºä½ 
+	SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge; //ç¬¬1ä¸ªè¾¹æ²¿æœ‰æ•ˆï¼Œä¸Šå‡æ²¿ä¸ºé‡‡æ ·æ—¶åˆ» 
+	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft; //NSSä¿¡å·ç”±è½¯ä»¶äº§ç”Ÿ 
+	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4; //4åˆ†é¢‘ï¼Œ9MHz 
+	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; //é«˜ä½åœ¨å‰ 
 	SPI_InitStructure.SPI_CRCPolynomial = 7; 
 	SPI_Init(SPI2, &SPI_InitStructure); 
 	/* Enable SPI2 */ 
@@ -54,11 +54,11 @@ void FTC_SPI2::Init(void)
 
 u8 FTC_SPI2::RW(u8 dat) 
 { 
-	/* µ± SPI·¢ËÍ»º³åÆ÷·Ç¿ÕÊ±µÈ´ı */ 
+	/* å½“ SPIå‘é€ç¼“å†²å™¨éç©ºæ—¶ç­‰å¾… */ 
 	while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_TXE) == RESET); 
-	/* Í¨¹ı SPI2·¢ËÍÒ»×Ö½ÚÊı¾İ */ 
+	/* é€šè¿‡ SPI2å‘é€ä¸€å­—èŠ‚æ•°æ® */ 
 	SPI_I2S_SendData(SPI2, dat); 
-	/* µ±SPI½ÓÊÕ»º³åÆ÷Îª¿ÕÊ±µÈ´ı */ 
+	/* å½“SPIæ¥æ”¶ç¼“å†²å™¨ä¸ºç©ºæ—¶ç­‰å¾… */ 
 	while (SPI_I2S_GetFlagStatus(SPI2, SPI_I2S_FLAG_RXNE) == RESET); 
 	/* Return the byte read from the SPI bus */ 
 	return SPI_I2S_ReceiveData(SPI2); 

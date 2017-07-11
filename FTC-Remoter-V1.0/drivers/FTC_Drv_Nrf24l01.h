@@ -3,10 +3,10 @@
 
 #include "board.h"
 
-#define MODEL_RX				1			//ÆÕÍ¨½ÓÊÕ
-#define MODEL_TX				2			//ÆÕÍ¨·¢ËÍ
-#define MODEL_RX2				3			//½ÓÊÕÄ£Ê½2,ÓÃÓÚË«Ïò´«Êä
-#define MODEL_TX2				4			//·¢ËÍÄ£Ê½2,ÓÃÓÚË«Ïò´«Êä
+#define MODEL_RX				1			//æ™®é€šæ¥æ”¶
+#define MODEL_TX				2			//æ™®é€šå‘é€
+#define MODEL_RX2				3			//æ¥æ”¶æ¨¡å¼2,ç”¨äºåŒå‘ä¼ è¾“
+#define MODEL_TX2				4			//å‘é€æ¨¡å¼2,ç”¨äºåŒå‘ä¼ è¾“
 
 #define RX_PLOAD_WIDTH  255  	
 #define TX_PLOAD_WIDTH  255  	
@@ -18,21 +18,21 @@ class FTC_NRF : public FTC_SPI2
 	
 public:
 	
-	//³õÊ¼»¯,model=1/2/3/4,chÎªÊµÓÃµÄÍ¨µÀºÅ
+	//åˆå§‹åŒ–,model=1/2/3/4,chä¸ºå®ç”¨çš„é€šé“å·
 	void Init(u8 model, u8 ch);	
-	//·¢ËÍÊı¾İ°ü,ÓÃÓÚmodel 2/4
+	//å‘é€æ•°æ®åŒ…,ç”¨äºmodel 2/4
 	void TxPacket(uint8_t * tx_buf, uint8_t len);	
-	//·¢ËÍÊı¾İ°ü,ÓÃÓÚmodel 3
+	//å‘é€æ•°æ®åŒ…,ç”¨äºmodel 3
 	void TxPacket_AP(uint8_t * tx_buf, uint8_t len);	
-	//¼ì²éNRFÄ£¿éÊÇ·ñÕı³£¹¤×÷
+	//æ£€æŸ¥NRFæ¨¡å—æ˜¯å¦æ­£å¸¸å·¥ä½œ
 	bool Check(void);
-	//¼ì²éÊÇ·ñÓĞÍ¨ĞÅÊÂ¼ş
+	//æ£€æŸ¥æ˜¯å¦æœ‰é€šä¿¡äº‹ä»¶
 	void Check_Event(void);
 
 private:
 
-	uint8_t NRF24L01_2_RXDATA[RX_PLOAD_WIDTH];//nrf24l01½ÓÊÕµ½µÄÊı¾İ
-	uint8_t NRF24L01_2_TXDATA[RX_PLOAD_WIDTH];//nrf24l01ĞèÒª·¢ËÍµÄÊı¾İ
+	uint8_t NRF24L01_2_RXDATA[RX_PLOAD_WIDTH];//nrf24l01æ¥æ”¶åˆ°çš„æ•°æ®
+	uint8_t NRF24L01_2_TXDATA[RX_PLOAD_WIDTH];//nrf24l01éœ€è¦å‘é€çš„æ•°æ®
 
 	uint8_t Read_Reg(uint8_t reg);
 	uint8_t Write_Reg(uint8_t reg, uint8_t value);

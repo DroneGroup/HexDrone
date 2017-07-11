@@ -21,28 +21,28 @@
 #define FTC_IMU_USE_LPF_2nd
 
 
-#define IMU_LOOP_TIME					2000	//µ¥Î»ÎªuS
-#define PID_INNER_LOOP_TIME		2000	//µ¥Î»Îªus
-#define PID_OUTER_LOOP_TIME		5000	//µ¥Î»Îªus
+#define IMU_LOOP_TIME					2000	//å•ä½ä¸ºuS
+#define PID_INNER_LOOP_TIME		2000	//å•ä½ä¸ºus
+#define PID_OUTER_LOOP_TIME		5000	//å•ä½ä¸ºus
 
-#define ACC_1G 			4096		//ÓÉ¼ÓËÙ¶È¼ÆµÄÁ¿³ÌÈ·¶¨
-#define ACC_LPF_CUT 50.0f		//¼ÓËÙ¶ÈµÍÍ¨ÂË²¨Æ÷½ØÖ¹ÆµÂÊ50Hz
-#define GYRO_LPF_CUT 130.0f		//ÍÓÂİÒÇµÍÍ¨ÂË²¨Æ÷½ØÖ¹ÆµÂÊ130Hz
+#define ACC_1G 			4096		//ç”±åŠ é€Ÿåº¦è®¡çš„é‡ç¨‹ç¡®å®š
+#define ACC_LPF_CUT 50.0f		//åŠ é€Ÿåº¦ä½é€šæ»¤æ³¢å™¨æˆªæ­¢é¢‘ç‡50Hz
+#define GYRO_LPF_CUT 130.0f		//é™€èºä»ªä½é€šæ»¤æ³¢å™¨æˆªæ­¢é¢‘ç‡130Hz
 
 #define GYRO_CF_TAU 1.8f
 /*---------------------------------------------*/
 
 
 /*----------------------Navgation--------------------*/
-#define BARO_LOOP_TIME					20000	//µ¥Î»ÎªuS
+#define BARO_LOOP_TIME					20000	//å•ä½ä¸ºuS
 #define BARO_LPF_CUT	5.0f 
 
-#define ULTRA_LOOP_TIME					20000	//µ¥Î»ÎªuS
+#define ULTRA_LOOP_TIME					20000	//å•ä½ä¸ºuS
 #define ULTRA_LPF_CUT	50.0f 
 /*--------------------------------------------------------*/
 
 
-/*-------------------ÎŞÏßÊı¾İ·¢ËÍ·½Ê½Ñ¡Ôñ-----------------*/
+/*-------------------æ— çº¿æ•°æ®å‘é€æ–¹å¼é€‰æ‹©-----------------*/
 //#define FTC_DT_USE_Bluetooth
 #define FTC_DT_USE_NRF24l01
 /*--------------------------------------------------------*/
@@ -71,7 +71,7 @@ public:
 			uint8_t LOWPOWER;
 	}f;
 	
-	//Ö¸Ê¾µÆ
+	//æŒ‡ç¤ºç¯
 	void Pilot_Light(void);
 	
 };

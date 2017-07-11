@@ -14,19 +14,19 @@ public:
 		imax = 0;
 	}
 
-	//PID²ÎÊı
+	//PIDå‚æ•°
 	float kP;
 	float kI;
 	float kD;
 	
-	//·µ»ØPID¼ÆËãµÄÖµ
+	//è¿”å›PIDè®¡ç®—çš„å€¼
 	int32_t get_pid(int32_t error, float dt);
 	int32_t get_pi(int32_t error, float dt);
 	int32_t get_p(int32_t error);
 	int32_t get_i(int32_t error, float dt);
 	int32_t get_d(int32_t error, float dt);
 	
-	//»ı·Ö¿ØÖÆÆ÷µÄÖµÇåÁã
+	//ç§¯åˆ†æ§åˆ¶å™¨çš„å€¼æ¸…é›¶
 	void reset_I(void);
 	
 	void set_pid(const float p,
@@ -38,16 +38,16 @@ public:
 	
 private:
 	
-	//»ı·ÖÉÏÏŞ
+	//ç§¯åˆ†ä¸Šé™
 	float imax;
-	//»ı·ÖÆ÷µÄÖµ
+	//ç§¯åˆ†å™¨çš„å€¼
 	float integrator; 
-	//ÉÏÒ»´ÎµÄÎó²îÊäÈë
+	//ä¸Šä¸€æ¬¡çš„è¯¯å·®è¾“å…¥
 	int32_t last_error;
-	//ÉÏÒ»´ÎµÄÎ¢·ÖÖµ£¬µÍÍ¨ÂË²¨¼ÆËãÓÃ
+	//ä¸Šä¸€æ¬¡çš„å¾®åˆ†å€¼ï¼Œä½é€šæ»¤æ³¢è®¡ç®—ç”¨
 	float	last_derivative;   
 
-	/// Î¢·ÖÏîµÄµÍÍ¨ÂË²¨Æ÷½ØÖ¹ÆµÂÊ
+	/// å¾®åˆ†é¡¹çš„ä½é€šæ»¤æ³¢å™¨æˆªæ­¢é¢‘ç‡
 	static const float  _filter;
 
 };

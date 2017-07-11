@@ -1,33 +1,33 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼þÃû  £ºFTC_Filter.cpp
- * ÃèÊö    £ºÂË²¨Æ÷Ïà¹Øº¯Êý
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Filter.cpp
+ * æè¿°    ï¼šæ»¤æ³¢å™¨ç›¸å…³å‡½æ•°
 **********************************************************************************/
 #include "FTC_Filter.h"
 
 
-/*----------------------Ò»½×µÍÍ¨ÂË²¨Æ÷ÏµÊý¼ÆËã-------------------------*/
+/*----------------------ä¸€é˜¶ä½Žé€šæ»¤æ³¢å™¨ç³»æ•°è®¡ç®—-------------------------*/
 float FTC_Filter::LPF_1st_Factor_Cal(float deltaT, float Fcut)
 {
 	return deltaT / (deltaT + 1 / (2 * M_PI * Fcut));
 }
 
-/*----------------------Ò»½×µÍÍ¨ÂË²¨Æ÷------------------------*/
+/*----------------------ä¸€é˜¶ä½Žé€šæ»¤æ³¢å™¨------------------------*/
 Vector3f FTC_Filter::LPF_1st(Vector3f oldData, Vector3f newData, float lpf_factor)
 {
 	return oldData * (1 - lpf_factor) + newData * lpf_factor;
 }
 
-/*----------------------¶þ½×µÍÍ¨ÂË²¨Æ÷ÏµÊý¼ÆËã-------------------------*/
+/*----------------------äºŒé˜¶ä½Žé€šæ»¤æ³¢å™¨ç³»æ•°è®¡ç®—-------------------------*/
 void FTC_Filter::LPF_2nd_Factor_Cal(LPF2ndData_t* lpf_data)
 {
-	//½ØÖ¹ÆµÂÊ:30Hz ²ÉÑùÆµÂÊ:500Hz
+	//æˆªæ­¢é¢‘çŽ‡:30Hz é‡‡æ ·é¢‘çŽ‡:500Hz
 	lpf_data->b0 = 0.1883633f;
 	lpf_data->a1 = 1.023694f;
 	lpf_data->a2 = 0.2120577f;
 }
 
-/*----------------------¶þ½×µÍÍ¨ÂË²¨Æ÷------------------------*/
+/*----------------------äºŒé˜¶ä½Žé€šæ»¤æ³¢å™¨------------------------*/
 Vector3f FTC_Filter::LPF_2nd(LPF2ndData_t* lpf_2nd, Vector3f newData)
 {
 	Vector3f lpf_2nd_data;
@@ -39,13 +39,13 @@ Vector3f FTC_Filter::LPF_2nd(LPF2ndData_t* lpf_2nd, Vector3f newData)
 	return lpf_2nd_data;
 }
 
-/*----------------------»¥²¹ÂË²¨Æ÷ÏµÊý¼ÆËã-------------------------*/
+/*----------------------äº’è¡¥æ»¤æ³¢å™¨ç³»æ•°è®¡ç®—-------------------------*/
 float FTC_Filter::CF_Factor_Cal(float deltaT, float tau)
 {
 	return tau / (deltaT + tau);
 }
 
-/*----------------------Ò»½×»¥²¹ÂË²¨Æ÷-----------------------------*/
+/*----------------------ä¸€é˜¶äº’è¡¥æ»¤æ³¢å™¨-----------------------------*/
 Vector3f FTC_Filter::CF_1st(Vector3f gyroData, Vector3f accData, float cf_factor)
 { 
 	return (gyroData * cf_factor + accData *(1 - cf_factor));	

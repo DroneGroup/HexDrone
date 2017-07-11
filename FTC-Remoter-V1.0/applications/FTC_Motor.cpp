@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_Motor.cpp
- * ÃèÊö    £ºµç»ú¿ØÖÆÏà¹Øº¯Êı
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Motor.cpp
+ * æè¿°    ï¼šç”µæœºæ§åˆ¶ç›¸å…³å‡½æ•°
 **********************************************************************************/
 #include "FTC_Motor.h"
 
@@ -9,23 +9,23 @@ FTC_Motor motor;
 
 void FTC_Motor::writeMotor(uint16_t throttle, int32_t pidTermRoll, int32_t pidTermPitch, int32_t pidTermYaw)
 {
-	//ÁùÖáXĞÍ
-	motorPWM[0] = throttle - 0.5 * pidTermRoll + 0.866 *  pidTermPitch + pidTermYaw; //ºóÓÒ
-	motorPWM[1] = throttle - 0.5 * pidTermRoll - 0.866 *  pidTermPitch + pidTermYaw; //Ç°ÓÒ
-	motorPWM[2] = throttle + 0.5 * pidTermRoll + 0.866 *  pidTermPitch - pidTermYaw; //ºó×ó
-	motorPWM[3] = throttle + 0.5 * pidTermRoll - 0.866 *  pidTermPitch - pidTermYaw; //Ç°×ó
-	motorPWM[4] = throttle - pidTermRoll - pidTermYaw;	//ÓÒ
-	motorPWM[5] = throttle + pidTermRoll + pidTermYaw;	//×ó
+	//å…­è½´Xå‹
+	motorPWM[0] = throttle - 0.5 * pidTermRoll + 0.866 *  pidTermPitch + pidTermYaw; //åå³
+	motorPWM[1] = throttle - 0.5 * pidTermRoll - 0.866 *  pidTermPitch + pidTermYaw; //å‰å³
+	motorPWM[2] = throttle + 0.5 * pidTermRoll + 0.866 *  pidTermPitch - pidTermYaw; //åå·¦
+	motorPWM[3] = throttle + 0.5 * pidTermRoll - 0.866 *  pidTermPitch - pidTermYaw; //å‰å·¦
+	motorPWM[4] = throttle - pidTermRoll - pidTermYaw;	//å³
+	motorPWM[5] = throttle + pidTermRoll + pidTermYaw;	//å·¦
 				
 	for (u8 i = 0; i < 6; i++) 
 		motorPWM[i] = constrain_uint16(motorPWM[i], MINTHROTTLE, MAXTHROTTLE);
 
-	//Èç¹ûÎ´½âËø£¬Ôò½«µç»úÊä³öÉèÖÃÎª×îµÍ
+	//å¦‚æœæœªè§£é”ï¼Œåˆ™å°†ç”µæœºè¾“å‡ºè®¾ç½®ä¸ºæœ€ä½
 	if(!ftc.f.ARMED || rc.rawData[THROTTLE] < 1200)	
 		for(u8 i=0; i< 6 ; i++)
 			motorPWM[i] = 1000;
 
-	//Ğ´Èëµç»úPWM
+	//å†™å…¥ç”µæœºPWM
 	pwm.SetPwm(motorPWM);
 	
 }

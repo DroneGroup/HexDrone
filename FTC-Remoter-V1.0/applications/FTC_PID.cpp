@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_PID.cpp
- * ÃèÊö    £ºPIDÔËËã¿â
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_PID.cpp
+ * æè¿°    ï¼šPIDè¿ç®—åº“
 **********************************************************************************/
 #include "FTC_PID.h"
 
@@ -15,7 +15,7 @@ int32_t FTC_PID::get_i(int32_t error, uint16_t dt)
 {
     if((kI != 0) && (dt != 0)) {
         integrator += (error * dt / 2048 ) * kI;
-				//»ı·ÖÏŞ·ù
+				//ç§¯åˆ†é™å¹…
 				integrator = constrain_int32(integrator, -imax, +imax);		
 				
         return integrator / 8192;

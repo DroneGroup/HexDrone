@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ����		 ��FTC
- * �ļ���  ��FTC_DT.cpp
- * ����    �����������շ��ʹ���
+ * 作者		 ：FTC
+ * 文件名  ：FTC_DT.cpp
+ * 描述    ：无线数据收发和处理
 **********************************************************************************/
 #include "FTC_DT.h"
 
@@ -15,13 +15,13 @@ FTC_DT dt;
 void FTC_DT::Data_Receive_Anl(u8 *data_buf,u8 num)
 {
 	u8 sum = 0;
-	u8 nohead = 1;//1Ϊ������ͷģʽ
+	u8 nohead = 1;//1为开启无头模式
 	int32_t pitch, roll;
 	
 	for(u8 i=0;i<(num-1);i++)
 		sum += *(data_buf+i);
-	if(!(sum==*(data_buf+num-1)))		return;		//�ж�sum
-	if(!(*(data_buf)==0xAA && *(data_buf+1)==0xAF))		return;		//�ж�֡ͷ
+	if(!(sum==*(data_buf+num-1)))		return;		//判断sum
+	if(!(*(data_buf)==0xAA && *(data_buf+1)==0xAF))		return;		//判断帧头
 	
 	ftc.f.FAILSAFE = 0;
 /////////////////////////////////////////////////////////////////////////////////////
@@ -53,11 +53,11 @@ void FTC_DT::Data_Receive_Anl(u8 *data_buf,u8 num)
 		{
 			
 		}
-		if(*(data_buf+4)==0XA0)		//��ȡ�汾��Ϣ
+		if(*(data_buf+4)==0XA0)		//读取版本信息
 		{
 			f.send_version = 1;
 		}
-		if(*(data_buf+4)==0XA1)		//�ָ�Ĭ�ϲ���
+		if(*(data_buf+4)==0XA1)		//恢复默认参数
 		{
 			fc.PID_Reset();
 			param.SAVE_PID();
@@ -75,7 +75,7 @@ void FTC_DT::Data_Receive_Anl(u8 *data_buf,u8 num)
 		rc.rawData[AUX3] = (vs16)(*(data_buf+16)<<8)|*(data_buf+17);
 		rc.rawData[AUX4] = (vs16)(*(data_buf+18)<<8)|*(data_buf+19);
 		
-		if(nohead)//��ͷģʽ
+		if(nohead)//无头模式
 		{
 			roll = rc.rawData[ROLL] - RC_MID;
 			pitch = rc.rawData[PITCH] - RC_MID;

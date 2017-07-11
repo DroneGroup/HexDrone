@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_Param.cpp
- * ÃèÊö    £º²ÎÊı¶ÁÈ¡ºÍ±£´æ
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Param.cpp
+ * æè¿°    ï¼šå‚æ•°è¯»å–å’Œä¿å­˜
 **********************************************************************************/
 #include "FTC_Param.h"
 #include "board.h"
@@ -40,7 +40,7 @@ uint16_t FirstInitFlag = 0x44;
 void FTC_Param::Init(void)
 {
 
-	if(READ_FirstInitFlag()!= FirstInitFlag)	//°å×Ó´ÓÎ´³õÊ¼»¯
+	if(READ_FirstInitFlag()!= FirstInitFlag)	//æ¿å­ä»æœªåˆå§‹åŒ–
 	{
 		SAVE_PID();
 	}

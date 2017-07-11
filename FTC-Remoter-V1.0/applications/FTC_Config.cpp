@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼þÃû  £ºFTC_Config.cpp
- * ÃèÊö    £ºÅäÖÃÎÄ¼þ
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Config.cpp
+ * æè¿°    ï¼šé…ç½®æ–‡ä»¶
 **********************************************************************************/
 
 #include "FTC_Config.h"
@@ -14,7 +14,7 @@ FTC_Config::FTC_Config(void)
 	f.STICKMODE = 1;
 }
 
-//Ö¸Ê¾µÆ
+//æŒ‡ç¤ºç¯
 void FTC_Config::Pilot_Light(void)
 {
 	static u8 cnt = 0;

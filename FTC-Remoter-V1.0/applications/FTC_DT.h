@@ -8,11 +8,11 @@ class FTC_DT
 	
 public:
 	
-	//¼ì²éÊÇ·ñÓĞ½ÓÊÕµ½ÎŞÏßÊı¾İ
+	//æ£€æŸ¥æ˜¯å¦æœ‰æ¥æ”¶åˆ°æ— çº¿æ•°æ®
 	void Check_Event(void);
-	//Êı¾İ·¢ËÍ
+	//æ•°æ®å‘é€
 	void Data_Exchange(void);
-	//Ê§¿Ø±£»¤¼ì²é
+	//å¤±æ§ä¿æŠ¤æ£€æŸ¥
 	void Failsafe_Check(void);
 
 	class flag{

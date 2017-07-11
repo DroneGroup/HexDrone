@@ -3,8 +3,8 @@
 
 #include "stm32f10x.h"
 
-extern u8 Rx_Buf[2][32];	//Á½¸ö32×Ö½ÚµÄ´®¿Ú½ÓÊÕ»º´æ
-extern u8 Rx_Ok0;		//½ÓÊÕÍê±Ï±êÖ¾
+extern u8 Rx_Buf[2][32];	//ä¸¤ä¸ª32å­—èŠ‚çš„ä¸²å£æ¥æ”¶ç¼“å­˜
+extern u8 Rx_Ok0;		//æ¥æ”¶å®Œæ¯•æ ‡å¿—
 extern u8 Rx_Ok1;
 
 void Uart1_Init(u32 br_num);

@@ -26,9 +26,9 @@ private:
 	void I2C_Stop(void);
 	void I2C_Ack(void); 
 	void I2C_NoAck(void);
-	int I2C_WaitAck(void); 	 //·µ»ØÎª:=1ÓĞACK,=0ÎŞACK
+	int I2C_WaitAck(void); 	 //è¿”å›ä¸º:=1æœ‰ACK,=0æ— ACK
 	void I2C_SendByte(u8 SendByte);
-	u8 I2C_ReadByte(void);  //Êı¾İ´Ó¸ßÎ»µ½µÍÎ»//
+	u8 I2C_ReadByte(void);  //æ•°æ®ä»é«˜ä½åˆ°ä½ä½//
 };
 
 

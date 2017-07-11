@@ -3,7 +3,7 @@
 
 #include "FTC_Config.h"
 
-#define FLYANGLE_MAX 350  //×î´ó·ÉĞĞÇã½Ç35¶È
+#define FLYANGLE_MAX 350  //æœ€å¤§é£è¡Œå€¾è§’35åº¦
 
 enum {
     PIDROLL,
@@ -35,16 +35,16 @@ public:
 	void PID_Reset(void);
 	void AltHoldReset(void);
 
-	//×ËÌ¬Íâ»·¿ØÖÆ
+	//å§¿æ€å¤–ç¯æ§åˆ¶
 	void Attitude_Outter_Loop(void);
 
-	//×ËÌ¬ÄÚ»·¿ØÖÆ
+	//å§¿æ€å†…ç¯æ§åˆ¶
 	void Attitude_Inner_Loop(void);
 
-	//¸ß¶ÈÍâ»·¿ØÖÆ
+	//é«˜åº¦å¤–ç¯æ§åˆ¶
 	void Altitude_Outter_Loop(void);
 
-	//¸ß¶ÈÄÚ»·¿ØÖÆ
+	//é«˜åº¦å†…ç¯æ§åˆ¶
 	void Altitude_Inner_Loop(void);
 
 private:

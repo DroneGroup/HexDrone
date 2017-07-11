@@ -1,21 +1,21 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼þÃû  £ºFtcRemoter.cpp
- * ÃèÊö    £ºFilter´´ÐÂÃÔÄãÊÖ³ÖÒ£¿ØÆ÷
- * ´úÂë°æ±¾£ºV1.0 
- * Ê±¼ä		 £º2015/12/1 
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFtcRemoter.cpp
+ * æè¿°    ï¼šFilteråˆ›æ–°è¿·ä½ æ‰‹æŒé¥æŽ§å™¨
+ * ä»£ç ç‰ˆæœ¬ï¼šV1.0 
+ * æ—¶é—´		 ï¼š2015/12/1 
 **********************************************************************************/
 #include "FTC_Config.h"
 
 int main(void)
 {
-	//³õÊ¼»¯Ò£¿ØÆ÷µÄÓ²¼þÉèÖÃ
+	//åˆå§‹åŒ–é¥æŽ§å™¨çš„ç¡¬ä»¶è®¾ç½®
 	FTC_Remoter_board_Init();
 	
-	//³õÊ¼»¯²ÎÊý
+	//åˆå§‹åŒ–å‚æ•°
 	param.Init();
 	
-	//³õÊ¼»¯IMU£¨¹ßÐÔ²âÁ¿µ¥Ôª£©
+	//åˆå§‹åŒ–IMUï¼ˆæƒ¯æ€§æµ‹é‡å•å…ƒï¼‰
 	imu.Init();		
 	
 	while(1)

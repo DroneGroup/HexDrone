@@ -39,9 +39,9 @@ private:
 	}factor;
 	
 	float accVelScale;
-	//加速度死区
+	//鍔犻�熷害姝诲尯
 	Vector3f accDeadband;
-	//真实重力加速度
+	//鐪熷疄閲嶅姏鍔犻�熷害
 	int32_t GRAVITY_MSS;
 
  	int32_t lastBaroAlt, lastUltraAlt;
@@ -50,9 +50,9 @@ private:
 	
 	uint8_t ULTRA_IS_OK;
 	
-	//滤波器参数初始化
+	//婊ゆ尝鍣ㄥ弬鏁板垵濮嬪寲
 	void filter_Init(void);
-	//传感器初始化
+	//浼犳劅鍣ㄥ垵濮嬪寲
 	void sensor_Init(void);
 
 };

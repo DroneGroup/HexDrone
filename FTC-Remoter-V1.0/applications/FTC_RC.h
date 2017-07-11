@@ -28,10 +28,10 @@ public:
 	uint16_t KeyDataL,KeyDataR;
 	float KeyDataRawL,KeyDataRawR;
 
-	//²ÎÊı³õÊ¼»¯
+	//å‚æ•°åˆå§‹åŒ–
 	void Init(void);
 	
-	//½«ADC²ÉÑùÖµ×ªÎªÒ£¿ØÍ¨µÀÊı¾İ
+	//å°†ADCé‡‡æ ·å€¼è½¬ä¸ºé¥æ§é€šé“æ•°æ®
 	void DataGet(void);
 
 	void DataCalculate(void);

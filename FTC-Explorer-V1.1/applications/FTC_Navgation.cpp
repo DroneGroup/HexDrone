@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC *******************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_Navgation.cpp
- * ÃèÊö    £º·ÉĞĞÆ÷×éºÏµ¼º½
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Navgation.cpp
+ * æè¿°    ï¼šé£è¡Œå™¨ç»„åˆå¯¼èˆª
 **********************************************************************************/
 #include "FTC_Navgation.h"
 #include <math.h>
@@ -39,7 +39,7 @@ void FTC_Navgation::update(void)
 	
 	Vector3f accel_ef, velocity_I;
 	
-	//·¢ËÍUS100³¬Éù²¨²â¾àĞÅºÅ
+	//å‘é€US100è¶…å£°æ³¢æµ‹è·ä¿¡å·
 	if(ultraCnt == 10 || uart3.RxState3 == 2){	
 			uart3.RxState3 = 0;
 			uart3.Put_Char(0x55);		
@@ -48,14 +48,14 @@ void FTC_Navgation::update(void)
 			deltaT = (GetSysTime_us() - lastTimeUltra) * 1e-6;
 			lastTimeUltra = GetSysTime_us();
 		
-			//»ñÈ¡³¬Éù²¨¸ß¶È²¢µÍÍ¨ÂË²¨
+			//è·å–è¶…å£°æ³¢é«˜åº¦å¹¶ä½é€šæ»¤æ³¢
 			ultraAlt = Ultra_LPF_2nd(&ultra_lpf_2nd, (float)ultraAltRaw);	
-			//¼ÆËã³¬Éù²¨±ä»¯ËÙ¶È
+			//è®¡ç®—è¶…å£°æ³¢å˜åŒ–é€Ÿåº¦
 			ultraVel = (ultraAlt - lastUltraAlt) / deltaT;
 			lastUltraAlt = ultraAlt;
-			//ÏŞÖÆÆøÑ¹±ä»¯µÄËÙ¶È£¬Õı¸º800cm/s
+			//é™åˆ¶æ°”å‹å˜åŒ–çš„é€Ÿåº¦ï¼Œæ­£è´Ÿ800cm/s
 			ultraVel = constrain_int32(ultraVel, -8000, 8000);    
-			//Ôö¼ÓËÀÇø¼õĞ¡ÔëÉù
+			//å¢åŠ æ­»åŒºå‡å°å™ªå£°
 			ultraVel = applyDeadband(ultraVel, 100); 		
 		
 			if(ultraAltRaw == lastUltraAlt)
@@ -76,7 +76,7 @@ void FTC_Navgation::update(void)
 	ultraCnt++;
 	
 	if(baroCnt == 5){
-		//ÆøÑ¹´«¸ĞÆ÷Êı¾İ¸üĞÂ
+		//æ°”å‹ä¼ æ„Ÿå™¨æ•°æ®æ›´æ–°
 		ms5611.Update();
 	}
 	else if(baroCnt == 10){
@@ -84,35 +84,35 @@ void FTC_Navgation::update(void)
 		lastTimeBaro = GetSysTime_us();
 		baroCnt = 0;
 		
-		//ÆøÑ¹´«¸ĞÆ÷Êı¾İ¸üĞÂ
+		//æ°”å‹ä¼ æ„Ÿå™¨æ•°æ®æ›´æ–°
 		ms5611.Update();
 		
-		//»ñÈ¡ÆøÑ¹¸ß¶È²¢µÍÍ¨ÂË²¨£¨ÒÑĞ£ÁãÆ«£©
+		//è·å–æ°”å‹é«˜åº¦å¹¶ä½é€šæ»¤æ³¢ï¼ˆå·²æ ¡é›¶åï¼‰
 		baroAlt = Baro_LPF_2nd(&baro_lpf_2nd, (float)ms5611.Get_BaroAlt());	
 		
-		//¼ÆËãÆøÑ¹±ä»¯ËÙ¶È
+		//è®¡ç®—æ°”å‹å˜åŒ–é€Ÿåº¦
 		baroVel = (baroAlt -lastBaroAlt) / deltaT;
 		lastBaroAlt = baroAlt;
-		//ÏŞÖÆÆøÑ¹±ä»¯µÄËÙ¶È£¬Õı¸º800cm/s
+		//é™åˆ¶æ°”å‹å˜åŒ–çš„é€Ÿåº¦ï¼Œæ­£è´Ÿ800cm/s
     baroVel = constrain_int32(baroVel, -800, 800);    
-		//Ôö¼ÓËÀÇø¼õĞ¡ÔëÉù
+		//å¢åŠ æ­»åŒºå‡å°å™ªå£°
     baroVel = applyDeadband(baroVel, 10);    
 
 		if(ULTRA_IS_OK){
 			velocity_I.z += ultraVel - velocity.z;
-			//zÖáËÙ¶È
+			//zè½´é€Ÿåº¦
 			velocity.z = velocity.z * factor.velz_ultra_cf + ultraVel * 0.1 * (1 - factor.velz_ultra_cf) ;//+ velocity_I.z * factor.velz_cf_ki;
-			//zÖá¸ß¶È	
+			//zè½´é«˜åº¦	
 			position.z = position.z * factor.ultra_cf + ultraAlt * 0.1 * (1 - factor.ultra_cf);			
 			
 			baroOffset += 0.001 * (float)(ultraAlt * 0.1  - baroAlt);
 		}
 		else{
-			//»¥²¹ÂË²¨Ğ£Õı»ı·ÖÆ«ÒÆ
+			//äº’è¡¥æ»¤æ³¢æ ¡æ­£ç§¯åˆ†åç§»
 			velocity_I.z += baroVel - velocity.z;
-			//zÖáËÙ¶È
+			//zè½´é€Ÿåº¦
 			velocity.z = velocity.z * factor.velz_baro_cf + baroVel * (1 - factor.velz_baro_cf) + velocity_I.z * factor.velz_cf_ki;
-			//zÖá¸ß¶È	
+			//zè½´é«˜åº¦	
 			position.z = position.z * factor.baro_cf + (baroAlt + baroOffset) * (1 - factor.baro_cf);
 			
 			if(abs(baroAlt - position.z)> 200)
@@ -124,30 +124,30 @@ void FTC_Navgation::update(void)
 	deltaT = (GetSysTime_us() - lastTimeInertia) * 1e-6;
 	lastTimeInertia = GetSysTime_us();
 	
-	//»ñÈ¡·ÉĞĞÆ÷µÄ¼ÓËÙ¶ÈÔÚµØÀí×ø±êÏµµÄÍ¶Ó°
+	//è·å–é£è¡Œå™¨çš„åŠ é€Ÿåº¦åœ¨åœ°ç†åæ ‡ç³»çš„æŠ•å½±
 	accel_ef = imu.Get_Accel_Ef();
 	
-	//¼ÆËãÕæÊµÖØÁ¦¼ÓËÙ¶È
+	//è®¡ç®—çœŸå®é‡åŠ›åŠ é€Ÿåº¦
 	if (!ftc.f.ARMED) {
 			GRAVITY_MSS -= GRAVITY_MSS / 64;
 			GRAVITY_MSS += accel_ef.z;
 	}
 	accel_ef.z -= GRAVITY_MSS / 64;
 	
-	//Ôö¼ÓËÀÇø£¬¼õĞ¡¼ÓËÙ¶È»ı·ÖÆ¯ÒÆ
+	//å¢åŠ æ­»åŒºï¼Œå‡å°åŠ é€Ÿåº¦ç§¯åˆ†æ¼‚ç§»
 	accel.x = (float)applyDeadband(accel_ef.x, accDeadband.x) * accVelScale;
-	accel.y = -(float)applyDeadband(accel_ef.y, accDeadband.y) * accVelScale; //yÖá¼ÓËÙ¶ÈÈ¡·´£¬ÊÇÒòÎªÒª½«Î÷±±Ìì×ø±êÏµ×ª»¯Îª¶«±±Ìì
+	accel.y = -(float)applyDeadband(accel_ef.y, accDeadband.y) * accVelScale; //yè½´åŠ é€Ÿåº¦å–åï¼Œæ˜¯å› ä¸ºè¦å°†è¥¿åŒ—å¤©åæ ‡ç³»è½¬åŒ–ä¸ºä¸œåŒ—å¤©
 	accel.z = (float)applyDeadband(accel_ef.z, accDeadband.z) * accVelScale;
 	
-	//¶ş½×Áú¸ñ¿âËş»ı·Ö³öÎ»ÒÆ s += v * t
+	//äºŒé˜¶é¾™æ ¼åº“å¡”ç§¯åˆ†å‡ºä½ç§» s += v * t
 	position += (velocity + velocity_last) * deltaT * 0.5;
 	
-	//¸üĞÂËÙ¶ÈÀúÊ·Öµ
+	//æ›´æ–°é€Ÿåº¦å†å²å€¼
 	velocity_last = velocity;
 	
-	//¶ş½×Áú¸ñ¿âËş»ı·Ö³öËÙ¶È v = a*t
+	//äºŒé˜¶é¾™æ ¼åº“å¡”ç§¯åˆ†å‡ºé€Ÿåº¦ v = a*t
 	velocity += (accel + accel_last) * deltaT * 0.5;	
-	//¸üĞÂ¼ÓËÙ¶ÈÀúÊ·Öµ
+	//æ›´æ–°åŠ é€Ÿåº¦å†å²å€¼
 	accel_last = accel;
 }
 
@@ -167,6 +167,6 @@ void FTC_Navgation::filter_Init()
 
 void FTC_Navgation::sensor_Init()
 {
-	//³õÊ¼»¯ÆøÑ¹¼Æ
+	//åˆå§‹åŒ–æ°”å‹è®¡
 	ms5611.Init();
 }
