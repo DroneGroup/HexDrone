@@ -13,12 +13,12 @@ class Vector3
 public:
     T	x, y, z;
 
-		//¹¹Ôìº¯Êı£¬³õÊ¼»¯ÏòÁ¿ÖµÎª0
+		//æ„é€ å‡½æ•°ï¼Œåˆå§‹åŒ–å‘é‡å€¼ä¸º0
     Vector3<T>() {
         x = y = z = 0;
     }
 		
-		//¸³Öµ¹¹Ôìº¯Êı
+		//èµ‹å€¼æ„é€ å‡½æ•°
     Vector3<T>(const T x0, const T y0, const T z0) : x(x0), y(y0), z(z0) {
     }		
 		
@@ -27,83 +27,83 @@ public:
         x= x0; y= y0; z= z0;
     }		
 		
-		//ÏòÁ¿Ğı×ª
+		//å‘é‡æ—‹è½¬
 		void rotate(enum Rotation rotation);
 		
-		//»ñÈ¡±¾ÏòÁ¿Æ½·½
+		//è·å–æœ¬å‘é‡å¹³æ–¹
     T  length_squared() const
     {
         return (T)(*this * *this);
     }
 		
-		//»ñÈ¡±¾ÏòÁ¿³¤¶È
+		//è·å–æœ¬å‘é‡é•¿åº¦
     float length(void) const;
 		
-    //ÏòÁ¿¹éÒ»»¯
+    //å‘é‡å½’ä¸€åŒ–
     void normalize()
     {
         *this /= length();
     }
 		
-    //ÏòÁ¿ÖÃÁã
+    //å‘é‡ç½®é›¶
     void zero()
     {
         x = y = z = 0;
     }
 		
-    //·µ»Ø¹éÒ»»¯ÏòÁ¿
+    //è¿”å›å½’ä¸€åŒ–å‘é‡
     Vector3<T> normalized() const
     {
         return *this/length();
     }
 		
-	  //¼ÆËãÁ½¸öÏòÁ¿Ö®¼äµÄ¼Ğ½Ç
+	  //è®¡ç®—ä¸¤ä¸ªå‘é‡ä¹‹é—´çš„å¤¹è§’
     float angle(const Vector3<T> &v2) const;	
 		
 		void get_rollpitch(Vector3<T> &angle);
 		
 		void get_yaw(Vector3<T> &angle);	
 		
-    // ¼ì²éÊÇ·ñÓĞÔªËØµÄÖµÎª NAN
+    // æ£€æŸ¥æ˜¯å¦æœ‰å…ƒç´ çš„å€¼ä¸º NAN
     bool is_nan(void) const;		
 		
-/*************************ÔËËã·ûÖØÔØ********************************/		
+/*************************è¿ç®—ç¬¦é‡è½½********************************/		
 		
-    //µã»ı
+    //ç‚¹ç§¯
     T operator *(const Vector3<T> &v) const;
 
-    //²æ»ı
+    //å‰ç§¯
     Vector3<T> operator %(const Vector3<T> &v) const;		
 		
-    //Óë±êÁ¿Ïà³Ë
+    //ä¸æ ‡é‡ç›¸ä¹˜
     Vector3<T> operator *(const T num) const;
     Vector3<T> &operator *=(const T num);
 		
-    //Óë±êÁ¿Ïà³ı
+    //ä¸æ ‡é‡ç›¸é™¤
     Vector3<T> operator  /(const T num) const;
     Vector3<T> &operator /=(const T num);
 		
-		//È¡·´
+		//å–å
 	  Vector3<T> operator -(void) const;
 	
-	  //Ïà¼Ó
+	  //ç›¸åŠ 
     Vector3<T> operator +(const Vector3<T> &v) const;
     Vector3<T> &operator +=(const Vector3<T> &v);
 		
-    //Ïà¼õ
+    //ç›¸å‡
     Vector3<T> operator -(const Vector3<T> &v) const;
     Vector3<T> &operator -=(const Vector3<T> &v);
 		
-    //¶Ô±ÈÁ½¸öÏòÁ¿ÊÇ·ñÏàµÈ
+    //å¯¹æ¯”ä¸¤ä¸ªå‘é‡æ˜¯å¦ç›¸ç­‰
     bool operator ==(const Vector3<T> &v) const;
 
-    //¶Ô±ÈÁ½¸öÏòÁ¿ÊÇ·ñ²»ÏàµÈ
+    //å¯¹æ¯”ä¸¤ä¸ªå‘é‡æ˜¯å¦ä¸ç›¸ç­‰
     bool operator !=(const Vector3<T> &v) const;
 		
-    //¾ØÕó³ËÒÔÒ»¸öĞĞÏòÁ¿£¬µÃµ½Ò»¸öĞĞÏòÁ¿
+    //çŸ©é˜µä¹˜ä»¥ä¸€ä¸ªè¡Œå‘é‡ï¼Œå¾—åˆ°ä¸€ä¸ªè¡Œå‘é‡
    Vector3<T> operator *(const Matrix3<T> &m) const;
 
-    // ÁĞÏòÁ¿³ËÒÔÒ»¸öĞĞÏòÁ¿,µÃµ½3x3¾ØÕó
+    // åˆ—å‘é‡ä¹˜ä»¥ä¸€ä¸ªè¡Œå‘é‡,å¾—åˆ°3x3çŸ©é˜µ
     Matrix3<T> mul_rowcol(const Vector3<T> &v) const;
 /*******************************************************************/	
 		

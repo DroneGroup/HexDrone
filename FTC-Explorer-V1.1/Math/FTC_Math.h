@@ -16,36 +16,36 @@
 
 float safe_asin(float v);
 
-//¸¡µãÊıÏŞ·ù
+//æµ®ç‚¹æ•°é™å¹…
 float constrain_float(float amt, float low, float high);
 
-//16Î»ÕûĞÍÊıÏŞ·ù
+//16ä½æ•´å‹æ•°é™å¹…
 int16_t constrain_int16(int16_t amt, int16_t low, int16_t high);
 
-//16Î»ÎŞ·ûºÅÕûĞÍÊıÏŞ·ù
+//16ä½æ— ç¬¦å·æ•´å‹æ•°é™å¹…
 uint16_t constrain_uint16(uint16_t amt, uint16_t low, uint16_t high);
 
-//32Î»ÕûĞÍÊıÏŞ·ù
+//32ä½æ•´å‹æ•°é™å¹…
 int32_t constrain_int32(int32_t amt, int32_t low, int32_t high);
 
 int32_t applyDeadband(int32_t value, int32_t deadband);
 
-//½Ç¶È×ª»¡¶È
+//è§’åº¦è½¬å¼§åº¦
 float radians(float deg);
 
-//»¡¶È×ª½Ç¶È
+//å¼§åº¦è½¬è§’åº¦
 float degrees(float rad);
 
-//ÇóÆ½·½
+//æ±‚å¹³æ–¹
 float sq(float v);
 
-//2Î¬ÏòÁ¿³¤¶È
+//2ç»´å‘é‡é•¿åº¦
 float pythagorous2(float a, float b);
 
-//3Î¬ÏòÁ¿³¤¶È
+//3ç»´å‘é‡é•¿åº¦
 float pythagorous3(float a, float b, float c); 
 
-//4Î¬ÏòÁ¿³¤¶È
+//4ç»´å‘é‡é•¿åº¦
 float pythagorous4(float a, float b, float c, float d);
 
 

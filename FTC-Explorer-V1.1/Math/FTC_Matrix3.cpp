@@ -2,7 +2,7 @@
 
 #define HALF_SQRT_2 0.70710678118654757
 
-//Å·À­½Ç×ªÓàÏÒ¾ØÕó
+//æ¬§æ‹‰è§’è½¬ä½™å¼¦çŸ©é˜µ
 template <typename T>
 void Matrix3<T>::from_euler(const Vector3<T> &euler)
 {
@@ -25,7 +25,7 @@ void Matrix3<T>::from_euler(const Vector3<T> &euler)
 }
 
 
-//ÓàÏÒ¾ØÕó¼ÆËãÅ·À­½Ç
+//ä½™å¼¦çŸ©é˜µè®¡ç®—æ¬§æ‹‰è§’
 template <typename T>
 void Matrix3<T>::to_euler(float *roll, float *pitch, float *yaw)
 {
@@ -41,7 +41,7 @@ void Matrix3<T>::to_euler(float *roll, float *pitch, float *yaw)
     }
 }
 
-//Ê¹ÓÃ½ÇËÙ¶ÈÏòÁ¿¼ÆËã¾ØÕóµÄÒ»´ÎĞı×ª
+//ä½¿ç”¨è§’é€Ÿåº¦å‘é‡è®¡ç®—çŸ©é˜µçš„ä¸€æ¬¡æ—‹è½¬
 template <typename T>
 void Matrix3<T>::rotate(const Vector3<T> &g)
 {
@@ -59,7 +59,7 @@ void Matrix3<T>::rotate(const Vector3<T> &g)
     (*this) += temp_matrix;
 }
 
-//Ê¹ÓÃ½ÇËÙ¶ÈÏòÁ¿¼ÆËã¾ØÕóµÄÒ»´ÎĞı×ª
+//ä½¿ç”¨è§’é€Ÿåº¦å‘é‡è®¡ç®—çŸ©é˜µçš„ä¸€æ¬¡æ—‹è½¬
 template <typename T>
 void Matrix3<T>::rotateXY(const Vector3<T> &g)
 {
@@ -77,7 +77,7 @@ void Matrix3<T>::rotateXY(const Vector3<T> &g)
     (*this) += temp_matrix;
 }
 
-//¾ØÕó³ËÒÔÒ»¸öÏòÁ¿
+//çŸ©é˜µä¹˜ä»¥ä¸€ä¸ªå‘é‡
 template <typename T>
 Vector3<T> Matrix3<T>::operator *(const Vector3<T> &v) const
 {
@@ -86,7 +86,7 @@ Vector3<T> Matrix3<T>::operator *(const Vector3<T> &v) const
                       c.x * v.x + c.y * v.y + c.z * v.z);
 }
 
-//¾ØÕóµÄ×ªÖÃ³ËÒÔÒ»¸öÏòÁ¿
+//çŸ©é˜µçš„è½¬ç½®ä¹˜ä»¥ä¸€ä¸ªå‘é‡
 template <typename T>
 Vector3<T> Matrix3<T>::mul_transpose(const Vector3<T> &v) const
 {
@@ -95,7 +95,7 @@ Vector3<T> Matrix3<T>::mul_transpose(const Vector3<T> &v) const
                       a.z * v.x + b.z * v.y + c.z * v.z);
 }
 
-//ºÍÁíÒ»¸ö3½×·½ÕóÏà³Ë
+//å’Œå¦ä¸€ä¸ª3é˜¶æ–¹é˜µç›¸ä¹˜
 template <typename T>
 Matrix3<T> Matrix3<T>::operator *(const Matrix3<T> &m) const
 {
@@ -111,7 +111,7 @@ Matrix3<T> Matrix3<T>::operator *(const Matrix3<T> &m) const
     return temp;
 }
 
-//¾ØÕó×ªÖÃ
+//çŸ©é˜µè½¬ç½®
 template <typename T>
 Matrix3<T> Matrix3<T>::transposed(void) const
 {
@@ -120,7 +120,7 @@ Matrix3<T> Matrix3<T>::transposed(void) const
                       Vector3<T>(a.z, b.z, c.z));
 }
 
-//¾ØÕóÔªËØÖÃÁã
+//çŸ©é˜µå…ƒç´ ç½®é›¶
 template <typename T>
 void Matrix3<T>::zero(void)
 {
@@ -129,7 +129,7 @@ void Matrix3<T>::zero(void)
     c.x = c.y = c.z = 0;
 }
 
-//Ö»¸ø¸¡µãĞÍ¶¨ÒåÁË
+//åªç»™æµ®ç‚¹å‹å®šä¹‰äº†
 template void Matrix3<float>::zero(void);
 template void Matrix3<float>::rotate(const Vector3<float> &g);
 template void Matrix3<float>::rotateXY(const Vector3<float> &g);
