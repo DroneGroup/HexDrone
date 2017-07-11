@@ -3,51 +3,51 @@
 
 #include "FTC_Vector3.h"
 
-// ÔªËØÀàĞÍÎªTµÄ3x3¾ØÕó
+// å…ƒç´ ç±»å‹ä¸ºTçš„3x3çŸ©é˜µ
 template <typename T>
 class Matrix3 {
 public:
 
-    //¾ØÕóµÄĞĞÏòÁ¿
+    //çŸ©é˜µçš„è¡Œå‘é‡
     Vector3<T>        a, b, c;
 
-    //¿Õ¹¹Ôìº¯Êı
+    //ç©ºæ„é€ å‡½æ•°
     Matrix3<T>() {
     }
 
-    //¸³Öµ¹¹Ôìº¯Êı
+    //èµ‹å€¼æ„é€ å‡½æ•°
     Matrix3<T>(const Vector3<T> a0, const Vector3<T> b0, const Vector3<T> c0) : a(a0), b(b0), c(c0) {
     }
 
-    //¸³Öµ¹¹Ôìº¯Êı
+    //èµ‹å€¼æ„é€ å‡½æ•°
     Matrix3<T>(const T ax, const T ay, const T az, const T bx, const T by, const T bz, const T cx, const T cy, const T cz) : a(ax,ay,az), b(bx,by,bz), c(cx,cy,cz) {
     }
 
-    //º¯Êıµ÷ÓÃ²Ù×÷·û
+    //å‡½æ•°è°ƒç”¨æ“ä½œç¬¦
     void operator        () (const Vector3<T> a0, const Vector3<T> b0, const Vector3<T> c0)
     {
         a = a0; b = b0; c = c0;
     }
 
-    //²âÊÔÊÇ·ñÏàµÈ
+    //æµ‹è¯•æ˜¯å¦ç›¸ç­‰
     bool operator        == (const Matrix3<T> &m)
     {
         return (a==m.a && b==m.b && c==m.c);
     }
 
-    //²âÊÔÊÇ·ñ²»ÏàµÈ
+    //æµ‹è¯•æ˜¯å¦ä¸ç›¸ç­‰
     bool operator        != (const Matrix3<T> &m)
     {
         return (a!=m.a || b!=m.b || c!=m.c);
     }
 
-    //È¡·´
+    //å–å
     Matrix3<T> operator        - (void) const
     {
         return Matrix3<T>(-a,-b,-c);
     }
 
-    //Ïà¼Ó
+    //ç›¸åŠ 
     Matrix3<T> operator        + (const Matrix3<T> &m) const
     {
         return Matrix3<T>(a+m.a, b+m.b, c+m.c);
@@ -57,7 +57,7 @@ public:
         return *this = *this + m;
     }
 
-    //Ïà¼õ
+    //ç›¸å‡
     Matrix3<T> operator        - (const Matrix3<T> &m) const
     {
         return Matrix3<T>(a-m.a, b-m.b, c-m.c);
@@ -67,7 +67,7 @@ public:
         return *this = *this - m;
     }
 
-    //±êÁ¿²Ù×÷
+    //æ ‡é‡æ“ä½œ
     Matrix3<T> operator        * (const T num) const
     {
         return Matrix3<T>(a*num, b*num, c*num);
@@ -85,37 +85,37 @@ public:
         return *this = *this / num;
     }
 
-    // ³ËÒÔÒ»¸öÏòÁ¿
+    // ä¹˜ä»¥ä¸€ä¸ªå‘é‡
     Vector3<T> operator         *(const Vector3<T> &v) const;
 
-    //¾ØÕóµÄ×ªÖÃ³ËÒÔÒ»¸öÏòÁ¿
+    //çŸ©é˜µçš„è½¬ç½®ä¹˜ä»¥ä¸€ä¸ªå‘é‡
     Vector3<T>                  mul_transpose(const Vector3<T> &v) const;
 
-    //ÌáÈ¡xĞĞÏòÁ¿
+    //æå–xè¡Œå‘é‡
     Vector3<T>                  colx(void) const
     {
         return Vector3f(a.x, b.x, c.x);
     }
 
-    //ÌáÈ¡yĞĞÏòÁ¿
+    //æå–yè¡Œå‘é‡
     Vector3<T>        coly(void) const
     {
         return Vector3f(a.y, b.y, c.y);
     }
 
-    //ÌáÈ¡zĞĞÏòÁ¿
+    //æå–zè¡Œå‘é‡
     Vector3<T>        colz(void) const
     {
         return Vector3f(a.z, b.z, c.z);
     }
 		
-    //zĞĞÏòÁ¿¸³Öµ
+    //zè¡Œå‘é‡èµ‹å€¼
     void        set_colz( const Vector3<T> v)
     {
         a.z = v.x;	b.z = v.y; c.z = v.z;
     }		
 		
-    //ºÍÁíÒ»¸ö3½×·½ÕóÏà³Ë
+    //å’Œå¦ä¸€ä¸ª3é˜¶æ–¹é˜µç›¸ä¹˜
     Matrix3<T> operator *(const Matrix3<T> &m) const;
 
     Matrix3<T> &operator        *=(const Matrix3<T> &m)
@@ -123,7 +123,7 @@ public:
         return *this = *this * m;
     }
 
-    //¾ØÕó×ªÖÃ
+    //çŸ©é˜µè½¬ç½®
     Matrix3<T>          transposed(void) const;
 
     Matrix3<T>          transpose(void)
@@ -131,10 +131,10 @@ public:
         return *this = transposed();
     }
 
-    //¾ØÕóÔªËØÖÃÁã
+    //çŸ©é˜µå…ƒç´ ç½®é›¶
     void        zero(void);
 
-    //¾ØÕó±äÎªµ¥Î»Õó
+    //çŸ©é˜µå˜ä¸ºå•ä½é˜µ
     void        identity(void) {
         a.x = b.y = c.z = 1;
         a.y = a.z = 0;
@@ -142,22 +142,22 @@ public:
         c.x = c.y = 0;
     }
 
-    //¼ì²éÔªËØÊÇ·ñÓĞÒì³£Öµ
+    //æ£€æŸ¥å…ƒç´ æ˜¯å¦æœ‰å¼‚å¸¸å€¼
     bool        is_nan(void)
     {
         return a.is_nan() || b.is_nan() || c.is_nan();
     }
 
-    //Å·À­½Ç×ªÓàÏÒ¾ØÕó
+    //æ¬§æ‹‰è§’è½¬ä½™å¼¦çŸ©é˜µ
     void        from_euler(const Vector3<T> &euler);
 		
-    //ÓàÏÒ¾ØÕó×ªÅ·À­½Ç
+    //ä½™å¼¦çŸ©é˜µè½¬æ¬§æ‹‰è§’
     void        to_euler(float *roll, float *pitch, float *yaw);
 
-		//Ê¹ÓÃ½ÇËÙ¶ÈÏòÁ¿À´¼ÆËã¾ØÕóµÄÒ»´ÎĞı×ª
+		//ä½¿ç”¨è§’é€Ÿåº¦å‘é‡æ¥è®¡ç®—çŸ©é˜µçš„ä¸€æ¬¡æ—‹è½¬
     void        rotate(const Vector3<T> &g);
 
-		//Ê¹ÓÃ½ÇËÙ¶ÈÏòÁ¿(½öX£¬Y)À´¼ÆËã¾ØÕóµÄÒ»´ÎĞı×ª
+		//ä½¿ç”¨è§’é€Ÿåº¦å‘é‡(ä»…Xï¼ŒY)æ¥è®¡ç®—çŸ©é˜µçš„ä¸€æ¬¡æ—‹è½¬
     void        rotateXY(const Vector3<T> &g);
 };
 

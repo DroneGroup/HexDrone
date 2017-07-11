@@ -1,7 +1,7 @@
 #include "FTC_Math.h"
 
 
-// ·µ»Ø¸ÃËÄÔªÊıµÄµÈĞ§Ğı×ª¾ØÕó
+// è¿”å›è¯¥å››å…ƒæ•°çš„ç­‰æ•ˆæ—‹è½¬çŸ©é˜µ
 void Quaternion::rotation_matrix(Matrix3f &m)
 {
     float q3q3 = q3 * q3;
@@ -25,7 +25,7 @@ void Quaternion::rotation_matrix(Matrix3f &m)
     m.c.z = 1-2*(q2q2 + q3q3);
 }
 
-// ·µ»Ø¸ÃËÄÔªÊıµÄµÈĞ§Ğı×ª¾ØÕóÖĞµÄÖØÁ¦·ÖÁ¿
+// è¿”å›è¯¥å››å…ƒæ•°çš„ç­‰æ•ˆæ—‹è½¬çŸ©é˜µä¸­çš„é‡åŠ›åˆ†é‡
 void Quaternion::vector_gravity(Vector3f &v)
 {
   v.x = 2*(q2*q4 - q1*q3);								
@@ -33,7 +33,7 @@ void Quaternion::vector_gravity(Vector3f &v)
   v.z = 1-2*(q2*q2 + q3*q3);
 }
 
-// ½«Ò»¸öÏòÁ¿´ÓµØÀí×ø±êÏµ×ª»»µ½»úÌå×ø±êÏµ
+// å°†ä¸€ä¸ªå‘é‡ä»åœ°ç†åæ ‡ç³»è½¬æ¢åˆ°æœºä½“åæ ‡ç³»
 void Quaternion::earth_to_body(Vector3f &v)
 {
     Matrix3f m;
@@ -43,7 +43,7 @@ void Quaternion::earth_to_body(Vector3f &v)
     v.z = -v.z;
 }
 
-//ËÄÔªÊı¹éÒ»»¯
+//å››å…ƒæ•°å½’ä¸€åŒ–
 void Quaternion::normalize(void)
 {
 	float length; 
@@ -54,7 +54,7 @@ void Quaternion::normalize(void)
 	q4 /= length;
 }
 
-//Ò»½×Áú¸ñ¿âËş·¨¸üĞÂËÄÔªÊı
+//ä¸€é˜¶é¾™æ ¼åº“å¡”æ³•æ›´æ–°å››å…ƒæ•°
 void Quaternion::Runge_Kutta_1st(Vector3f &g, float deltaT)
 {
   q1 += 0.5 * (-q2*g.x - q3*g.y - q4*g.z)* deltaT;
@@ -63,7 +63,7 @@ void Quaternion::Runge_Kutta_1st(Vector3f &g, float deltaT)
   q4 += 0.5 * (q1*g.z + q2*g.y - q3*g.x)* deltaT;	
 }
 
-//Å·À­½Ç×ªËÄÔªÊı
+//æ¬§æ‹‰è§’è½¬å››å…ƒæ•°
 void Quaternion::from_euler(float roll, float pitch, float yaw)
 {
     float cr2 = cosf(roll*0.5f);
@@ -79,14 +79,14 @@ void Quaternion::from_euler(float roll, float pitch, float yaw)
     q4 = cr2*cp2*sy2 - sr2*sp2*cy2;
 }
 
-//ËÄÔªÊı×ªÅ·À­½Ç
+//å››å…ƒæ•°è½¬æ¬§æ‹‰è§’
 void Quaternion::to_euler(float *roll, float *pitch, float *yaw)
 {
     if (roll) {
         *roll = degrees(atan2f(2.0f*(q1*q2 + q3*q4),1 - 2.0f*(q2*q2 + q3*q3)));
     }
     if (pitch) {
-        // Ê¹ÓÃsafe_asin()À´´¦Àípitch½Ó½ü90/-90Ê±µÄÆæµã
+        // ä½¿ç”¨safe_asin()æ¥å¤„ç†pitchæ¥è¿‘90/-90æ—¶çš„å¥‡ç‚¹
         *pitch = degrees(safe_asin(2.0f*(q1*q3 - q2*q4)));
     }
     if (yaw) {

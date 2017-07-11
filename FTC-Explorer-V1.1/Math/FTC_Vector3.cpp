@@ -1,6 +1,6 @@
 #include "FTC_Math.h"
 
-#define HALF_SQRT_2 0.70710678118654757f	//¸ùºÅ2µÄÖµ
+#define HALF_SQRT_2 0.70710678118654757f	//æ ¹å·2çš„å€¼
 
 template <typename T>
 void Vector3<T>::rotate(enum Rotation rotation)
@@ -203,21 +203,21 @@ void Vector3<T>::rotate(enum Rotation rotation)
     }
 }
 
-//ÇóÏòÁ¿³¤¶È
+//æ±‚å‘é‡é•¿åº¦
 template <typename T>
 float Vector3<T>::length(void) const
 {
     return pythagorous3(x, y, z);
 }
 
-//¼ÆËãÁ½¸öÏòÁ¿Ö®¼äµÄ¼Ğ½Ç
+//è®¡ç®—ä¸¤ä¸ªå‘é‡ä¹‹é—´çš„å¤¹è§’
 template <typename T>
 float Vector3<T>::angle(const Vector3<T> &v2) const
 {
     return acosf(((*this)*v2) / (this->length()*v2.length()));
 }
 
-//ÏòÁ¿²æ»ı
+//å‘é‡å‰ç§¯
 template <typename T>
 Vector3<T> Vector3<T>::operator %(const Vector3<T> &v) const
 {
@@ -225,14 +225,14 @@ Vector3<T> Vector3<T>::operator %(const Vector3<T> &v) const
     return temp;
 }
 
-//ÏòÁ¿µã»ı
+//å‘é‡ç‚¹ç§¯
 template <typename T>
 T Vector3<T>::operator *(const Vector3<T> &v) const
 {
     return x*v.x + y*v.y + z*v.z;
 }
 
-//Óë±êÁ¿Ïà³Ë
+//ä¸æ ‡é‡ç›¸ä¹˜
 template <typename T>
 Vector3<T> Vector3<T>::operator *(const T num) const
 {
@@ -246,7 +246,7 @@ Vector3<T> &Vector3<T>::operator *=(const T num)
     return *this;
 }
 
-//Óë±êÁ¿Ïà³ı
+//ä¸æ ‡é‡ç›¸é™¤
 template <typename T>
 Vector3<T> &Vector3<T>::operator /=(const T num)
 {
@@ -260,14 +260,14 @@ Vector3<T> Vector3<T>::operator /(const T num) const
     return Vector3<T>(x/num, y/num, z/num);
 }
 
-//ÏòÁ¿È¡·´
+//å‘é‡å–å
 template <typename T>
 Vector3<T> Vector3<T>::operator -(void) const
 {
     return Vector3<T>(-x,-y,-z);
 }
 
-//ÏòÁ¿Ïà¼Ó
+//å‘é‡ç›¸åŠ 
 template <typename T>
 Vector3<T> Vector3<T>::operator +(const Vector3<T> &v) const
 {
@@ -281,7 +281,7 @@ Vector3<T> &Vector3<T>::operator +=(const Vector3<T> &v)
     return *this;
 }
 
-//ÏòÁ¿Ïà¼õ
+//å‘é‡ç›¸å‡
 template <typename T>
 Vector3<T> Vector3<T>::operator -(const Vector3<T> &v) const
 {
@@ -295,21 +295,21 @@ Vector3<T> &Vector3<T>::operator -=(const Vector3<T> &v)
     return *this;
 }
 
-//¶Ô±ÈÁ½¸öÏòÁ¿ÊÇ·ñÏàµÈ
+//å¯¹æ¯”ä¸¤ä¸ªå‘é‡æ˜¯å¦ç›¸ç­‰
 template <typename T>
 bool Vector3<T>::operator ==(const Vector3<T> &v) const
 {
     return (x==v.x && y==v.y && z==v.z);
 }
 
-//¶Ô±ÈÁ½¸öÏòÁ¿ÊÇ·ñ²»ÏàµÈ
+//å¯¹æ¯”ä¸¤ä¸ªå‘é‡æ˜¯å¦ä¸ç›¸ç­‰
 template <typename T>
 bool Vector3<T>::operator !=(const Vector3<T> &v) const
 {
     return (x!=v.x && y!=v.y && z!=v.z);
 }
 
-//¾ØÕó³ËÒÔÒ»¸öĞĞÏòÁ¿£¬µÃµ½Ò»¸öĞĞÏòÁ¿
+//çŸ©é˜µä¹˜ä»¥ä¸€ä¸ªè¡Œå‘é‡ï¼Œå¾—åˆ°ä¸€ä¸ªè¡Œå‘é‡
 template <typename T>
 Vector3<T> Vector3<T>::operator *(const Matrix3<T> &m) const
 {
@@ -318,7 +318,7 @@ Vector3<T> Vector3<T>::operator *(const Matrix3<T> &m) const
                       *this * m.colz());
 }
 
-// ÁĞÏòÁ¿³ËÒÔÒ»¸öĞĞÏòÁ¿,µÃµ½3x3¾ØÕó
+// åˆ—å‘é‡ä¹˜ä»¥ä¸€ä¸ªè¡Œå‘é‡,å¾—åˆ°3x3çŸ©é˜µ
 template <typename T>
 Matrix3<T> Vector3<T>::mul_rowcol(const Vector3<T> &v2) const
 {
@@ -348,7 +348,7 @@ bool Vector3<T>::is_nan(void) const
 }
 
 		
-//µ¥¾«¶È¸¡µãĞÍµÄ¶¨Òå
+//å•ç²¾åº¦æµ®ç‚¹å‹çš„å®šä¹‰
 template void Vector3<float>::rotate(enum Rotation);
 template float Vector3<float>::length(void) const;
 template Vector3<float> Vector3<float>::operator %(const Vector3<float> &v) const;
@@ -371,7 +371,7 @@ template void Vector3<float>::get_yaw(Vector3<float> &angle);
 template bool Vector3<float>::is_nan(void) const;
 
 
-//Ë«¾«¶È¸¡µãĞÍµÄ¶¨Òå
+//åŒç²¾åº¦æµ®ç‚¹å‹çš„å®šä¹‰
 template Vector3<double> Vector3<double>::operator %(const Vector3<double> &v) const;
 template double Vector3<double>::operator *(const Vector3<double> &v) const;
 template Vector3<double> &Vector3<double>::operator *=(const double num);

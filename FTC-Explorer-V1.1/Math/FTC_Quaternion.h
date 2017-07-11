@@ -8,42 +8,42 @@ class Quaternion
 public:
     float        q1, q2, q3, q4;
 
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     // roll=0, pitch=0, yaw=0
     Quaternion() {
         q1 = 1; q2 = q3 = q4 = 0;
     }
 
-    //¸³Öµ¹¹Ôìº¯Êı
+    //èµ‹å€¼æ„é€ å‡½æ•°
     Quaternion(const float _q1, const float _q2, const float _q3, const float _q4) :
         q1(_q1), q2(_q2), q3(_q3), q4(_q4) {
     }
 
-    //º¯Êıµ÷ÓÃ²Ù×÷·û
+    //å‡½æ•°è°ƒç”¨æ“ä½œç¬¦
     void operator        ()(const float _q1, const float _q2, const float _q3, const float _q4)
     {
         q1 = _q1; q2 = _q2; q3 = _q3; q4 = _q4;
     }
 		
-		//ËÄÔªÊı¹éÒ»»¯
+		//å››å…ƒæ•°å½’ä¸€åŒ–
 		void normalize(void);
 		
-    // ·µ»Ø¸ÃËÄÔªÊıµÄµÈĞ§Ğı×ª¾ØÕó
+    // è¿”å›è¯¥å››å…ƒæ•°çš„ç­‰æ•ˆæ—‹è½¬çŸ©é˜µ
     void rotation_matrix(Matrix3f &m);
 
-    // ·µ»Ø¸ÃËÄÔªÊıµÄµÈĞ§Ğı×ª¾ØÕóÖĞµÄÖØÁ¦·ÖÁ¿
+    // è¿”å›è¯¥å››å…ƒæ•°çš„ç­‰æ•ˆæ—‹è½¬çŸ©é˜µä¸­çš„é‡åŠ›åˆ†é‡
     void vector_gravity(Vector3f &v);
 		
-    // ½«Ò»¸öÏòÁ¿´ÓµØÀí×ø±êÏµ×ª»»µ½»úÌå×ø±êÏµ
+    // å°†ä¸€ä¸ªå‘é‡ä»åœ°ç†åæ ‡ç³»è½¬æ¢åˆ°æœºä½“åæ ‡ç³»
     void earth_to_body(Vector3f &v);
 
-		//Ò»½×Áú¸ñ¿âËş·¨¸üĞÂËÄÔªÊı
+		//ä¸€é˜¶é¾™æ ¼åº“å¡”æ³•æ›´æ–°å››å…ƒæ•°
 		void Runge_Kutta_1st(Vector3f &g, float deltaT);
 		
-    //Å·À­½Ç×ªËÄÔªÊı
+    //æ¬§æ‹‰è§’è½¬å››å…ƒæ•°
     void from_euler(float roll, float pitch, float yaw);
 
-    //ËÄÔªÊı×ªÅ·À­½Ç
+    //å››å…ƒæ•°è½¬æ¬§æ‹‰è§’
     void to_euler(float *roll, float *pitch, float *yaw);
 };
 #endif // QUATERNION_H
