@@ -17,7 +17,9 @@ void FTC_IMU::Init()
 	//滤波器参数初始化
 	filter_Init();
 	//传感器初始化
-	sensor_Init();	
+	sensor_Init();
+
+	RPVec = Vector3f(0, 0, ACC_1G), YawVec = Vector3f(ACC_1G/8.0, 0, 0);
 }
 
 //更新传感器数据
@@ -93,6 +95,22 @@ Vector3f FTC_IMU::Get_Accel_Ef(void)
 void FTC_IMU::DCM_CF(Vector3f gyro,Vector3f acc, float deltaT)
 {
 	//to do
+	// acc.get_rollpitch(angle);
+	// acc.get_yaw(angle);
+
+	Matrix3f dcm;
+	//get dcm matrix
+	deltaGyroAngle = (gyro + oldGyro) * 0.5f * deltaT;
+	oldGyro = gyro;
+	dcm.from_euler(deltaGyroAngle);
+
+	RPVec = dcm * RPVec;
+	RPVec = CF_1st(RPVec, acc, ftc.factor.gyro_cf);
+
+	YawVec = dcm * YawVec;
+	
+	RPVec.get_rollpitch(angle);
+	YawVec.get_yaw(angle);
 }
 
 #define Kp 2.0f        //加速度权重，越大则向加速度测量值收敛越快

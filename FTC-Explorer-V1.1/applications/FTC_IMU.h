@@ -30,7 +30,6 @@ public:
 	void getAttitude();
 	
 	Vector3f Get_Accel_Ef();
-		
 	
 private:
 
@@ -50,6 +49,7 @@ private:
 	//传感器初始化
 	void sensor_Init();
 
+	Vector3f deltaGyroAngle, oldGyro, RPVec, YawVec;
 };
 
 extern FTC_IMU imu;

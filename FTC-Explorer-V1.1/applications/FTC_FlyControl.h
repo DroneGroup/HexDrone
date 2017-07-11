@@ -13,7 +13,7 @@ enum {
     PIDMAG,
     PIDVELZ,
     PIDALT,
-		PIDITEMS
+	PIDITEMS
 };
 
 class FTC_FlyControl
