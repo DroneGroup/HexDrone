@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼þÃû  £ºFTC_Drv_Uart.cpp
- * ÃèÊö    £ºLED
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Drv_Uart.cpp
+ * æè¿°    ï¼šLED
 **********************************************************************************/
 #include "FTC_Drv_Uart3.h"
 
@@ -14,7 +14,7 @@ void FTC_UART3::Init(u32 br_num)
 	GPIO_InitTypeDef GPIO_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE); //¿ªÆôUSART3Ê±ÖÓ
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE); //å¼€å¯USART3æ—¶é’Ÿ
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);	
 	
 	//Tx
@@ -28,24 +28,24 @@ void FTC_UART3::Init(u32 br_num)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 	GPIO_Init(GPIOB , &GPIO_InitStructure);
 
-	USART_InitStructure.USART_BaudRate = br_num;       //²¨ÌØÂÊ¿ÉÒÔÍ¨¹ýµØÃæÕ¾ÅäÖÃ
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;  //8Î»Êý¾Ý
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;   //ÔÚÖ¡½áÎ²´«Êä1¸öÍ£Ö¹Î»
-	USART_InitStructure.USART_Parity = USART_Parity_No;    //½ûÓÃÆæÅ¼Ð£Ñé
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; //Ó²¼þÁ÷¿ØÖÆÊ§ÄÜ
-	USART_InitStructure.USART_Mode = USART_Mode_Tx | USART_Mode_Rx;  //·¢ËÍ¡¢½ÓÊÕÊ¹ÄÜ
-	//ÅäÖÃUSART3Ê±ÖÓ
-	USART_ClockInitStruct.USART_Clock = USART_Clock_Disable;  //Ê±ÖÓµÍµçÆ½»î¶¯
-	USART_ClockInitStruct.USART_CPOL = USART_CPOL_Low;  //SLCKÒý½ÅÉÏÊ±ÖÓÊä³öµÄ¼«ÐÔ->µÍµçÆ½
-	USART_ClockInitStruct.USART_CPHA = USART_CPHA_2Edge;  //Ê±ÖÓµÚ¶þ¸ö±ßÑØ½øÐÐÊý¾Ý²¶»ñ
-	USART_ClockInitStruct.USART_LastBit = USART_LastBit_Disable; //×îºóÒ»Î»Êý¾ÝµÄÊ±ÖÓÂö³å²»´ÓSCLKÊä³ö
+	USART_InitStructure.USART_BaudRate = br_num;       //æ³¢ç‰¹çŽ‡å¯ä»¥é€šè¿‡åœ°é¢ç«™é…ç½®
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;  //8ä½æ•°æ®
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;   //åœ¨å¸§ç»“å°¾ä¼ è¾“1ä¸ªåœæ­¢ä½
+	USART_InitStructure.USART_Parity = USART_Parity_No;    //ç¦ç”¨å¥‡å¶æ ¡éªŒ
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; //ç¡¬ä»¶æµæŽ§åˆ¶å¤±èƒ½
+	USART_InitStructure.USART_Mode = USART_Mode_Tx | USART_Mode_Rx;  //å‘é€ã€æŽ¥æ”¶ä½¿èƒ½
+	//é…ç½®USART3æ—¶é’Ÿ
+	USART_ClockInitStruct.USART_Clock = USART_Clock_Disable;  //æ—¶é’Ÿä½Žç”µå¹³æ´»åŠ¨
+	USART_ClockInitStruct.USART_CPOL = USART_CPOL_Low;  //SLCKå¼•è„šä¸Šæ—¶é’Ÿè¾“å‡ºçš„æžæ€§->ä½Žç”µå¹³
+	USART_ClockInitStruct.USART_CPHA = USART_CPHA_2Edge;  //æ—¶é’Ÿç¬¬äºŒä¸ªè¾¹æ²¿è¿›è¡Œæ•°æ®æ•èŽ·
+	USART_ClockInitStruct.USART_LastBit = USART_LastBit_Disable; //æœ€åŽä¸€ä½æ•°æ®çš„æ—¶é’Ÿè„‰å†²ä¸ä»ŽSCLKè¾“å‡º
 	
 	USART_Init(USART3, &USART_InitStructure);
 	USART_ClockInit(USART3, &USART_ClockInitStruct);
 
-	//Ê¹ÄÜUSART3½ÓÊÕÖÐ¶Ï
+	//ä½¿èƒ½USART3æŽ¥æ”¶ä¸­æ–­
 	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);
-	//Ê¹ÄÜUSART3
+	//ä½¿èƒ½USART3
 	USART_Cmd(USART3, ENABLE); 
 	
 	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;	 
@@ -61,20 +61,20 @@ static u8 RxBuffer3[50];
 
 void FTC_UART3::IRQ(void)
 {
-	if(USART3->SR & USART_SR_ORE)//OREÖÐ¶Ï
+	if(USART3->SR & USART_SR_ORE)//OREä¸­æ–­
 	{
 		u8 com_data = USART3->DR;
 		//USART_ClearFlag(USART3,USART_IT_ORE);
 	}
 	if((USART3->SR & (1<<7))&&(USART3->CR1 & USART_CR1_TXEIE))
 	{
-		USART3->DR = TxBuffer3[TxCounter3++]; //Ð´DRÇå³ýÖÐ¶Ï±êÖ¾ 
+		USART3->DR = TxBuffer3[TxCounter3++]; //å†™DRæ¸…é™¤ä¸­æ–­æ ‡å¿— 
 		if(TxCounter3 == count3)
 		{
-			USART3->CR1 &= ~USART_CR1_TXEIE;		//¹Ø±ÕTXEÖÐ¶Ï
+			USART3->CR1 &= ~USART_CR1_TXEIE;		//å…³é—­TXEä¸­æ–­
 		}
 	}
-	//½ÓÊÕÖÐ¶Ï (½ÓÊÕ¼Ä´æÆ÷·Ç¿Õ) 
+	//æŽ¥æ”¶ä¸­æ–­ (æŽ¥æ”¶å¯„å­˜å™¨éžç©º) 
 	if(USART3->SR & (1<<5))//if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)    
 	{
 		static u8 ultraAltLow,ultraAltHigh;
@@ -105,14 +105,14 @@ void FTC_UART3::Put_Char(unsigned char DataToSend)
 }
 void FTC_UART3::Put_String(unsigned char *Str)
 {
-	//ÅÐ¶ÏStrÖ¸ÏòµÄÊý¾ÝÊÇ·ñÓÐÐ§.
+	//åˆ¤æ–­StræŒ‡å‘çš„æ•°æ®æ˜¯å¦æœ‰æ•ˆ.
 	while(*Str)
 	{
-	//ÊÇ·ñÊÇ»Ø³µ×Ö·û Èç¹ûÊÇ,Ôò·¢ËÍÏàÓ¦µÄ»Ø³µ 0x0d 0x0a
+	//æ˜¯å¦æ˜¯å›žè½¦å­—ç¬¦ å¦‚æžœæ˜¯,åˆ™å‘é€ç›¸åº”çš„å›žè½¦ 0x0d 0x0a
 	if(*Str=='\r')Put_Char(0x0d);
 		else if(*Str=='\n')Put_Char(0x0a);
 			else Put_Char(*Str);
-	//Ö¸Õë++ Ö¸ÏòÏÂÒ»¸ö×Ö½Ú.
+	//æŒ‡é’ˆ++ æŒ‡å‘ä¸‹ä¸€ä¸ªå­—èŠ‚.
 	Str++;
 	}
 }

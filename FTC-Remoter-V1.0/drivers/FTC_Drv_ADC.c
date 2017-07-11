@@ -17,11 +17,11 @@ __IO uint16_t ADC_ConvertedValue[7];
 
 
 /*
- * º¯ÊıÃû£ºADC1_GPIO_Config
- * ÃèÊö  £ºÊ¹ÄÜADC1ºÍDMA1µÄÊ±ÖÓ£¬³õÊ¼»¯PC.01
- * ÊäÈë  : ÎŞ
- * Êä³ö  £ºÎŞ
- * µ÷ÓÃ  £ºÄÚ²¿µ÷ÓÃ
+ * å‡½æ•°åï¼šADC1_GPIO_Config
+ * æè¿°  ï¼šä½¿èƒ½ADC1å’ŒDMA1çš„æ—¶é’Ÿï¼Œåˆå§‹åŒ–PC.01
+ * è¾“å…¥  : æ— 
+ * è¾“å‡º  ï¼šæ— 
+ * è°ƒç”¨  ï¼šå†…éƒ¨è°ƒç”¨
  */
 static void ADC1_GPIO_Config(void)
 {
@@ -42,11 +42,11 @@ static void ADC1_GPIO_Config(void)
 }
 
 
-/* º¯ÊıÃû£ºADC1_Mode_Config
- * ÃèÊö  £ºÅäÖÃADC1µÄ¹¤×÷Ä£Ê½ÎªMDAÄ£Ê½
- * ÊäÈë  : ÎŞ
- * Êä³ö  £ºÎŞ
- * µ÷ÓÃ  £ºÄÚ²¿µ÷ÓÃ
+/* å‡½æ•°åï¼šADC1_Mode_Config
+ * æè¿°  ï¼šé…ç½®ADC1çš„å·¥ä½œæ¨¡å¼ä¸ºMDAæ¨¡å¼
+ * è¾“å…¥  : æ— 
+ * è¾“å‡º  ï¼šæ— 
+ * è°ƒç”¨  ï¼šå†…éƒ¨è°ƒç”¨
  */
 static void ADC1_Mode_Config(void)
 {
@@ -55,15 +55,15 @@ static void ADC1_Mode_Config(void)
 	
 	/* DMA channel1 configuration */
 	DMA_DeInit(DMA1_Channel1);
-	DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1_DR_Address;	 //ADCµØÖ·
-	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)&ADC_ConvertedValue;//ÄÚ´æµØÖ·
+	DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1_DR_Address;	 //ADCåœ°å€
+	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)&ADC_ConvertedValue;//å†…å­˜åœ°å€
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
 	DMA_InitStructure.DMA_BufferSize = 7;
-	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;//ÍâÉèµØÖ·¹Ì¶¨
-	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;  //ÄÚ´æµØÖ·¹Ì¶¨
-	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;	//°ë×Ö
+	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;//å¤–è®¾åœ°å€å›ºå®š
+	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;  //å†…å­˜åœ°å€å›ºå®š
+	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;	//åŠå­—
 	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
-	DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;		//Ñ­»·´«Êä
+	DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;		//å¾ªç¯ä¼ è¾“
 	DMA_InitStructure.DMA_Priority = DMA_Priority_High;
 	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
 	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
@@ -73,17 +73,17 @@ static void ADC1_Mode_Config(void)
 	
 	/* ADC1 configuration */
 	
-	ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;	//¶ÀÁ¢ADCÄ£Ê½
-	ADC_InitStructure.ADC_ScanConvMode = ENABLE ; 	 //½ûÖ¹É¨ÃèÄ£Ê½£¬É¨ÃèÄ£Ê½ÓÃÓÚ¶àÍ¨µÀ²É¼¯
-	ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;	//¿ªÆôÁ¬Ğø×ª»»Ä£Ê½£¬¼´²»Í£µØ½øĞĞADC×ª»»
-	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;	//²»Ê¹ÓÃÍâ²¿´¥·¢×ª»»
-	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right; 	//²É¼¯Êı¾İÓÒ¶ÔÆë
-	ADC_InitStructure.ADC_NbrOfChannel = 7;	 	//Òª×ª»»µÄÍ¨µÀÊıÄ¿
+	ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;	//ç‹¬ç«‹ADCæ¨¡å¼
+	ADC_InitStructure.ADC_ScanConvMode = ENABLE ; 	 //ç¦æ­¢æ‰«ææ¨¡å¼ï¼Œæ‰«ææ¨¡å¼ç”¨äºå¤šé€šé“é‡‡é›†
+	ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;	//å¼€å¯è¿ç»­è½¬æ¢æ¨¡å¼ï¼Œå³ä¸åœåœ°è¿›è¡ŒADCè½¬æ¢
+	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;	//ä¸ä½¿ç”¨å¤–éƒ¨è§¦å‘è½¬æ¢
+	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right; 	//é‡‡é›†æ•°æ®å³å¯¹é½
+	ADC_InitStructure.ADC_NbrOfChannel = 7;	 	//è¦è½¬æ¢çš„é€šé“æ•°ç›®
 	ADC_Init(ADC1, &ADC_InitStructure);
 	
-	/*ÅäÖÃADCÊ±ÖÓ£¬ÎªPCLK2µÄ6·ÖÆµ£¬¼´12MHz,ADCÆµÂÊ×î¸ß²»ÄÜ³¬¹ı14MHz*/
+	/*é…ç½®ADCæ—¶é’Ÿï¼Œä¸ºPCLK2çš„6åˆ†é¢‘ï¼Œå³12MHz,ADCé¢‘ç‡æœ€é«˜ä¸èƒ½è¶…è¿‡14MHz*/
 	RCC_ADCCLKConfig(RCC_PCLK2_Div6); 
-	/*ÅäÖÃADC1µÄÍ¨µÀ11Îª55.	5¸ö²ÉÑùÖÜÆÚ£¬ĞòÁĞÎª1 */ 
+	/*é…ç½®ADC1çš„é€šé“11ä¸º55.	5ä¸ªé‡‡æ ·å‘¨æœŸï¼Œåºåˆ—ä¸º1 */ 
 
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_0, 1, ADC_SampleTime_55Cycles5);
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 2, ADC_SampleTime_55Cycles5);
@@ -101,26 +101,26 @@ static void ADC1_Mode_Config(void)
 	/* Enable ADC1 */
 	ADC_Cmd(ADC1, ENABLE);
 	
-	/*¸´Î»Ğ£×¼¼Ä´æÆ÷ */   
+	/*å¤ä½æ ¡å‡†å¯„å­˜å™¨ */   
 	ADC_ResetCalibration(ADC1);
-	/*µÈ´ıĞ£×¼¼Ä´æÆ÷¸´Î»Íê³É */
+	/*ç­‰å¾…æ ¡å‡†å¯„å­˜å™¨å¤ä½å®Œæˆ */
 	while(ADC_GetResetCalibrationStatus(ADC1));
 	
-	/* ADCĞ£×¼ */
+	/* ADCæ ¡å‡† */
 	ADC_StartCalibration(ADC1);
-	/* µÈ´ıĞ£×¼Íê³É*/
+	/* ç­‰å¾…æ ¡å‡†å®Œæˆ*/
 	while(ADC_GetCalibrationStatus(ADC1));
 	
-	/* ÓÉÓÚÃ»ÓĞ²ÉÓÃÍâ²¿´¥·¢£¬ËùÒÔÊ¹ÓÃÈí¼ş´¥·¢ADC×ª»» */ 
+	/* ç”±äºæ²¡æœ‰é‡‡ç”¨å¤–éƒ¨è§¦å‘ï¼Œæ‰€ä»¥ä½¿ç”¨è½¯ä»¶è§¦å‘ADCè½¬æ¢ */ 
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
 
 /*
- * º¯ÊıÃû£ºADC1_Init
- * ÃèÊö  £ºÎŞ
- * ÊäÈë  £ºÎŞ
- * Êä³ö  £ºÎŞ
- * µ÷ÓÃ  £ºÍâ²¿µ÷ÓÃ
+ * å‡½æ•°åï¼šADC1_Init
+ * æè¿°  ï¼šæ— 
+ * è¾“å…¥  ï¼šæ— 
+ * è¾“å‡º  ï¼šæ— 
+ * è°ƒç”¨  ï¼šå¤–éƒ¨è°ƒç”¨
  */
 void ADC1_Init(void)
 {

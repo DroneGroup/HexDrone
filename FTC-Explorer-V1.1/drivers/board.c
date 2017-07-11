@@ -1,13 +1,13 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºboard.c
- * ÃèÊö    £ºÓ²¼ş³õÊ¼»¯
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šboard.c
+ * æè¿°    ï¼šç¡¬ä»¶åˆå§‹åŒ–
 **********************************************************************************/
 #include "board.h"
 
 // cycles per microsecond
 static volatile uint32_t usTicks = 0;
-// µÎ´ğ¶¨Ê±Æ÷¼ÆÊı±äÁ¿ ,49ÌìºóÒç³ö
+// æ»´ç­”å®šæ—¶å™¨è®¡æ•°å˜é‡ ,49å¤©åæº¢å‡º
 static volatile uint32_t sysTickUptime = 0;
 
 static void cycleCounterInit(void)
@@ -51,32 +51,32 @@ void DelayMs(uint32_t ms)
 
 void FTC_Hexacopter_board_Init(void)
 {
-	//ÖĞ¶ÏÓÅÏÈ¼¶×é±ğÉèÖÃ
+	//ä¸­æ–­ä¼˜å…ˆçº§ç»„åˆ«è®¾ç½®
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 	
-	//³õÊ¼»¯ÏµÍ³µÎ´ğ¶¨Ê±Æ÷
+	//åˆå§‹åŒ–ç³»ç»Ÿæ»´ç­”å®šæ—¶å™¨
 	cycleCounterInit();
 	SysTick_Config(SystemCoreClock / 1000);	
 	
-	//³õÊ¼»¯Ä£ÄâI2C
+	//åˆå§‹åŒ–æ¨¡æ‹ŸI2C
 	FTC_I2C_Soft::Init();
-	//³õÊ¼»¯SPI2
+	//åˆå§‹åŒ–SPI2
 	FTC_SPI2::Init();
-	//³õÊ¼»¯NRF
+	//åˆå§‹åŒ–NRF
 	nrf.Init(MODEL_TX2,251);
 	
-	//³õÊ¼»¯¶¨Ê±Æ÷Êä³öPWM,24KHz
+	//åˆå§‹åŒ–å®šæ—¶å™¨è¾“å‡ºPWM,24KHz
 	FTC_PWM::out_Init(24000);
 
 	uart3.Init(9600);
 	
 	FTC_LED::Init();	
-	//¶ÁÈ¡µçÑ¹ADC³õÊ¼»¯
+	//è¯»å–ç”µå‹ADCåˆå§‹åŒ–
 	FTC_ADC_Init();
 	
-	//½âËøflash
+	//è§£é”flash
 	FLASH_Unlock();	
-	//³õÊ¼»¯ĞéÄâeepromÉèÖÃ
+	//åˆå§‹åŒ–è™šæ‹Ÿeepromè®¾ç½®
 	EE_Init();	
 }
 

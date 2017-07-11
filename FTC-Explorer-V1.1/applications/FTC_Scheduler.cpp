@@ -1,69 +1,69 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_Scheduler.cpp
- * ÃèÊö    £ºÈÎÎñ´¦Àí
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Scheduler.cpp
+ * æè¿°    ï¼šä»»åŠ¡å¤„ç†
 **********************************************************************************/
 #include "FTC_Scheduler.h"
 
 FTC_Scheduler scheduler;
 
-static void FTC_Loop_1000Hz(void)	//1msÖ´ĞĞÒ»´Î
+static void FTC_Loop_1000Hz(void)	//1msæ‰§è¡Œä¸€æ¬¡
 {
-	//¼ì²éÊÇ·ñÓĞ½ÓÊÕµ½ÎŞÏßÊı¾İ
+	//æ£€æŸ¥æ˜¯å¦æœ‰æ¥æ”¶åˆ°æ— çº¿æ•°æ®
 	dt.Check_Event();
 	
-	//·¢ËÍ·ÉĞĞÆ÷Êı¾İ
+	//å‘é€é£è¡Œå™¨æ•°æ®
 	dt.Data_Exchange();
 }
 
-static void FTC_Loop_500Hz(void)	//2msÖ´ĞĞÒ»´Î
+static void FTC_Loop_500Hz(void)	//2msæ‰§è¡Œä¸€æ¬¡
 {	
-	//¸üĞÂ´«¸ĞÆ÷Êı¾İ	
+	//æ›´æ–°ä¼ æ„Ÿå™¨æ•°æ®	
 	imu.updateSensor();		
 	
-	//¼ÆËã·ÉĞĞÆ÷×ËÌ¬
+	//è®¡ç®—é£è¡Œå™¨å§¿æ€
 	imu.getAttitude();
 	
-	//·ÉĞĞÆ÷×ËÌ¬ÄÚ»·¿ØÖÆ
+	//é£è¡Œå™¨å§¿æ€å†…ç¯æ§åˆ¶
 	fc.Attitude_Inner_Loop();	
 	
-	//·ÉĞĞÆ÷¸ß¶È´«¸ĞÆ÷Êı¾İ¸üĞÂ
+	//é£è¡Œå™¨é«˜åº¦ä¼ æ„Ÿå™¨æ•°æ®æ›´æ–°
 	nav.update();
 }
 
-static void FTC_Loop_200Hz(void)	//5msÖ´ĞĞÒ»´Î
+static void FTC_Loop_200Hz(void)	//5msæ‰§è¡Œä¸€æ¬¡
 {
-	//·ÉĞĞÆ÷×ËÌ¬Íâ»·¿ØÖÆ
+	//é£è¡Œå™¨å§¿æ€å¤–ç¯æ§åˆ¶
 	fc.Attitude_Outter_Loop();
 }
 
-static void FTC_Loop_100Hz(void)	//10msÖ´ĞĞÒ»´Î
+static void FTC_Loop_100Hz(void)	//10msæ‰§è¡Œä¸€æ¬¡
 {
-	//µç³ØµçÑ¹²âÁ¿
+	//ç”µæ± ç”µå‹æµ‹é‡
 	FTC_ADC_Battery();
 }
 
-static void FTC_Loop_50Hz(void)	//20msÖ´ĞĞÒ»´Î
+static void FTC_Loop_50Hz(void)	//20msæ‰§è¡Œä¸€æ¬¡
 {
-	//Ò£¿ØÍ¨µÀÊı¾İ´¦Àí
+	//é¥æ§é€šé“æ•°æ®å¤„ç†
 	rc.Cal_Command();
 	
-	//Ò¡¸ËÎ»ÖÃ¼ì²é
+	//æ‘‡æ†ä½ç½®æ£€æŸ¥
 	rc.check_sticks();
 	
-	//¸¨ÖúÍ¨µÀ¼ì²â
+	//è¾…åŠ©é€šé“æ£€æµ‹
 	rc.CheckAUX();
 	
-	//Ê§¿Ø±£»¤¼ì²é
+	//å¤±æ§ä¿æŠ¤æ£€æŸ¥
 	dt.Failsafe_Check();
 	
-	//LEDÖ¸Ê¾µÆ¿ØÖÆ
+	//LEDæŒ‡ç¤ºç¯æ§åˆ¶
 	ftc.Pilot_Light();
 	
-	//·ÉĞĞÆ÷¸ß¶ÈÍâ»·¿ØÖÆ
+	//é£è¡Œå™¨é«˜åº¦å¤–ç¯æ§åˆ¶
 	fc.Altitude_Outter_Loop();	
 	
-	//·ÉĞĞÆ÷¸ß¶ÈÄÚ»·¿ØÖÆ
+	//é£è¡Œå™¨é«˜åº¦å†…ç¯æ§åˆ¶
 	fc.Altitude_Inner_Loop();	
 }
 

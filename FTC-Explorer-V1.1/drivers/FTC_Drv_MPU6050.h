@@ -16,28 +16,28 @@ public:
 	u8 Gyro_CALIBRATED;
 	Vector3i Acc_Offset,Gyro_Offset;
 
-	//³õÊ¼»¯6050
+	//åˆå§‹åŒ–6050
 	void Init(uint16_t sample_rate, uint16_t lpf);
-	//¶ÁÈ¡¼ÓËÙ¶È
+	//è¯»å–åŠ é€Ÿåº¦
 	void Read_Acc_Data(void);
-	//¶ÁÈ¡½ÇËÙ¶È
+	//è¯»å–è§’é€Ÿåº¦
 	void Read_Gyro_Data(void);
-	//·µ»Ø¼ÓËÙ¶ÈµÄÖµ
+	//è¿”å›åŠ é€Ÿåº¦çš„å€¼
 	Vector3f Get_Acc(void);
-	//·µ»Ø½ÇËÙ¶ÈµÄÖµ
+	//è¿”å›è§’é€Ÿåº¦çš„å€¼
 	Vector3f Get_Gyro(void);
-	//·µ»Øµ¥Î»Îª¶ÈÃ¿ÃëµÄ½ÇËÙ¶È
+	//è¿”å›å•ä½ä¸ºåº¦æ¯ç§’çš„è§’é€Ÿåº¦
 	Vector3f Get_Gyro_in_dps(Vector3f GyroRaw);
 
 private:
 	
-	u8 mpu6050_buffer[14]; //½ÓÊÕÊı¾İ»º´æÇø
+	u8 mpu6050_buffer[14]; //æ¥æ”¶æ•°æ®ç¼“å­˜åŒº
 	Vector3f Acc_ADC,Gyro_ADC;
 	Vector3f Gyro_dps;
 
-	//¼ÓËÙ¶ÈÁãÆ«½ÃÕı
+	//åŠ é€Ÿåº¦é›¶åçŸ«æ­£
 	void CalOffset_Acc(void);
-	//ÍÓÂİÒÇÁãÆ«½ÃÕı
+	//é™€èºä»ªé›¶åçŸ«æ­£
 	void CalOffset_Gyro(void);
 
 	void delayms(uint16_t ms);

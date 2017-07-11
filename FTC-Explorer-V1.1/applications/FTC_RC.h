@@ -39,13 +39,13 @@ public:
 	uint16_t rawData[10];
 	int16_t Command[4];
 
-	//²ÎÊı³õÊ¼»¯
+	//å‚æ•°åˆå§‹åŒ–
 	void Init(void);
-	//Ò£¿ØÍ¨µÀÊı¾İ´¦Àí
+	//é¥æ§é€šé“æ•°æ®å¤„ç†
 	void Cal_Command(void);
-	//Ò¡¸ËÎ»ÖÃ¼ì²â
+	//æ‘‡æ†ä½ç½®æ£€æµ‹
 	void check_sticks(void);
-	//¸¨ÖúÍ¨µÀ¼ì²â
+	//è¾…åŠ©é€šé“æ£€æµ‹
 	void CheckAUX(void);
 
 private:

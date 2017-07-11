@@ -1,21 +1,21 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼þÃû  £ºFtcCopter.cpp
- * ÃèÊö    £ºFilter´´ÐÂÌ½Ë÷ÕßV1.0Î¢ÐÍÁùÖá·ÉÐÐÆ÷
- * ´úÂë°æ±¾£ºV1.0
- * Ê±¼ä		 £º2015/12/1
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFtcCopter.cpp
+ * æè¿°    ï¼šFilteråˆ›æ–°æŽ¢ç´¢è€…V1.0å¾®åž‹å…­è½´é£žè¡Œå™¨
+ * ä»£ç ç‰ˆæœ¬ï¼šV1.0
+ * æ—¶é—´		 ï¼š2015/12/1
 **********************************************************************************/
 #include "FTC_Config.h"
 
 int main(void)
 {
-	//³õÊ¼»¯·É¿Ø°åµÄÓ²¼þÉèÖÃ
+	//åˆå§‹åŒ–é£žæŽ§æ¿çš„ç¡¬ä»¶è®¾ç½®
 	FTC_Hexacopter_board_Init();
 	
-	//³õÊ¼»¯²ÎÊý
+	//åˆå§‹åŒ–å‚æ•°
 	param.Init();
 	
-	//³õÊ¼»¯IMU£¨¹ßÐÔ²âÁ¿µ¥Ôª£©
+	//åˆå§‹åŒ–IMUï¼ˆæƒ¯æ€§æµ‹é‡å•å…ƒï¼‰
 	imu.Init();	
 	
 	nav.Init();

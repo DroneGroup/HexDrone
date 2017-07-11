@@ -1,12 +1,12 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼þÃû  £ºFTC_Drv_MPU6050.cpp
- * ÃèÊö    £ºMPU6050
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Drv_MPU6050.cpp
+ * æè¿°    ï¼šMPU6050
 **********************************************************************************/
 
 #include "FTC_Drv_MPU6050.h"
 
-// MPU6050, Ó²¼þI2cµØÖ· 0x68£¬Ä£Äâi2cµØÖ·0xD0
+// MPU6050, ç¡¬ä»¶I2cåœ°å€ 0x68ï¼Œæ¨¡æ‹Ÿi2cåœ°å€0xD0
 #define MPU6050_ADDRESS         0xD0	// 0x68
 #define DMP_MEM_START_ADDR 0x6E
 #define DMP_MEM_R_W 0x6F
@@ -131,7 +131,7 @@ void FTC_MPU6050::delayms(uint16_t ms){
 		while(i--);
 }
 
-//MPU6050³õÊ¼»¯£¬´«Èë²ÎÊý£º²ÉÑùÂÊ£¬µÍÍ¨ÂË²¨ÆµÂÊ
+//MPU6050åˆå§‹åŒ–ï¼Œä¼ å…¥å‚æ•°ï¼šé‡‡æ ·çŽ‡ï¼Œä½Žé€šæ»¤æ³¢é¢‘çŽ‡
 void FTC_MPU6050::Init(uint16_t sample_rate, uint16_t lpf)
 {
 	uint8_t default_filter;
@@ -163,64 +163,64 @@ void FTC_MPU6050::Init(uint16_t sample_rate, uint16_t lpf)
 			break;
 	}	
 	
-	//Éè±¸¸´Î»
+	//è®¾å¤‡å¤ä½
 	I2C_Single_Write(MPU6050_ADDRESS,MPU_RA_PWR_MGMT_1, 0x80);	
 	
 	delayms(5);
 	
-	//ÍÓÂÝÒÇ²ÉÑùÂÊ£¬0x00(1000Hz)   ²ÉÑùÂÊ = ÍÓÂÝÒÇµÄÊä³öÂÊ / (1 + SMPLRT_DIV)
+	//é™€èžºä»ªé‡‡æ ·çŽ‡ï¼Œ0x00(1000Hz)   é‡‡æ ·çŽ‡ = é™€èžºä»ªçš„è¾“å‡ºçŽ‡ / (1 + SMPLRT_DIV)
 	I2C_Single_Write(MPU6050_ADDRESS,MPU_RA_SMPLRT_DIV, (1000/sample_rate - 1));	
-	//ÉèÖÃÉè±¸Ê±ÖÓÔ´£¬ÍÓÂÝÒÇZÖá
+	//è®¾ç½®è®¾å¤‡æ—¶é’Ÿæºï¼Œé™€èžºä»ªZè½´
 	I2C_Single_Write(MPU6050_ADDRESS, MPU_RA_PWR_MGMT_1, 0x03);	
-	//i2cÅÔÂ·Ä£Ê½
+	//i2cæ—è·¯æ¨¡å¼
 	I2C_Single_Write(MPU6050_ADDRESS, MPU_RA_INT_PIN_CFG, 0 << 7 | 0 << 6 | 0 << 5 | 0 << 4 | 0 << 3 | 0 << 2 | 1 << 1 | 0 << 0); 
 	// INT_PIN_CFG   -- INT_LEVEL_HIGH, INT_OPEN_DIS, LATCH_INT_DIS, INT_RD_CLEAR_DIS, FSYNC_INT_LEVEL_HIGH, FSYNC_INT_DIS, I2C_BYPASS_EN, CLOCK_DIS
-	//µÍÍ¨ÂË²¨ÆµÂÊ£¬0x03(42Hz)
+	//ä½Žé€šæ»¤æ³¢é¢‘çŽ‡ï¼Œ0x03(42Hz)
 	I2C_Single_Write(MPU6050_ADDRESS,MPU_RA_CONFIG, default_filter);	
-	 //ÍÓÂÝÒÇ×Ô¼ì¼°²âÁ¿·¶Î§£¬µäÐÍÖµ£º0x18(²»×Ô¼ì£¬2000deg/s)
+	 //é™€èžºä»ªè‡ªæ£€åŠæµ‹é‡èŒƒå›´ï¼Œå…¸åž‹å€¼ï¼š0x18(ä¸è‡ªæ£€ï¼Œ2000deg/s)
 	I2C_Single_Write(MPU6050_ADDRESS, MPU_RA_GYRO_CONFIG, 0x18); 
-	//¼ÓËÙ¼Æ×Ô¼ì¡¢²âÁ¿·¶Î§(²»×Ô¼ì£¬+-8G)			
+	//åŠ é€Ÿè®¡è‡ªæ£€ã€æµ‹é‡èŒƒå›´(ä¸è‡ªæ£€ï¼Œ+-8G)			
 	I2C_Single_Write(MPU6050_ADDRESS,MPU_RA_ACCEL_CONFIG, 2 << 3);	
 }
 
-//¶ÁÈ¡¼ÓËÙ¶È
+//è¯»å–åŠ é€Ÿåº¦
 void FTC_MPU6050::Read_Acc_Data(void)
 {
 	int16_t acc_temp[3];
 	
 	mpu6050_buffer[0] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_ACCEL_XOUT_L); 
 	mpu6050_buffer[1] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_ACCEL_XOUT_H);
-	acc_temp[0] = ((((int16_t)mpu6050_buffer[1]) << 8) | mpu6050_buffer[0])- Acc_Offset.x;  //¼ÓËÙ¶ÈXÖá
+	acc_temp[0] = ((((int16_t)mpu6050_buffer[1]) << 8) | mpu6050_buffer[0])- Acc_Offset.x;  //åŠ é€Ÿåº¦Xè½´
 
 	mpu6050_buffer[2] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_ACCEL_YOUT_L);
 	mpu6050_buffer[3] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_ACCEL_YOUT_H);
-	acc_temp[1] = ((((int16_t)mpu6050_buffer[3]) << 8) | mpu6050_buffer[2])- Acc_Offset.y;  //¼ÓËÙ¶ÈYÖá
+	acc_temp[1] = ((((int16_t)mpu6050_buffer[3]) << 8) | mpu6050_buffer[2])- Acc_Offset.y;  //åŠ é€Ÿåº¦Yè½´
 
 	mpu6050_buffer[4] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_ACCEL_ZOUT_L);
 	mpu6050_buffer[5] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_ACCEL_ZOUT_H);
-	acc_temp[2] = ((((int16_t)mpu6050_buffer[5]) << 8) | mpu6050_buffer[4])- Acc_Offset.z;  //¼ÓËÙ¶ÈZÖá
+	acc_temp[2] = ((((int16_t)mpu6050_buffer[5]) << 8) | mpu6050_buffer[4])- Acc_Offset.z;  //åŠ é€Ÿåº¦Zè½´
 	
 	Acc_ADC((float)acc_temp[0],(float)acc_temp[1],(float)acc_temp[2]);
 	
 	CalOffset_Acc();
 }
 
-//¶ÁÈ¡½ÇËÙ¶È
+//è¯»å–è§’é€Ÿåº¦
 void FTC_MPU6050::Read_Gyro_Data(void)
 {
 	int16_t gyro_temp[3];
 	
 	mpu6050_buffer[6] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_GYRO_XOUT_L); 
 	mpu6050_buffer[7] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_GYRO_XOUT_H);
-	gyro_temp[0] = ((((int16_t)mpu6050_buffer[7]) << 8) | mpu6050_buffer[6])- Gyro_Offset.x;	//ÍÓÂÝÒÇXÖá
+	gyro_temp[0] = ((((int16_t)mpu6050_buffer[7]) << 8) | mpu6050_buffer[6])- Gyro_Offset.x;	//é™€èžºä»ªXè½´
 
 	mpu6050_buffer[8] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_GYRO_YOUT_L);
 	mpu6050_buffer[9] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_GYRO_YOUT_H);
-	gyro_temp[1] = ((((int16_t)mpu6050_buffer[9]) << 8) | mpu6050_buffer[8])- Gyro_Offset.y;	//ÍÓÂÝÒÇYÖá
+	gyro_temp[1] = ((((int16_t)mpu6050_buffer[9]) << 8) | mpu6050_buffer[8])- Gyro_Offset.y;	//é™€èžºä»ªYè½´
 
 	mpu6050_buffer[10] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_GYRO_ZOUT_L);
 	mpu6050_buffer[11] = I2C_Single_Read(MPU6050_ADDRESS,MPU_RA_GYRO_ZOUT_H);
-	gyro_temp[2] = ((((int16_t)mpu6050_buffer[11]) << 8) | mpu6050_buffer[10])- Gyro_Offset.z;	  //ÍÓÂÝÒÇZÖá		
+	gyro_temp[2] = ((((int16_t)mpu6050_buffer[11]) << 8) | mpu6050_buffer[10])- Gyro_Offset.z;	  //é™€èžºä»ªZè½´		
 	
 	Gyro_ADC((float)gyro_temp[0], (float)gyro_temp[1], (float)gyro_temp[2]);
 	
@@ -245,7 +245,7 @@ Vector3f FTC_MPU6050::Get_Gyro_in_dps(void)
 	return Gyro_dps;
 }
 
-//¼ÓËÙ¶ÈÁãÆ«½ÃÕý
+//åŠ é€Ÿåº¦é›¶åçŸ«æ­£
 void FTC_MPU6050::CalOffset_Acc(void)
 {
 	if(Acc_CALIBRATED)
@@ -268,7 +268,7 @@ void FTC_MPU6050::CalOffset_Acc(void)
 				Acc_Offset.z = tempAcc.z/cnt_a - ACC_1G;
 				cnt_a = 0;
 				Acc_CALIBRATED = 0;
-				//param.SAVE_ACC_OFFSET();//±£´æÊý¾Ý
+				//param.SAVE_ACC_OFFSET();//ä¿å­˜æ•°æ®
 				return;
 			}
 			cnt_a++;		
@@ -276,7 +276,7 @@ void FTC_MPU6050::CalOffset_Acc(void)
 	
 }
 
-//ÍÓÂÝÒÇÁãÆ«½ÃÕý
+//é™€èžºä»ªé›¶åçŸ«æ­£
 void FTC_MPU6050::CalOffset_Gyro(void)
 {
 	if(Gyro_CALIBRATED)
@@ -298,7 +298,7 @@ void FTC_MPU6050::CalOffset_Gyro(void)
 			Gyro_Offset.z = tempGyro.z/cnt_g;
 			cnt_g = 0;
 			Gyro_CALIBRATED = 0;
-			//param.SAVE_GYRO_OFFSET();//±£´æÊý¾Ý
+			//param.SAVE_GYRO_OFFSET();//ä¿å­˜æ•°æ®
 			return;
 		}
 		cnt_g++;

@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_FlyControl.cpp
- * ÃèÊö    £º·ÉĞĞ¿ØÖÆ
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_FlyControl.cpp
+ * æè¿°    ï¼šé£è¡Œæ§åˆ¶
 **********************************************************************************/
 #include "FTC_FlyControl.h"
 
@@ -11,11 +11,11 @@ FTC_FlyControl fc;
 FTC_FlyControl::FTC_FlyControl()
 {
 	yawRate = 20;
-	//ÖØÖÃPID²ÎÊı
+	//é‡ç½®PIDå‚æ•°
 	PID_Reset();
 }
 
-//ÖØÖÃPID²ÎÊı
+//é‡ç½®PIDå‚æ•°
 void FTC_FlyControl::PID_Reset(void)
 {
 	pid[PIDROLL].set_pid(50, 15, 65, 2000000);
@@ -23,28 +23,28 @@ void FTC_FlyControl::PID_Reset(void)
 	pid[PIDYAW].set_pid(30, 0, 40, 2000000);
 }
 
-//·ÉĞĞÆ÷×ËÌ¬¿ØÖÆ
+//é£è¡Œå™¨å§¿æ€æ§åˆ¶
 void FTC_FlyControl::Attitude_Loop(void)
 {
 	int32_t PIDTerm[3];
 	int32_t	errorAngle[3];
 	
-	//¼ÆËã½Ç¶ÈÎó²îÖµ
+	//è®¡ç®—è§’åº¦è¯¯å·®å€¼
 	errorAngle[ROLL] = constrain_int32((rc.Command[ROLL] * 2) , -((int)FLYANGLE_MAX), +FLYANGLE_MAX) - imu.angle.x * 10; 
 	errorAngle[PITCH] = constrain_int32((rc.Command[PITCH] * 2) , -((int)FLYANGLE_MAX), +FLYANGLE_MAX) - imu.angle.y * 10; 
 	errorAngle[YAW] = (imu.magHold - imu.angle.z) * 10;
 	
 	for(u8 i=0; i<3;i++)
 	{
-		//µ±ÓÍÃÅµÍÓÚ¼ì²éÖµÊ±»ı·ÖÇåÁã
+		//å½“æ²¹é—¨ä½äºæ£€æŸ¥å€¼æ—¶ç§¯åˆ†æ¸…é›¶
 		if ((rc.rawData[THROTTLE]) < RC_MINCHECK)	
 			pid[i].reset_I();
 		
-		//µÃµ½PIDÊä³ö
+		//å¾—åˆ°PIDè¾“å‡º
 		PIDTerm[i] = pid[i].get_pid(errorAngle[i], PID_LOOP_TIME);
 	}
 	
-	//PIDÊä³ö×ªÎªµç»ú¿ØÖÆÁ¿
+	//PIDè¾“å‡ºè½¬ä¸ºç”µæœºæ§åˆ¶é‡
 	motor.writeMotor(rc.Command[THROTTLE], PIDTerm[ROLL], PIDTerm[PITCH], PIDTerm[YAW]);
 }
 

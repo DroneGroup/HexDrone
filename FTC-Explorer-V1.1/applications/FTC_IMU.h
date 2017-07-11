@@ -10,7 +10,7 @@ public:
 
 	FTC_IMU();
 	
-	//Å·À­½Ç±íÊ¾µÄ·ÉĞĞÆ÷×ËÌ¬
+	//æ¬§æ‹‰è§’è¡¨ç¤ºçš„é£è¡Œå™¨å§¿æ€
 	Vector3f angle;
 	
 	Vector3f Gyro, Gyro_lpf, Acc, Acc_lpf; 
@@ -23,10 +23,10 @@ public:
 	
 	void Init();
 	
-	//¸üĞÂ´«¸ĞÆ÷Êı¾İ
+	//æ›´æ–°ä¼ æ„Ÿå™¨æ•°æ®
 	void updateSensor();	
 	
-	//¼ÆËã·ÉĞĞÆ÷×ËÌ¬
+	//è®¡ç®—é£è¡Œå™¨å§¿æ€
 	void getAttitude();
 	
 	Vector3f Get_Accel_Ef();
@@ -39,14 +39,14 @@ private:
 
 	float getDeltaT(uint32_t time);
 
-	//»ùÓÚÓàÏÒ¾ØÕóºÍ»¥²¹ÂË²¨µÄ×ËÌ¬½âËã
+	//åŸºäºä½™å¼¦çŸ©é˜µå’Œäº’è¡¥æ»¤æ³¢çš„å§¿æ€è§£ç®—
 	void DCM_CF(Vector3f gyro,Vector3f acc, float deltaT);
-	//»ùÓÚËÄÔªÊıºÍ»¥²¹ÂË²¨µÄ×ËÌ¬½âËã
+	//åŸºäºå››å…ƒæ•°å’Œäº’è¡¥æ»¤æ³¢çš„å§¿æ€è§£ç®—
 	void Quaternion_CF(Vector3f gyro,Vector3f acc, float deltaT);
 
-	//ÂË²¨Æ÷²ÎÊı³õÊ¼»¯
+	//æ»¤æ³¢å™¨å‚æ•°åˆå§‹åŒ–
 	void filter_Init();
-	//´«¸ĞÆ÷³õÊ¼»¯
+	//ä¼ æ„Ÿå™¨åˆå§‹åŒ–
 	void sensor_Init();
 
 	Vector3f deltaGyroAngle, oldGyro, RPVec, YawVec;

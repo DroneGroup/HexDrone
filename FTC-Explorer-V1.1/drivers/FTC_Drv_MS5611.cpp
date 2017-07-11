@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼þÃû  £ºFTC_Drv_MS5611.cpp
- * ÃèÊö    £ºMS5611
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Drv_MS5611.cpp
+ * æè¿°    ï¼šMS5611
 **********************************************************************************/
 #include "FTC_Drv_MS5611.h"
 
@@ -50,11 +50,11 @@ bool FTC_MS5611::Read_Prom(void)
 void FTC_MS5611::Init(void)
 {
 	DelayMs(10);
-	//´«¸ÐÆ÷¸´Î»
+	//ä¼ æ„Ÿå™¨å¤ä½
 	Reset();
 	DelayMs(3);
 	Read_Prom();
-	//¿ªÊ¼¶ÁÈ¡ÎÂ¶È
+	//å¼€å§‹è¯»å–æ¸©åº¦
 	Start_T();
 }
 
