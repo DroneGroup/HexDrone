@@ -22,7 +22,7 @@ int main(void)
 
 	pwm.out_Init(2000);
 	
-	motor.writeMotor(0,0,0,0);
+	//motor.writeMotor(0,0,0,0);
 	
 	while(1)
 	{
