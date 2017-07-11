@@ -1,6 +1,6 @@
 #include "FTC_Math.h"
 
-//±£Ö¤ÊäÈëÖµÊÇÓĞĞ§µÄ
+//ä¿è¯è¾“å…¥å€¼æ˜¯æœ‰æ•ˆçš„
 float safe_asin(float v)
 {
     if (isnan(v)) {
@@ -15,7 +15,7 @@ float safe_asin(float v)
     return asinf(v);
 }
 
-//¸¡µãÊıÏŞ·ù
+//æµ®ç‚¹æ•°é™å¹…
 float constrain_float(float amt, float low, float high) 
 {
 	if (isnan(amt)) {
@@ -24,18 +24,18 @@ float constrain_float(float amt, float low, float high)
 	return ((amt)<(low)?(low):((amt)>(high)?(high):(amt)));
 }
 
-//16Î»ÕûĞÍÊıÏŞ·ù
+//16ä½æ•´å‹æ•°é™å¹…
 int16_t constrain_int16(int16_t amt, int16_t low, int16_t high) {
 	return ((amt)<(low)?(low):((amt)>(high)?(high):(amt)));
 }
 
-//16Î»ÎŞ·ûºÅÕûĞÍÊıÏŞ·ù
+//16ä½æ— ç¬¦å·æ•´å‹æ•°é™å¹…
 uint16_t constrain_uint16(uint16_t amt, uint16_t low, uint16_t high)
 {
 	return ((amt)<(low)?(low):((amt)>(high)?(high):(amt)));
 }
 
-//32Î»ÕûĞÍÊıÏŞ·ù
+//32ä½æ•´å‹æ•°é™å¹…
 int32_t constrain_int32(int32_t amt, int32_t low, int32_t high) {
 	return ((amt)<(low)?(low):((amt)>(high)?(high):(amt)));
 }
@@ -52,32 +52,32 @@ int32_t applyDeadband(int32_t value, int32_t deadband)
     return value;
 }
 
-//½Ç¶È×ª»¡¶È
+//è§’åº¦è½¬å¼§åº¦
 float radians(float deg) {
 	return deg * DEG_TO_RAD;
 }
 
-//»¡¶È×ª½Ç¶È
+//å¼§åº¦è½¬è§’åº¦
 float degrees(float rad) {
 	return rad * RAD_TO_DEG;
 }
 
-//ÇóÆ½·½
+//æ±‚å¹³æ–¹
 float sq(float v) {
 	return v*v;
 }
 
-//2Î¬ÏòÁ¿³¤¶È
+//2ç»´å‘é‡é•¿åº¦
 float pythagorous2(float a, float b) {
 	return sqrtf(sq(a)+sq(b));
 }
 
-//3Î¬ÏòÁ¿³¤¶È
+//3ç»´å‘é‡é•¿åº¦
 float pythagorous3(float a, float b, float c) {
 	return sqrtf(sq(a)+sq(b)+sq(c));
 }
 
-//4Î¬ÏòÁ¿³¤¶È
+//4ç»´å‘é‡é•¿åº¦
 float pythagorous4(float a, float b, float c, float d) {
 	return sqrtf(sq(a)+sq(b)+sq(c)+sq(d));
 }
