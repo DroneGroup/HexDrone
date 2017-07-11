@@ -10,19 +10,19 @@ FTC_Motor motor;
 void FTC_Motor::writeMotor(uint16_t throttle, int32_t pidTermRoll, int32_t pidTermPitch, int32_t pidTermYaw)
 {
 	//to do
-	// motorPWM[0] = throttle + 0.866 * pidTermRoll - 0.5 * pidTermRoll - pidTermYaw;
-	// motorPWM[1] = throttle + 0.000 * pidTermRoll - 1.0 * pidTermRoll + pidTermYaw;
-	// motorPWM[2] = throttle - 0.866 * pidTermRoll - 0.5 * pidTermRoll - pidTermYaw;
-	// motorPWM[3] = throttle - 0.866 * pidTermRoll + 0.5 * pidTermRoll + pidTermYaw;
-	// motorPWM[4] = throttle + 0.000 * pidTermRoll + 1.0 * pidTermRoll - pidTermYaw;
-	// motorPWM[5] = throttle + 0.866 * pidTermRoll + 0.5 * pidTermRoll + pidTermYaw;
+	motorPWM[0] = throttle + 0.866 * pidTermRoll - 0.5 * pidTermRoll - pidTermYaw;
+	motorPWM[1] = throttle + 0.000 * pidTermRoll - 1.0 * pidTermRoll + pidTermYaw;
+	motorPWM[2] = throttle - 0.866 * pidTermRoll - 0.5 * pidTermRoll - pidTermYaw;
+	motorPWM[3] = throttle - 0.866 * pidTermRoll + 0.5 * pidTermRoll + pidTermYaw;
+	motorPWM[4] = throttle + 0.000 * pidTermRoll + 1.0 * pidTermRoll - pidTermYaw;
+	motorPWM[5] = throttle + 0.866 * pidTermRoll + 0.5 * pidTermRoll + pidTermYaw;
 	
-	motorPWM[0] = 0.1667 * throttle +  0.2887 * pidTermRoll + -0.1667 * pidTermRoll + -0.1667 * pidTermYaw;
-	motorPWM[1] = 0.1667 * throttle +  0.0000 * pidTermRoll + -0.3333 * pidTermRoll +  0.1667 * pidTermYaw;
-	motorPWM[2] = 0.1667 * throttle + -0.2887 * pidTermRoll + -0.1667 * pidTermRoll + -0.1667 * pidTermYaw;
-	motorPWM[3] = 0.1667 * throttle + -0.2887 * pidTermRoll +  0.1667 * pidTermRoll +  0.1667 * pidTermYaw;
-	motorPWM[4] = 0.1667 * throttle +  0.0000 * pidTermRoll +  0.3333 * pidTermRoll + -0.1667 * pidTermYaw;
-	motorPWM[5] = 0.1667 * throttle +  0.2887 * pidTermRoll +  0.1667 * pidTermRoll +  0.1667 * pidTermYaw;
+	// motorPWM[0] = 0.1667 * throttle +  0.2887 * pidTermRoll + -0.1667 * pidTermRoll + -0.1667 * pidTermYaw;
+	// motorPWM[1] = 0.1667 * throttle +  0.0000 * pidTermRoll + -0.3333 * pidTermRoll +  0.1667 * pidTermYaw;
+	// motorPWM[2] = 0.1667 * throttle + -0.2887 * pidTermRoll + -0.1667 * pidTermRoll + -0.1667 * pidTermYaw;
+	// motorPWM[3] = 0.1667 * throttle + -0.2887 * pidTermRoll +  0.1667 * pidTermRoll +  0.1667 * pidTermYaw;
+	// motorPWM[4] = 0.1667 * throttle +  0.0000 * pidTermRoll +  0.3333 * pidTermRoll + -0.1667 * pidTermYaw;
+	// motorPWM[5] = 0.1667 * throttle +  0.2887 * pidTermRoll +  0.1667 * pidTermRoll +  0.1667 * pidTermYaw;
 
 	int16_t maxMotor = motorPWM[0];
 	for (u8 i = 1; i < MAXMOTORS; i++)
