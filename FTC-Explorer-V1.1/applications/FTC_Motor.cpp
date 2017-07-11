@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼þÃû  £ºFTC_Motor.cpp
- * ÃèÊö    £ºµç»ú¿ØÖÆÏà¹Øº¯Êý
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Motor.cpp
+ * æè¿°    ï¼šç”µæœºæŽ§åˆ¶ç›¸å…³å‡½æ•°
 **********************************************************************************/
 #include "FTC_Motor.h"
 
@@ -35,18 +35,18 @@ void FTC_Motor::writeMotor(uint16_t throttle, int32_t pidTermRoll, int32_t pidTe
 	{
 		if (maxMotor > MAXTHROTTLE)    
 			motorPWM[i] -= maxMotor - MAXTHROTTLE;	
-		//ÏÞÖÆµç»úPWMµÄ×îÐ¡ºÍ×î´óÖµ
+		//é™åˆ¶ç”µæœºPWMçš„æœ€å°å’Œæœ€å¤§å€¼
 		motorPWM[i] = constrain_uint16(motorPWM[i], MINTHROTTLE, MAXTHROTTLE);
 	}
 
-	//Èç¹ûÎ´½âËø£¬Ôò½«µç»úÊä³öÉèÖÃÎª×îµÍ
+	//å¦‚æžœæœªè§£é”ï¼Œåˆ™å°†ç”µæœºè¾“å‡ºè®¾ç½®ä¸ºæœ€ä½Ž
 	if(!ftc.f.ARMED)	
 		ResetPWM();
 
 	if(!ftc.f.ALTHOLD && rc.rawData[THROTTLE] < RC_MINCHECK)
 		ResetPWM();
 
-	//Ð´Èëµç»úPWM
+	//å†™å…¥ç”µæœºPWM
 	pwm.SetPwm(motorPWM);
 	
 }

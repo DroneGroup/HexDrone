@@ -10,27 +10,27 @@ public:
 
 	FTC_IMU();
 	
-	//Å·À­½Ç±íÊ¾µÄ·ÉÐÐÆ÷×ËÌ¬
+	//æ¬§æ‹‰è§’è¡¨ç¤ºçš„é£žè¡Œå™¨å§¿æ€
 	Vector3f angle;
 	
 	Vector3f Gyro, Acc, Acc_lpf; 
 	
 	void Init();
 	
-	//¸üÐÂ´«¸ÐÆ÷Êý¾Ý
+	//æ›´æ–°ä¼ æ„Ÿå™¨æ•°æ®
 	void updateSensor();	
 	
-	//¼ÆËã·ÉÐÐÆ÷×ËÌ¬
+	//è®¡ç®—é£žè¡Œå™¨å§¿æ€
 	void getAttitude();
 	
 private:
 
-	//»ùÓÚÓàÏÒ¾ØÕóºÍ»¥²¹ÂË²¨µÄ×ËÌ¬½âËã
+	//åŸºäºŽä½™å¼¦çŸ©é˜µå’Œäº’è¡¥æ»¤æ³¢çš„å§¿æ€è§£ç®—
 	void DCM_CF(Vector3f gyro,Vector3f acc, float deltaT);
 
-	//ÂË²¨Æ÷²ÎÊý³õÊ¼»¯
+	//æ»¤æ³¢å™¨å‚æ•°åˆå§‹åŒ–
 	void filter_Init();
-	//´«¸ÐÆ÷³õÊ¼»¯
+	//ä¼ æ„Ÿå™¨åˆå§‹åŒ–
 	void sensor_Init();
 
 };

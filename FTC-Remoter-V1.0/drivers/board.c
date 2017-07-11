@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼þÃû  £ºboard.c
- * ÃèÊö    £ºÓ²¼þ³õÊ¼»¯
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šboard.c
+ * æè¿°    ï¼šç¡¬ä»¶åˆå§‹åŒ–
 **********************************************************************************/
 #include "board.h"
 
@@ -16,34 +16,34 @@ void SysTick_IRQ(void)
 
 void FTC_Remoter_board_Init(void)
 {
-	//ÖÐ¶ÏÓÅÏÈ¼¶×é±ðÉèÖÃ
+	//ä¸­æ–­ä¼˜å…ˆçº§ç»„åˆ«è®¾ç½®
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	
-	//³õÊ¼»¯ÏµÍ³µÎ´ð¶¨Ê±Æ÷
+	//åˆå§‹åŒ–ç³»ç»Ÿæ»´ç­”å®šæ—¶å™¨
 	SysTick_Config(SystemCoreClock / 1000);	
 	
-	//³õÊ¼»¯Ä£ÄâI2C
+	//åˆå§‹åŒ–æ¨¡æ‹ŸI2C
 	FTC_I2C_Soft::Init();	
 	
-	//³õÊ¼»¯´®¿Ú1
+	//åˆå§‹åŒ–ä¸²å£1
 	Uart1_Init(500000);
 	
-	//³õÊ¼»¯SPI2
+	//åˆå§‹åŒ–SPI2
 	FTC_SPI2::Init();
-	//³õÊ¼»¯NRF
+	//åˆå§‹åŒ–NRF
 	nrf.Init(MODEL_RX2,251);
 	
 	if(nrf.Check())
 		scheduler.cnt_30ms++;
 	
-	//³õÊ¼»¯ADC²ÉÑù
+	//åˆå§‹åŒ–ADCé‡‡æ ·
 	ADC1_Init();
 	
 	FTC_LED::Init();	
 	
-	//½âËøflash
+	//è§£é”flash
 	FLASH_Unlock();	
-	//³õÊ¼»¯ÐéÄâeepromÉèÖÃ
+	//åˆå§‹åŒ–è™šæ‹Ÿeepromè®¾ç½®
 	EE_Init();	
 	
 }

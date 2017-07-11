@@ -8,7 +8,7 @@
 
 #define ARMAPI extern "C"
 
-/***************LED GPIO¶¨Òå******************/
+/***************LED GPIOå®šä¹‰******************/
 #define FTC_RCC_LED1			RCC_APB2Periph_GPIOC
 #define FTC_GPIO_LED1		GPIOC
 #define FTC_Pin_LED1			GPIO_Pin_14
@@ -16,13 +16,13 @@
 #define FTC_GPIO_LED2		GPIOC
 #define FTC_Pin_LED2		GPIO_Pin_13
 /*********************************************/
-/***************I2C GPIO¶¨Òå******************/
+/***************I2C GPIOå®šä¹‰******************/
 #define FTC_GPIO_I2C	GPIOB
 #define I2C_Pin_SCL		GPIO_Pin_6
 #define I2C_Pin_SDA		GPIO_Pin_7
 #define FTC_RCC_I2C		RCC_APB2Periph_GPIOB
 /*********************************************/
-/***************SPI2 GPIO¶¨Òå******************/
+/***************SPI2 GPIOå®šä¹‰******************/
 #define FTC_GPIO_SPI2		GPIOB
 #define FTC_GPIO_CE2		GPIOA
 #define SPI2_Pin_SCK		GPIO_Pin_13
@@ -34,7 +34,7 @@
 #define RCC_GPIO_CE2		RCC_APB2Periph_GPIOA
 /*********************************************/
 
-/***************Ó²¼þÖÐ¶ÏÓÅÏÈ¼¶******************/
+/***************ç¡¬ä»¶ä¸­æ–­ä¼˜å…ˆçº§******************/
 #define NVIC_UART_P	5
 #define NVIC_UART_S	1
 #define NVIC_TIM4_P	2

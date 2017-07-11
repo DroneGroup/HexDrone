@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_PID.cpp
- * ÃèÊö    £ºPIDÔËËã¿â
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_PID.cpp
+ * æè¿°    ï¼šPIDè¿ç®—åº“
 **********************************************************************************/
 #include "FTC_PID.h"
 
@@ -11,7 +11,7 @@
 // f_cut = 20 Hz -> _filter =  7.9577e-3
 // f_cut = 25 Hz -> _filter =  6.3662e-3
 // f_cut = 30 Hz -> _filter =  5.3052e-3
-const float  FTC_PID::_filter = 7.9577e-3; // ÓÉ "1 / ( 2 * PI * f_cut )"Õâ¸ö¹«Ê½¼ÆËãµÃÀ´;
+const float  FTC_PID::_filter = 7.9577e-3; // ç”± "1 / ( 2 * PI * f_cut )"è¿™ä¸ªå…¬å¼è®¡ç®—å¾—æ¥;
 
 
 int32_t FTC_PID::get_p(int32_t error)
@@ -23,7 +23,7 @@ int32_t FTC_PID::get_i(int32_t error, float dt)
 {
     if((kI != 0) && (dt != 0)) {
         integrator += ((float)error * kI) * dt;
-				//»ı·ÖÏŞ·ù
+				//ç§¯åˆ†é™å¹…
 				integrator = constrain_float(integrator, -imax, +imax);		
 				
         return integrator;
@@ -47,7 +47,7 @@ int32_t FTC_PID::get_d(int32_t error, float dt)
 		derivative = (error - last_error) / dt;
 	}
 
-	// Ò»½×ÀëÉ¢µÍÍ¨ÂË²¨Æ÷£¬½µµÍ¸ßÆµÔëÉù¶Ô¿ØÖÆÆ÷µÄ¸ÉÈÅ
+	// ä¸€é˜¶ç¦»æ•£ä½é€šæ»¤æ³¢å™¨ï¼Œé™ä½é«˜é¢‘å™ªå£°å¯¹æ§åˆ¶å™¨çš„å¹²æ‰°
 	derivative = last_derivative +
 								(dt / ( _filter + dt)) * (derivative - last_derivative);
 

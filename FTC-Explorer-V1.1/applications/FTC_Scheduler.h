@@ -7,9 +7,9 @@
 class FTC_Scheduler
 {
 public:
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	FTC_Scheduler();
-	//ÈÎÎñÊ±»ù¼ÆÊı±äÁ¿
+	//ä»»åŠ¡æ—¶åŸºè®¡æ•°å˜é‡
 	uint16_t cnt_1ms,cnt_2ms,cnt_5ms,cnt_10ms,cnt_20ms;
 
 };

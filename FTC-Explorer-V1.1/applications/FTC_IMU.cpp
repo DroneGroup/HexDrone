@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC *******************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_IMU.cpp
- * ÃèÊö    £º·ÉĞĞÆ÷×ËÌ¬¼ÆËã
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_IMU.cpp
+ * æè¿°    ï¼šé£è¡Œå™¨å§¿æ€è®¡ç®—
 **********************************************************************************/
 #include "FTC_IMU.h"
 
@@ -11,59 +11,59 @@ FTC_IMU::FTC_IMU()
 {
 }
 
-//IMU³õÊ¼»¯
+//IMUåˆå§‹åŒ–
 void FTC_IMU::Init()
 {
-	//ÂË²¨Æ÷²ÎÊı³õÊ¼»¯
+	//æ»¤æ³¢å™¨å‚æ•°åˆå§‹åŒ–
 	filter_Init();
-	//´«¸ĞÆ÷³õÊ¼»¯
+	//ä¼ æ„Ÿå™¨åˆå§‹åŒ–
 	sensor_Init();
 
 	RPVec = Vector3f(0, 0, ACC_1G), YawVec = Vector3f(ACC_1G/8.0, 0, 0);
 }
 
-//¸üĞÂ´«¸ĞÆ÷Êı¾İ
+//æ›´æ–°ä¼ æ„Ÿå™¨æ•°æ®
 void FTC_IMU::updateSensor()
 {
-	//¶ÁÈ¡¼ÓËÙ¶È
+	//è¯»å–åŠ é€Ÿåº¦
 	mpu6050.Read_Acc_Data();
-	//¶ÁÈ¡½ÇËÙ¶È
+	//è¯»å–è§’é€Ÿåº¦
 	mpu6050.Read_Gyro_Data();	
-	//»ñÈ¡½ÇËÙ¶È£¬µ¥Î»Îª¶ÈÃ¿Ãë
+	//è·å–è§’é€Ÿåº¦ï¼Œå•ä½ä¸ºåº¦æ¯ç§’
 	Gyro = mpu6050.Get_Gyro();
-	//»ñÈ¡¼ÓËÙ¶È²ÉÑùÖµ
+	//è·å–åŠ é€Ÿåº¦é‡‡æ ·å€¼
 	Acc = mpu6050.Get_Acc();
 }
 
 
-//¼ÆËã·ÉĞĞÆ÷×ËÌ¬
+//è®¡ç®—é£è¡Œå™¨å§¿æ€
 void FTC_IMU::getAttitude()
 {
 	float deltaT;
 	Vector3d accTemp, gyroTemp;
 	
 #ifdef FTC_IMU_USE_LPF_1st	
-	//¼ÓËÙ¶ÈÊı¾İÒ»½×µÍÍ¨ÂË²¨
+	//åŠ é€Ÿåº¦æ•°æ®ä¸€é˜¶ä½é€šæ»¤æ³¢
 	Acc_lpf = LPF_1st(Acc_lpf, Acc, ftc.factor.acc_lpf);
 #endif	
 	
 #ifdef FTC_IMU_USE_LPF_2nd	
-	//¼ÓËÙ¶ÈÊı¾İ¶ş½×µÍÍ¨ÂË²¨
+	//åŠ é€Ÿåº¦æ•°æ®äºŒé˜¶ä½é€šæ»¤æ³¢
 	Acc_lpf = LPF_2nd(&Acc_lpf_2nd, Acc);
 #endif
 	
-	//ÍÓÂİÒÇÊı¾İ¶ş½×µÍÍ¨ÂË²¨
+	//é™€èºä»ªæ•°æ®äºŒé˜¶ä½é€šæ»¤æ³¢
 	Gyro_lpf = LPF_2nd(&Gyro_lpf_2nd, Gyro);
 	
 #ifdef FTC_IMU_USE_LPF_4th
-	//¼ÓËÙ¶ÈÊı¾İËÄ½×µÍÍ¨ÂË²¨
+	//åŠ é€Ÿåº¦æ•°æ®å››é˜¶ä½é€šæ»¤æ³¢
 	accTemp(double(Acc.x), double(Acc.y), double(Acc.z));
 	accTemp = LPF_Butterworth_4th(accTemp, &Acc_lpf_4th);
 	Acc_lpf(float(accTemp.x),float(accTemp.y),float(accTemp.z));
 #endif
 	
 
-	//¼ÆËãÊµ¼Ê²âÁ¿µÄ¼ÓËÙ¶ÈºÍÖØÁ¦¼ÓËÙ¶ÈµÄ±ÈÖµ
+	//è®¡ç®—å®é™…æµ‹é‡çš„åŠ é€Ÿåº¦å’Œé‡åŠ›åŠ é€Ÿåº¦çš„æ¯”å€¼
 	accRatio = Acc_lpf.length_squared() * 100 / (ACC_1G * ACC_1G);		
 	
 	deltaT = getDeltaT(GetSysTime_us());
@@ -76,22 +76,22 @@ void FTC_IMU::getAttitude()
 #endif
 }
 
-//»ñÈ¡·ÉĞĞÆ÷µÄ¼ÓËÙ¶ÈÔÚµØÀí×ø±êÏµµÄÍ¶Ó°
+//è·å–é£è¡Œå™¨çš„åŠ é€Ÿåº¦åœ¨åœ°ç†åæ ‡ç³»çš„æŠ•å½±
 Vector3f FTC_IMU::Get_Accel_Ef(void)
 {
 	Matrix3f dcm;
 	Vector3f anglerad;
 	
-	//×ËÌ¬½Ç×ª»¡¶È
-	anglerad(-radians(angle.x), -radians(angle.y), radians(angle.z));	//Ã»Ğ´´í£¬zÖá·ûºÅÎª+²ÅÊÇ¶ÔµÄ
+	//å§¿æ€è§’è½¬å¼§åº¦
+	anglerad(-radians(angle.x), -radians(angle.y), radians(angle.z));	//æ²¡å†™é”™ï¼Œzè½´ç¬¦å·ä¸º+æ‰æ˜¯å¯¹çš„
 
-	//¼ÆËã±íÊ¾Ğı×ªµÄÓàÏÒ¾ØÕó
+	//è®¡ç®—è¡¨ç¤ºæ—‹è½¬çš„ä½™å¼¦çŸ©é˜µ
 	dcm.from_euler(anglerad);
 	
 	return dcm * Acc_lpf;
 }
 
-//ÓàÏÒ¾ØÕó¸üĞÂ×ËÌ¬
+//ä½™å¼¦çŸ©é˜µæ›´æ–°å§¿æ€
 void FTC_IMU::DCM_CF(Vector3f gyro,Vector3f acc, float deltaT)
 {
 	//to do
@@ -113,9 +113,9 @@ void FTC_IMU::DCM_CF(Vector3f gyro,Vector3f acc, float deltaT)
 	YawVec.get_yaw(angle);
 }
 
-#define Kp 2.0f        //¼ÓËÙ¶ÈÈ¨ÖØ£¬Ô½´óÔòÏò¼ÓËÙ¶È²âÁ¿ÖµÊÕÁ²Ô½¿ì
-#define Ki 0.001f      //Îó²î»ı·ÖÔöÒæ
-//ËÄÔªÊı¸üĞÂ×ËÌ¬
+#define Kp 2.0f        //åŠ é€Ÿåº¦æƒé‡ï¼Œè¶Šå¤§åˆ™å‘åŠ é€Ÿåº¦æµ‹é‡å€¼æ”¶æ•›è¶Šå¿«
+#define Ki 0.001f      //è¯¯å·®ç§¯åˆ†å¢ç›Š
+//å››å…ƒæ•°æ›´æ–°å§¿æ€
 void FTC_IMU::Quaternion_CF(Vector3f gyro,Vector3f acc, float deltaT)
 {
 	//to do
@@ -123,22 +123,22 @@ void FTC_IMU::Quaternion_CF(Vector3f gyro,Vector3f acc, float deltaT)
 
 void FTC_IMU::filter_Init()
 {
-	//¼ÓËÙ¶ÈÒ»½×µÍÍ¨ÂË²¨Æ÷ÏµÊı¼ÆËã
+	//åŠ é€Ÿåº¦ä¸€é˜¶ä½é€šæ»¤æ³¢å™¨ç³»æ•°è®¡ç®—
 	ftc.factor.acc_lpf = LPF_1st_Factor_Cal(IMU_LOOP_TIME * 1e-6, ACC_LPF_CUT);
 	
-	//¼ÓËÙ¶È¶ş½×µÍÍ¨ÂË²¨Æ÷ÏµÊı¼ÆËã
+	//åŠ é€Ÿåº¦äºŒé˜¶ä½é€šæ»¤æ³¢å™¨ç³»æ•°è®¡ç®—
 	LPF_2nd_Factor_Cal(IMU_LOOP_TIME * 1e-6, ACC_LPF_CUT, &Acc_lpf_2nd);
 	
-	//ÍÓÂİÒÇ¶ş½×µÍÍ¨ÂË²¨Æ÷ÏµÊı¼ÆËã	
+	//é™€èºä»ªäºŒé˜¶ä½é€šæ»¤æ³¢å™¨ç³»æ•°è®¡ç®—	
 	LPF_2nd_Factor_Cal(IMU_LOOP_TIME * 1e-6, GYRO_LPF_CUT, &Gyro_lpf_2nd);	
 	
-	//»¥²¹ÂË²¨Æ÷ÏµÊı¼ÆËã
+	//äº’è¡¥æ»¤æ³¢å™¨ç³»æ•°è®¡ç®—
 	ftc.factor.gyro_cf = CF_Factor_Cal(IMU_LOOP_TIME * 1e-6, GYRO_CF_TAU);	
 }
 
 void FTC_IMU::sensor_Init()
 {
-	//³õÊ¼»¯MPU6050£¬1Khz²ÉÑùÂÊ£¬98HzµÍÍ¨ÂË²¨
+	//åˆå§‹åŒ–MPU6050ï¼Œ1Khzé‡‡æ ·ç‡ï¼Œ98Hzä½é€šæ»¤æ³¢
 	mpu6050.Init(1000,98);
 }
 

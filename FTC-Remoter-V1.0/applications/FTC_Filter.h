@@ -22,22 +22,22 @@ public:
 		Vector3f lastout;
 	};
 	
-	//Ò»½×µÍÍ¨ÂË²¨Æ÷ÏµÊý¼ÆËã
+	//ä¸€é˜¶ä½Žé€šæ»¤æ³¢å™¨ç³»æ•°è®¡ç®—
 	float LPF_1st_Factor_Cal(float deltaT, float Fcut);
 	
-	//¶þ½×µÍÍ¨ÂË²¨Æ÷ÏµÊý¼ÆËã
+	//äºŒé˜¶ä½Žé€šæ»¤æ³¢å™¨ç³»æ•°è®¡ç®—
 	void LPF_2nd_Factor_Cal(LPF2ndData_t* lpf_data);
 	
-	//»¥²¹ÂË²¨Æ÷ÏµÊý¼ÆËã
+	//äº’è¡¥æ»¤æ³¢å™¨ç³»æ•°è®¡ç®—
 	float CF_Factor_Cal(float deltaT, float tau);
 	
-	//Ò»½×µÍÍ¨ÂË²¨Æ÷
+	//ä¸€é˜¶ä½Žé€šæ»¤æ³¢å™¨
 	Vector3f LPF_1st(Vector3f oldData, Vector3f newData, float lpf_factor);
 	
-	//¶þ½×µÍÍ¨ÂË²¨Æ÷
+	//äºŒé˜¶ä½Žé€šæ»¤æ³¢å™¨
 	Vector3f LPF_2nd(LPF2ndData_t* lpf_2nd, Vector3f newData);
 	
-	//Ò»½×»¥²¹ÂË²¨Æ÷
+	//ä¸€é˜¶äº’è¡¥æ»¤æ³¢å™¨
 	Vector3f CF_1st(Vector3f gyroData, Vector3f accData, float cf_factor);
 	
 

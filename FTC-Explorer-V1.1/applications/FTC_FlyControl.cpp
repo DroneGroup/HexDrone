@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_FlyControl.cpp
- * ÃèÊö    £º·ÉĞĞ¿ØÖÆ
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_FlyControl.cpp
+ * æè¿°    ï¼šé£è¡Œæ§åˆ¶
 **********************************************************************************/
 #include "FTC_FlyControl.h"
 
@@ -14,11 +14,11 @@ FTC_FlyControl::FTC_FlyControl()
 	
 	altHoldDeadband = 100;
 	
-	//ÖØÖÃPID²ÎÊı
+	//é‡ç½®PIDå‚æ•°
 	PID_Reset();
 }
 
-//ÖØÖÃPID²ÎÊı
+//é‡ç½®PIDå‚æ•°
 void FTC_FlyControl::PID_Reset(void)
 {
 	pid[PIDROLL].set_pid(0.15, 0.15, 0.02, 200);
@@ -30,7 +30,7 @@ void FTC_FlyControl::PID_Reset(void)
  	pid[PIDALT].set_pid(1.2, 0, 0, 200);
 }
 
-//·ÉĞĞÆ÷×ËÌ¬Íâ»·¿ØÖÆ
+//é£è¡Œå™¨å§¿æ€å¤–ç¯æ§åˆ¶
 void FTC_FlyControl::Attitude_Outter_Loop(void)
 {
 	//to do
@@ -42,7 +42,7 @@ void FTC_FlyControl::Attitude_Outter_Loop(void)
 	outterOut.z =  pid[PIDROLL].get_pid(temp.z, PID_OUTER_LOOP_TIME*1e-6);
 }
 
-//·ÉĞĞÆ÷×ËÌ¬ÄÚ»·¿ØÖÆ
+//é£è¡Œå™¨å§¿æ€å†…ç¯æ§åˆ¶
 void FTC_FlyControl::Attitude_Inner_Loop(void)
 {
 	//to do
@@ -66,13 +66,13 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 	motor.writeMotor(rc.Command[THROTTLE]/cosf(maxAngle), velPIDTerm.x, velPIDTerm.y, velPIDTerm.z);	
 }	
 
-//·ÉĞĞÆ÷¸ß¶ÈÍâ»·¿ØÖÆ
+//é£è¡Œå™¨é«˜åº¦å¤–ç¯æ§åˆ¶
 void FTC_FlyControl::Altitude_Outter_Loop(void)
 {
 	//to do
 }
 
-//·ÉĞĞÆ÷¸ß¶ÈÄÚ»·¿ØÖÆ
+//é£è¡Œå™¨é«˜åº¦å†…ç¯æ§åˆ¶
 void FTC_FlyControl::Altitude_Inner_Loop(void)
 {
 	//to do

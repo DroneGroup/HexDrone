@@ -1,7 +1,7 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_RC.cpp
- * ÃèÊö    £ºÒ£¿ØÍ¨µÀÊı¾İ´¦Àí
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_RC.cpp
+ * æè¿°    ï¼šé¥æ§é€šé“æ•°æ®å¤„ç†
 **********************************************************************************/
 #include "FTC_RC.h"
 
@@ -33,7 +33,7 @@ void FTC_RC::Cal_Command(void)
 {
 	  int32_t tmp, tmp2;
     for (u8 i = 0; i < 3; i++) 
-		{	//´¦ÀíROLL,PITCH,YAWÕâÈı¸öÖáµÄÊı¾İ
+		{	//å¤„ç†ROLL,PITCH,YAWè¿™ä¸‰ä¸ªè½´çš„æ•°æ®
         tmp = min(abs(rawData[i] - RC_MID), 500);	
         if (i != 2) 
 				{ // ROLL & PITCH
@@ -57,7 +57,7 @@ void FTC_RC::Cal_Command(void)
 			Command[THROTTLE] = constrain_uint16(rawData[THROTTLE], RC_MINCHECK, 2000);
 		}
 		
-		//-------------------º½ÏòËø¶¨------------------
+		//-------------------èˆªå‘é”å®š------------------
 		if (abs(Command[YAW]) < 70 && rawData[THROTTLE] > RC_MINCHECK) 
 		{
 			int16_t dif = imu.angle.z - imu.magHold;
@@ -95,7 +95,7 @@ void FTC_RC::check_sticks(void)
 
 	for (i = 0; i < 4; i++) 
 	{
-			if(rawData[i]<900||rawData[i]>2000)	//Èç¹ûÒ¡¸ËÖµ²»ÔÚÕı³£·¶Î§ÄÚ£¬ÔòÍË³ö¼ì²é
+			if(rawData[i]<900||rawData[i]>2000)	//å¦‚æœæ‘‡æ†å€¼ä¸åœ¨æ­£å¸¸èŒƒå›´å†…ï¼Œåˆ™é€€å‡ºæ£€æŸ¥
 				break;
 			
 			if (rawData[i] < RC_MINCHECK)
@@ -109,7 +109,7 @@ void FTC_RC::check_sticks(void)
 					stick_flag &= ~stick_max_flag[i]; 
 	}	
 	
-	if(stick_flag&0xff)	//Èç¹ûÈÎÒ»Ò¡¸ËÔÚ×î´ó»ò×îĞ¡Î»ÖÃ
+	if(stick_flag&0xff)	//å¦‚æœä»»ä¸€æ‘‡æ†åœ¨æœ€å¤§æˆ–æœ€å°ä½ç½®
 	{
 		if(rcDelayCommand < 250)
 			rcDelayCommand++;
@@ -122,11 +122,11 @@ void FTC_RC::check_sticks(void)
 		
 	if (rcDelayCommand == 100) //2s: 20ms * 100
 	{
-		if (ftc.f.ARMED) //Èç¹ûÒÑ¾­´¦ÓÚ½âËø×´Ì¬
+		if (ftc.f.ARMED) //å¦‚æœå·²ç»å¤„äºè§£é”çŠ¶æ€
 		{ 
 			if((stick_flag & YAW_L)&&(stick_flag & THR_L))
 			{
-				ftc.f.ARMED = 0;	//ÉÏËø
+				ftc.f.ARMED = 0;	//ä¸Šé”
 			}
 		}
 		else
@@ -134,7 +134,7 @@ void FTC_RC::check_sticks(void)
 			if((stick_flag & YAW_H)&&(stick_flag & THR_L))
 			{
 				if(ftc.f.CALIBRATED)
-					ftc.f.ARMED = 1;	//½âËø
+					ftc.f.ARMED = 1;	//è§£é”
 				else
 				{
 					mpu6050.Gyro_CALIBRATED = 1;
@@ -148,7 +148,7 @@ void FTC_RC::check_sticks(void)
 
 void FTC_RC::CheckAUX(void)
 {
-	if(rc.rawData[AUX2]>0 && rc.rawData[AUX2]<2100)	//¸¨ÖúÍ¨µÀ1£¬Èı¶Î¿ª¹Ø
+	if(rc.rawData[AUX2]>0 && rc.rawData[AUX2]<2100)	//è¾…åŠ©é€šé“1ï¼Œä¸‰æ®µå¼€å…³
 	{
 		if(rc.rawData[AUX2]>0 && rc.rawData[AUX2]<1300)
 		{

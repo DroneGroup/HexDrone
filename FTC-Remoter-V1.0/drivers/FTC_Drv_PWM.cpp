@@ -1,12 +1,12 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼şÃû  £ºFTC_Drv_PWM.cpp
- * ÃèÊö    £ºPWMÏà¹Ø¶¨Ê±Æ÷
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Drv_PWM.cpp
+ * æè¿°    ï¼šPWMç›¸å…³å®šæ—¶å™¨
 **********************************************************************************/
 #include "FTC_Drv_PWM.h"
 
 
-/*ÄäÃûĞ¡ÁùÖáPWMÒı½Å¶¨Òå
+/*åŒ¿åå°å…­è½´PWMå¼•è„šå®šä¹‰
 PWM1 = TIM2_CH1 PA0
 PWM2 = TIM3_CH3 PB0
 PWM3 = TIM2_CH3 PA2
@@ -39,15 +39,15 @@ void FTC_PWM::out_Init(uint16_t hz)
 	PrescalerValue = (uint16_t) (SystemCoreClock / (hz*1000)) - 1;
 	/* Time base configuration */
 	TIM_TimeBaseStructure.TIM_Period = 999;		//
-	TIM_TimeBaseStructure.TIM_Prescaler = PrescalerValue;	//pwmÊ±ÖÓ·ÖÆµ
+	TIM_TimeBaseStructure.TIM_Prescaler = PrescalerValue;	//pwmæ—¶é’Ÿåˆ†é¢‘
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0;	
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;		//ÏòÉÏ¼ÆÊı
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;		//å‘ä¸Šè®¡æ•°
 	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
 	
 	/* PWM1 Mode configuration: Channel */
 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-	TIM_OCInitStructure.TIM_Pulse = 0;//³õÊ¼Õ¼¿Õ±ÈÎª0
+	TIM_OCInitStructure.TIM_Pulse = 0;//åˆå§‹å ç©ºæ¯”ä¸º0
 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
 	
 	TIM_OC1Init(TIM2, &TIM_OCInitStructure);
@@ -67,15 +67,15 @@ void FTC_PWM::out_Init(uint16_t hz)
 	PrescalerValue = (uint16_t) (SystemCoreClock / 24000000) - 1;
 	/* Time base configuration */
 	TIM_TimeBaseStructure.TIM_Period = 999;		//
-	TIM_TimeBaseStructure.TIM_Prescaler = PrescalerValue;	//pwmÊ±ÖÓ·ÖÆµ
+	TIM_TimeBaseStructure.TIM_Prescaler = PrescalerValue;	//pwmæ—¶é’Ÿåˆ†é¢‘
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0;	
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;		//ÏòÉÏ¼ÆÊı
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;		//å‘ä¸Šè®¡æ•°
 	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
 	
 	/* PWM1 Mode configuration: Channel */
 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-	TIM_OCInitStructure.TIM_Pulse = 0;//³õÊ¼Õ¼¿Õ±ÈÎª0
+	TIM_OCInitStructure.TIM_Pulse = 0;//åˆå§‹å ç©ºæ¯”ä¸º0
 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
 	
 	TIM_OC3Init(TIM3, &TIM_OCInitStructure);

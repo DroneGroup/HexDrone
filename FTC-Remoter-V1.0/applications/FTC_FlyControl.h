@@ -3,7 +3,7 @@
 
 #include "FTC_Config.h"
 
-#define FLYANGLE_MAX 250  //×î´ó·ÉĞĞÇã½Ç25¶È
+#define FLYANGLE_MAX 250  //æœ€å¤§é£è¡Œå€¾è§’25åº¦
 
 enum {
     PIDROLL,
@@ -21,7 +21,7 @@ public:
 
 	FTC_FlyControl();
 
-	//×ËÌ¬¿ØÖÆ
+	//å§¿æ€æ§åˆ¶
 	void Attitude_Loop(void);
 	
 private:

@@ -1,42 +1,42 @@
 /******************** (C) COPYRIGHT 2015 FTC ***************************
- * ×÷Õß		 £ºFTC
- * ÎÄ¼þÃû  £ºFTC_Scheduler.cpp
- * ÃèÊö    £ºÈÎÎñ´¦Àí
+ * ä½œè€…		 ï¼šFTC
+ * æ–‡ä»¶å  ï¼šFTC_Scheduler.cpp
+ * æè¿°    ï¼šä»»åŠ¡å¤„ç†
 **********************************************************************************/
 #include "FTC_Scheduler.h"
 
 FTC_Scheduler scheduler;
 
 
-static void FTC_Loop_1000Hz(void)	//1msÖ´ÐÐÒ»´Î
+static void FTC_Loop_1000Hz(void)	//1msæ‰§è¡Œä¸€æ¬¡
 {
 	rc.DataGet();
 }
 
-static void FTC_Loop_500Hz(void)	//2msÖ´ÐÐÒ»´Î
+static void FTC_Loop_500Hz(void)	//2msæ‰§è¡Œä¸€æ¬¡
 {	
-	//¸üÐÂ´«¸ÐÆ÷Êý¾Ý	
+	//æ›´æ–°ä¼ æ„Ÿå™¨æ•°æ®	
 	imu.updateSensor();		
 	
-	//¼ÆËã·ÉÐÐÆ÷×ËÌ¬
+	//è®¡ç®—é£žè¡Œå™¨å§¿æ€
 	imu.getAttitude();	
 }
 
-static void FTC_Loop_200Hz(void)	//5msÖ´ÐÐÒ»´Î
+static void FTC_Loop_200Hz(void)	//5msæ‰§è¡Œä¸€æ¬¡
 {
 	rc.DataCalculate();
 }
 
-static void FTC_Loop_100Hz(void)	//10msÖ´ÐÐÒ»´Î
+static void FTC_Loop_100Hz(void)	//10msæ‰§è¡Œä¸€æ¬¡
 {
 	rc.KeyCheck();
 	
-	//LEDÖ¸Ê¾µÆ¿ØÖÆ
+	//LEDæŒ‡ç¤ºç¯æŽ§åˆ¶
 	ftc.Pilot_Light();
 	
 }
 
-static void FTC_Loop_30Hz(void)	//30msÖ´ÐÐÒ»´Î
+static void FTC_Loop_30Hz(void)	//30msæ‰§è¡Œä¸€æ¬¡
 {
 	dt.Data_Exchange();
 }
@@ -44,7 +44,7 @@ static void FTC_Loop_30Hz(void)	//30msÖ´ÐÐÒ»´Î
 void FTC_Loop(void)
 {
 	
-	//¼ì²éÊÇ·ñÓÐ½ÓÊÕµ½ÎÞÏßÊý¾Ý
+	//æ£€æŸ¥æ˜¯å¦æœ‰æŽ¥æ”¶åˆ°æ— çº¿æ•°æ®
 	dt.Check_Event();
 	
 	if(scheduler.cnt_1ms >= 1){
