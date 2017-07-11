@@ -52,6 +52,9 @@ private:
 	uint8_t rollPitchRate;
 	uint8_t yawRate;
 	int32_t RateError[3];
+	Vector3f outterOut;
+
+	float_t maxAngle;
 
 	Vector3i velError;
 	int16_t altHoldDeadband;
