@@ -37,9 +37,9 @@ void FTC_FlyControl::Attitude_Outter_Loop(void)
 	Vector3f temp;
 	temp = Vector3f(rc.Command[ROLL], rc.Command[PITCH], rc.Command[YAW]) - imu.angle;
 
-	outterOut.x =  pid[PIDROLL].get_pid(temp.x, PID_OUTER_LOOP_TIME*1e-6);
-	outterOut.y =  pid[PIDROLL].get_pid(temp.y, PID_OUTER_LOOP_TIME*1e-6);
-	outterOut.z =  pid[PIDROLL].get_pid(temp.z, PID_OUTER_LOOP_TIME*1e-6);
+	outterOut.x =  pid[PIDROLL].get_p(temp.x);
+	outterOut.y =  pid[PIDPITCH].get_p(temp.y);
+	outterOut.z =  pid[PIDYAW].get_p(temp.z);
 }
 
 //飞行器姿态内环控制
