@@ -50,6 +50,8 @@ private:
 	void sensor_Init();
 
 	Vector3f deltaGyroAngle, oldGyro, RPVec, YawVec;
+
+		Vector3f vGravity, vError, vIntegrate;
 };
 
 extern FTC_IMU imu;

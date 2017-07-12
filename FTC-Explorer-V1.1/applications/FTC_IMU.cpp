@@ -120,7 +120,21 @@ void FTC_IMU::DCM_CF(Vector3f gyro,Vector3f acc, float deltaT)
 void FTC_IMU::Quaternion_CF(Vector3f gyro,Vector3f acc, float deltaT)
 {
 	//to do
-	gyro.normalize();
+
+	acc.normalize();
+	
+	Q.vector_gravity(vGravity);
+
+	vError = acc % vGravity;
+
+	vIntegrate += vError * Ki;
+
+	gyro += vError * Kp + vIntegrate;
+
+	Q.Runge_Kutta_1st(gyro, deltaT);
+
+	Q.normalize();
+	Q.to_euler(&angle.x, &angle.y, &angle.z);
 	
 }
 
