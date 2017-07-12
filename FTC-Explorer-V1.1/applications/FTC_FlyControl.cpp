@@ -37,9 +37,9 @@ void FTC_FlyControl::Attitude_Outter_Loop(void)
 	Vector3f temp;
 	temp = Vector3f(rc.Command[ROLL], rc.Command[PITCH], rc.Command[YAW]) - imu.angle;
 
-	outterOut.x = pid[PIDROLL].get_p(temp.x);
-	outterOut.y = pid[PIDPITCH].get_p(temp.y);
-	outterOut.z = pid[PIDYAW].get_p(temp.z);
+	outterOut.x = pid[PIDANGLE].get_p(temp.x);
+	outterOut.y = pid[PIDANGLE].get_p(temp.y);
+	outterOut.z = pid[PIDANGLE].get_p(temp.z);
 }
 
 //飞行器姿态内环控制
@@ -56,10 +56,12 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 		pid[PIDPITCH].reset_I();
 		pid[PIDYAW].reset_I();
 	}
-
-	velPIDTerm.x = pid[PIDROLL].get_pid(RateError[ROLL], PID_INNER_LOOP_TIME * 1e-6);
-	velPIDTerm.y = pid[PIDPITCH].get_pid(RateError[PITCH], PID_INNER_LOOP_TIME * 1e-6);
-	velPIDTerm.z = pid[PIDYAW].get_pid(RateError[YAW], PID_INNER_LOOP_TIME * 1e-6);
+	else
+	{
+		velPIDTerm.x = pid[PIDROLL].get_pid(RateError[ROLL], PID_INNER_LOOP_TIME * 1e-6);
+		velPIDTerm.y = pid[PIDPITCH].get_pid(RateError[PITCH], PID_INNER_LOOP_TIME * 1e-6);
+		velPIDTerm.z = pid[PIDYAW].get_pid(RateError[YAW], PID_INNER_LOOP_TIME * 1e-6);
+	}
 
 	maxAngle = imu.angle.x > imu.angle.y ? imu.angle.x : imu.angle.y;
 
