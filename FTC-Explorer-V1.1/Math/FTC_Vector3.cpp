@@ -332,7 +332,7 @@ template <typename T>
 void Vector3<T>::get_rollpitch(Vector3<T> &angle)
 {
 	angle.x = degrees(atan2f(y,z));
-	angle.y = degrees(atan2f(x, sqrtf(y * y + z* z)));	
+	angle.y = degrees(atan2f(-x, sqrtf(y * y + z* z)));	
 }
 
 template <typename T>
