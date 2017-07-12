@@ -17,13 +17,21 @@ void FTC_Motor::writeMotor(uint16_t throttle, int32_t pidTermRoll, int32_t pidTe
 	// motorPWM[4] = throttle + 0.000 * pidTermRoll + 1.0 * pidTermRoll - pidTermYaw;
 	// motorPWM[5] = throttle + 0.866 * pidTermRoll + 0.5 * pidTermRoll + pidTermYaw;
 
-	motorPWM[1] = throttle + 0.866 * pidTermRoll - 0.5 * pidTermPitch - pidTermYaw;
-	motorPWM[5] = throttle + 0.000 * pidTermRoll - 1.0 * pidTermPitch + pidTermYaw;
-	motorPWM[2] = throttle - 0.866 * pidTermRoll - 0.5 * pidTermPitch - pidTermYaw;
-	motorPWM[0] = throttle - 0.866 * pidTermRoll + 0.5 * pidTermPitch + pidTermYaw;
-	motorPWM[4] = throttle + 0.000 * pidTermRoll + 1.0 * pidTermPitch - pidTermYaw;
-	motorPWM[3] = throttle + 0.866 * pidTermRoll + 0.5 * pidTermPitch + pidTermYaw;
+	// motorPWM[1] = throttle + 0.866 * pidTermRoll - 0.5 * pidTermPitch - pidTermYaw;
+	// motorPWM[5] = throttle + 0.000 * pidTermRoll - 1.0 * pidTermPitch + pidTermYaw;
+	// motorPWM[2] = throttle - 0.866 * pidTermRoll - 0.5 * pidTermPitch - pidTermYaw;
+	// motorPWM[0] = throttle - 0.866 * pidTermRoll + 0.5 * pidTermPitch + pidTermYaw;
+	// motorPWM[4] = throttle + 0.000 * pidTermRoll + 1.0 * pidTermPitch - pidTermYaw;
+	// motorPWM[3] = throttle + 0.866 * pidTermRoll + 0.5 * pidTermPitch + pidTermYaw;
 	
+	//六轴X型
+	motorPWM[2] = throttle - 0.5 * pidTermRoll + 0.866 *  pidTermPitch + pidTermYaw; //后右
+	motorPWM[1] = throttle - 0.5 * pidTermRoll - 0.866 *  pidTermPitch + pidTermYaw; //前右
+	motorPWM[0] = throttle + 0.5 * pidTermRoll + 0.866 *  pidTermPitch - pidTermYaw; //后左
+	motorPWM[3] = throttle + 0.5 * pidTermRoll - 0.866 *  pidTermPitch - pidTermYaw; //前左
+	motorPWM[5] = throttle - pidTermRoll - pidTermYaw;	//右
+	motorPWM[4] = throttle + pidTermRoll + pidTermYaw;	//左
+
 	// motorPWM[0] = 0.1667 * throttle +  0.2887 * pidTermRoll + -0.1667 * pidTermRoll + -0.1667 * pidTermYaw;
 	// motorPWM[1] = 0.1667 * throttle +  0.0000 * pidTermRoll + -0.3333 * pidTermRoll +  0.1667 * pidTermYaw;
 	// motorPWM[2] = 0.1667 * throttle + -0.2887 * pidTermRoll + -0.1667 * pidTermRoll + -0.1667 * pidTermYaw;

@@ -19,7 +19,8 @@ void FTC_IMU::Init()
 	//传感器初始化
 	sensor_Init();
 
-	RPVec = Vector3f(0, 0, ACC_1G), YawVec = Vector3f(ACC_1G/8.0, 0, 0);
+	RPVec = Vector3f(0, 0, ACC_1G);
+	YawVec = Vector3f(200, 0, 0);
 }
 
 //更新传感器数据
@@ -93,7 +94,7 @@ Vector3f FTC_IMU::Get_Accel_Ef(void)
 
 //余弦矩阵更新姿态
 void FTC_IMU::DCM_CF(Vector3f gyro,Vector3f acc, float deltaT)
-{
+{ 
 	//to do
 	// acc.get_rollpitch(angle);
 	// acc.get_yaw(angle);
@@ -119,6 +120,8 @@ void FTC_IMU::DCM_CF(Vector3f gyro,Vector3f acc, float deltaT)
 void FTC_IMU::Quaternion_CF(Vector3f gyro,Vector3f acc, float deltaT)
 {
 	//to do
+	gyro.normalize();
+	
 }
 
 void FTC_IMU::filter_Init()

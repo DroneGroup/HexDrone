@@ -1,4 +1,4 @@
-#ifndef __FTC_CONFIG_H
+ #ifndef __FTC_CONFIG_H
 #define __FTC_CONFIG_H
 
 #include "board.h"
