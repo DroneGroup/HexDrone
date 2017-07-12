@@ -185,7 +185,7 @@ void FTC_DT::Data_Exchange(void)
 	else if(f.send_status)
 	{
 		f.send_status = 0;
-		Send_Status(imu.angle.x,imu.angle.y,imu.angle.z,nav.position.z,ftc.f.ALTHOLD,ftc.f.ARMED);	
+		Send_Status(imu.angle.x,-imu.angle.y,imu.angle.z,nav.position.z,ftc.f.ALTHOLD,ftc.f.ARMED);	
 	}	
 /////////////////////////////////////////////////////////////////////////////////////
 	else if(f.send_user)

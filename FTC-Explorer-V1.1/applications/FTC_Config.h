@@ -14,8 +14,8 @@
 #include "FTC_Param.h"
 
 /*----------------------IMU--------------------*/
-#define FTC_IMU_USE_DCM_CF
-//#define FTC_IMU_USE_Quaternions_CF
+//#define FTC_IMU_USE_DCM_CF
+#define FTC_IMU_USE_Quaternions_CF
 
 //#define FTC_IMU_USE_LPF_1st
 #define FTC_IMU_USE_LPF_2nd
