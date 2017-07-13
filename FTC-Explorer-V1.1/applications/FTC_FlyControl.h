@@ -59,6 +59,9 @@ private:
 	Vector3i velError;
 	int16_t altHoldDeadband;
 
+	uint8_t startedFlag;
+	uint16_t startCnt;
+
 };
 
 extern FTC_FlyControl fc;

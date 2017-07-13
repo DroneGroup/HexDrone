@@ -61,6 +61,12 @@ void FTC_Motor::writeMotor(uint16_t throttle, int32_t pidTermRoll, int32_t pidTe
 	if(!ftc.f.ALTHOLD && rc.rawData[THROTTLE] < RC_MINCHECK)
 		ResetPWM();
 
+	if(abs(imu.angle.x) > 45 || abs(imu.angle.y) > 50)
+	{
+		ResetPWM();
+		ftc.f.ARMED = 0;
+	}
+
 	//写入电机PWM
 	pwm.SetPwm(motorPWM);
 	
