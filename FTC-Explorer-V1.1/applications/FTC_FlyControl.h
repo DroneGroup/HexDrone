@@ -3,7 +3,7 @@
 
 #include "FTC_Config.h"
 
-#define FLYANGLE_MAX 200  //最大飞行倾角35度
+#define FLYANGLE_MAX 200  //最大飞行倾角20度
 
 enum {
     PIDROLL,
@@ -20,7 +20,9 @@ class FTC_FlyControl
 {
 
 public:
-	
+	uint16_t startCnt;
+	uint8_t startedFlag;
+
 	FTC_PID pid[PIDITEMS];
 
 	Vector3i setVelocity;
@@ -58,10 +60,6 @@ private:
 
 	Vector3i velError;
 	int16_t altHoldDeadband;
-
-	uint8_t startedFlag;
-	uint16_t startCnt;
-
 };
 
 extern FTC_FlyControl fc;

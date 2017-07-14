@@ -211,9 +211,12 @@ void FTC_DT::Data_Exchange(void)
 	else if(f.send_rcdata)
 	{
 		f.send_rcdata = 0;
+		// Send_RCData(rc.rawData[THROTTLE],rc.rawData[YAW],rc.rawData[ROLL],rc.rawData[PITCH],
+		// 						rc.rawData[AUX1],rc.rawData[AUX2],rc.rawData[AUX3],
+		// 						rc.rawData[AUX4],rc.rawData[AUX5],rc.rawData[AUX6]);
 		Send_RCData(rc.rawData[THROTTLE],rc.rawData[YAW],rc.rawData[ROLL],rc.rawData[PITCH],
-								rc.rawData[AUX1],rc.rawData[AUX2],rc.rawData[AUX3],
-								rc.rawData[AUX4],rc.rawData[AUX5],rc.rawData[AUX6]);
+								rc.rawData[AUX1],rc.rawData[AUX2],fc.startedFlag,
+								fc.startCnt,rc.rawData[AUX5],rc.rawData[AUX6]);
 	}	
 /////////////////////////////////////////////////////////////////////////////////////	
 	else if(f.send_motopwm)

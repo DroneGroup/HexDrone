@@ -39,7 +39,7 @@ void FTC_FlyControl::Attitude_Outter_Loop(void)
 	int32_t	errorAngle[2];
 	Vector3f Gyro_ADC;
 	
-	if(startCnt < 10000)
+	if(startCnt < 1000)
 	{
 		rc.Command[ROLL] = 0;
 		rc.Command[PITCH] = 0;
@@ -79,33 +79,28 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 	
 	PIDTerm[YAW] = -constrain_int32(PIDTerm[YAW], -300 - abs(rc.Command[YAW]), +300 + abs(rc.Command[YAW]));
 
-	if(rc.Command[THROTTLE] > RC_MINCHECK)
+	if (startedFlag == 0 && imu.Acc.z > (float)(1.5 * ACC_1G) && ftc.f.ARMED)
 	{
-		startedFlag = 1;
-	}
-
-	if (imu.Acc.z > (float)(1.2 * ACC_1G) && startedFlag == 0 && ftc.f.ARMED)
-	{
-		led.OFF1();
-		led.OFF2();
 		startCnt = 0;
 		startedFlag = 1;
-		rc.Command[THROTTLE] = 1400;
 	}
 
-	if (startCnt < 10000)
+	if (startCnt < 1000)
 	{
 		led.OFF1();
 		led.OFF2();
 		startCnt++;
-		rc.Command[THROTTLE] = 1400;
-		motor.writeMotor(rc.Command[THROTTLE], PIDTerm[ROLL], PIDTerm[PITCH], PIDTerm[YAW]);
 	}
 
 	//油门倾斜补偿
 	if(!ftc.f.ALTHOLD)
 		rc.Command[THROTTLE] = (rc.Command[THROTTLE] - 1000) / cosf(radians(tiltAngle)) + 1000;
 	
+	if (rc.Command[THROTTLE] > RC_MINCHECK + 200)
+	{
+		startedFlag = 1;
+	}
+
 	//PID输出转为电机控制量
 	motor.writeMotor(rc.Command[THROTTLE], PIDTerm[ROLL], PIDTerm[PITCH], PIDTerm[YAW]);
 }
