@@ -60,6 +60,9 @@ private:
 
 	Vector3i velError;
 	int16_t altHoldDeadband;
+
+	uint16_t upThrottle;
+	uint16_t downThrottle;
 };
 
 extern FTC_FlyControl fc;

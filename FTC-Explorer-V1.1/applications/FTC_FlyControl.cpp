@@ -83,23 +83,33 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 	{
 		startCnt = 0;
 		startedFlag = 1;
+
+		upThrottle = 1400;
+		downThrottle = 1260;
+	}
+
+	if (rc.rawData[THROTTLE] > RC_MINCHECK + 100)
+	{
+		//startCnt = 20000;
+		startedFlag = 1;
 	}
 
 	if (startCnt < 1000)
 	{
-		led.OFF1();
-		led.OFF2();
 		startCnt++;
+		rc.Command[THROTTLE] = upThrottle;
+		rc.rawData[THROTTLE] = upThrottle;
+	}
+	else if (startCnt < 2000)
+	{
+		startCnt++;
+		rc.Command[THROTTLE] = downThrottle;
+		rc.rawData[THROTTLE] = downThrottle;
 	}
 
 	//油门倾斜补偿
 	if(!ftc.f.ALTHOLD)
 		rc.Command[THROTTLE] = (rc.Command[THROTTLE] - 1000) / cosf(radians(tiltAngle)) + 1000;
-	
-	if (rc.Command[THROTTLE] > RC_MINCHECK + 200)
-	{
-		startedFlag = 1;
-	}
 
 	//PID输出转为电机控制量
 	motor.writeMotor(rc.Command[THROTTLE], PIDTerm[ROLL], PIDTerm[PITCH], PIDTerm[YAW]);

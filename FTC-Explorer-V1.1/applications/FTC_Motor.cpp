@@ -24,12 +24,6 @@ void FTC_Motor::writeMotor(uint16_t throttle, int32_t pidTermRoll, int32_t pidTe
 	// motorPWM[4] = throttle + 0.000 * pidTermRoll + 1.0 * pidTermPitch - pidTermYaw;
 	// motorPWM[3] = throttle + 0.866 * pidTermRoll + 0.5 * pidTermPitch + pidTermYaw;
 
-	if (fc.startCnt < 1000)
-	{
-		throttle = 1300;
-		rc.rawData[THROTTLE] = 1300;
-	}
-
 	//六轴X型
 	motorPWM[2] = throttle - 0.5 * pidTermRoll + 0.866 *  pidTermPitch + pidTermYaw; //后右
 	motorPWM[1] = throttle - 0.5 * pidTermRoll - 0.866 *  pidTermPitch + pidTermYaw; //前右
