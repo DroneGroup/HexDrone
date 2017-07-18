@@ -1,20 +1,19 @@
 #ifndef __FTC_DRV_MPU6050_H
-#define	__FTC_DRV_MPU6050_H
+#define __FTC_DRV_MPU6050_H
 
 #include "board.h"
 
-#define CALIBRATING_GYRO_CYCLES             200
-#define CALIBRATING_ACC_CYCLES              200
+#define CALIBRATING_GYRO_CYCLES 200
+#define CALIBRATING_ACC_CYCLES 200
 
-class FTC_MPU6050:public FTC_I2C_Soft
+class FTC_MPU6050 : public FTC_I2C_Soft
 {
-public:
-	
+  public:
 	FTC_MPU6050(void);
 
 	u8 Acc_CALIBRATED;
 	u8 Gyro_CALIBRATED;
-	Vector3i Acc_Offset,Gyro_Offset;
+	Vector3i Acc_Offset, Gyro_Offset;
 
 	//初始化6050
 	void Init(uint16_t sample_rate, uint16_t lpf);
@@ -29,10 +28,9 @@ public:
 	//返回单位为度每秒的角速度
 	Vector3f Get_Gyro_in_dps(Vector3f GyroRaw);
 
-private:
-	
+  private:
 	u8 mpu6050_buffer[14]; //接收数据缓存区
-	Vector3f Acc_ADC,Gyro_ADC;
+	Vector3f Acc_ADC, Gyro_ADC;
 	Vector3f Gyro_dps;
 
 	//加速度零偏矫正
@@ -46,11 +44,3 @@ private:
 extern FTC_MPU6050 mpu6050;
 
 #endif
-
-
-
-
-
-
-
-

@@ -3,16 +3,17 @@
 
 #include "FTC_Config.h"
 
-#define FLYANGLE_MAX 200  //最大飞行倾角20度
+#define FLYANGLE_MAX 200 //最大飞行倾角20度
 
-enum {
-    PIDROLL,
-    PIDPITCH,
-    PIDYAW,
-    PIDANGLE,
-    PIDMAG,
-    PIDVELZ,
-    PIDALT,
+enum
+{
+	PIDROLL,
+	PIDPITCH,
+	PIDYAW,
+	PIDANGLE,
+	PIDMAG,
+	PIDVELZ,
+	PIDALT,
 	PIDITEMS
 };
 
@@ -29,7 +30,7 @@ class FTC_FlyControl
 		shutDown
 	};
 	//only for debug
-	uint16_t startCnt;	
+	uint16_t startCnt;
 	ThrowToTakeOffState nowState;
 	//for debug
 
@@ -59,8 +60,7 @@ class FTC_FlyControl
 	//高度内环控制
 	void Altitude_Inner_Loop(void);
 
-private:
-	
+  private:
 	uint8_t rollPitchRate;
 	uint8_t yawRate;
 	int32_t RateError[3];
@@ -79,26 +79,3 @@ private:
 extern FTC_FlyControl fc;
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

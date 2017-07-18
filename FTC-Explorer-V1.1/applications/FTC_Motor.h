@@ -9,25 +9,17 @@
 class FTC_Motor
 {
 
-public:
-	
+  public:
 	void writeMotor(uint16_t throttle, int32_t pidTermRoll, int32_t pidTermPitch, int32_t pidTermYaw);
-	
-	void getPWM(int16_t* pwm);
 
-private:
-	
-	int16_t motorPWM[6];	
+	void getPWM(int16_t *pwm);
+
+  private:
+	int16_t motorPWM[6];
 
 	void ResetPWM(void);
-
 };
 
 extern FTC_Motor motor;
 
 #endif
-
-
-
-
-

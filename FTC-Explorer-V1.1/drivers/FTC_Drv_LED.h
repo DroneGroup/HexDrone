@@ -6,8 +6,7 @@
 class FTC_LED
 {
 
-public:
-	
+  public:
 	static void Init(void);
 
 	void ON1(void);
@@ -19,4 +18,3 @@ public:
 extern FTC_LED led;
 
 #endif
-

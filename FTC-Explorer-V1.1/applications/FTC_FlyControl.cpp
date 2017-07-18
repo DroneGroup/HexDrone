@@ -16,7 +16,7 @@ FTC_FlyControl::FTC_FlyControl()
 
 	//重置PID参数
 	PID_Reset();
-		
+
 	nowState = locked;
 	upThrottle = 1500;
 	downThrottle = 1250;
@@ -37,7 +37,7 @@ void FTC_FlyControl::PID_Reset(void)
 //飞行器姿态外环控制
 void FTC_FlyControl::Attitude_Outter_Loop(void)
 {
-	int32_t	errorAngle[2];
+	int32_t errorAngle[2];
 	Vector3f Gyro_ADC;
 
 	switch (nowState)
@@ -75,26 +75,26 @@ void FTC_FlyControl::Attitude_Outter_Loop(void)
 	}
 
 	//计算角度误差值
-	errorAngle[ROLL] = constrain_int32((rc.Command[ROLL] * 2) , -((int)FLYANGLE_MAX), +FLYANGLE_MAX) - imu.angle.x * 10; 
-	errorAngle[PITCH] = constrain_int32((rc.Command[PITCH] * 2) , -((int)FLYANGLE_MAX), +FLYANGLE_MAX) - imu.angle.y * 10; 
+	errorAngle[ROLL] = constrain_int32((rc.Command[ROLL] * 2), -((int)FLYANGLE_MAX), +FLYANGLE_MAX) - imu.angle.x * 10;
+	errorAngle[PITCH] = constrain_int32((rc.Command[PITCH] * 2), -((int)FLYANGLE_MAX), +FLYANGLE_MAX) - imu.angle.y * 10;
 	errorAngle[ROLL] = applyDeadband(errorAngle[ROLL], 2);
 	errorAngle[PITCH] = applyDeadband(errorAngle[PITCH], 2);
-	
+
 	//获取角速度
 	Gyro_ADC = imu.Gyro_lpf / 4.0f;
-	
+
 	//得到外环PID输出
 	RateError[ROLL] = pid[PIDANGLE].get_p(errorAngle[ROLL]) - Gyro_ADC.x;
 	RateError[PITCH] = pid[PIDANGLE].get_p(errorAngle[PITCH]) - Gyro_ADC.y;
-	RateError[YAW] = ((int32_t)(yawRate) * rc.Command[YAW]) / 32 - Gyro_ADC.z;
+	RateError[YAW] = ((int32_t)(yawRate)*rc.Command[YAW]) / 32 - Gyro_ADC.z;
 }
 
 //飞行器姿态内环控制
 void FTC_FlyControl::Attitude_Inner_Loop(void)
 {
 	int32_t PIDTerm[3];
-	float tiltAngle = constrain_float( max(abs(imu.angle.x), abs(imu.angle.y)), 0 ,20);
-	
+	float tiltAngle = constrain_float(max(abs(imu.angle.x), abs(imu.angle.y)), 0, 20);
+
 	//My modification
 	if (nowState != shutDown && nowState > locked && rc.rawData[THROTTLE] > RC_MINCHECK)
 		nowState = shutDown;
@@ -120,18 +120,18 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 		break;
 	}
 
-	for(u8 i=0; i<3;i++)
+	for (u8 i = 0; i < 3; i++)
 	{
 		//当油门低于检查值时积分清零
-		if (fc.nowState != goingDown && fc.nowState != goingUP && (rc.rawData[THROTTLE]) < RC_MINCHECK)	
+		if (fc.nowState != goingDown && fc.nowState != goingUP && (rc.rawData[THROTTLE]) < RC_MINCHECK)
 			pid[i].reset_I();
-		
-	 	//得到内环PID输出
-		PIDTerm[i] = pid[i].get_pid(RateError[i], PID_INNER_LOOP_TIME*1e-6);
+
+		//得到内环PID输出
+		PIDTerm[i] = pid[i].get_pid(RateError[i], PID_INNER_LOOP_TIME * 1e-6);
 	}
-	
+
 	PIDTerm[YAW] = -constrain_int32(PIDTerm[YAW], -300 - abs(rc.Command[YAW]), +300 + abs(rc.Command[YAW]));
-	
+
 	//油门倾斜补偿
 	//if(!ftc.f.ALTHOLD)
 	useThrottle = (useThrottle - 1000) / cosf(radians(tiltAngle)) + 1000;

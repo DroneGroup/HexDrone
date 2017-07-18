@@ -3,20 +3,17 @@
 
 #include "FTC_Config.h"
 
-
 class FTC_Param
 {
-	
-public:
-	
+
+  public:
 	void Init(void);
 
 	void SAVE_ACC_OFFSET(void);
 	void SAVE_GYRO_OFFSET(void);
 	void SAVE_PID(void);
 
-private:
-	
+  private:
 	void SAVE_FirstInitFlag(void);
 	uint16_t READ_FirstInitFlag(void);
 	void READ_ACC_OFFSET(void);
@@ -28,4 +25,3 @@ private:
 extern FTC_Param param;
 
 #endif
-
