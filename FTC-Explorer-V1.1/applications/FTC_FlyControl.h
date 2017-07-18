@@ -19,9 +19,19 @@ enum {
 class FTC_FlyControl
 {
 
-public:
-	uint16_t startCnt;
-	uint8_t startedFlag;
+  public:
+	enum ThrowToTakeOffState
+	{
+		locked = 0,
+		standBy,
+		goingUP,
+		goingDown,
+		shutDown
+	};
+	//only for debug
+	uint16_t startCnt;	
+	ThrowToTakeOffState nowState;
+	//for debug
 
 	FTC_PID pid[PIDITEMS];
 
@@ -63,6 +73,7 @@ private:
 
 	uint16_t upThrottle;
 	uint16_t downThrottle;
+	uint16_t useThrottle;
 };
 
 extern FTC_FlyControl fc;

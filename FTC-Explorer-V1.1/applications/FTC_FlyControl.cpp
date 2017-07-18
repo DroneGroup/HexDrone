@@ -16,9 +16,10 @@ FTC_FlyControl::FTC_FlyControl()
 
 	//重置PID参数
 	PID_Reset();
-
-	startedFlag = 0;
-	startCnt = 20000;
+		
+	nowState = locked;
+	upThrottle = 1500;
+	downThrottle = 1250;
 }
 
 //重置PID参数
@@ -38,12 +39,39 @@ void FTC_FlyControl::Attitude_Outter_Loop(void)
 {
 	int32_t	errorAngle[2];
 	Vector3f Gyro_ADC;
-	
-	if(startCnt < 1000)
+
+	switch (nowState)
 	{
+	case locked:
+		if (ftc.f.ARMED)
+			nowState = standBy;
+		break;
+	case standBy:
+		if (!ftc.f.ARMED)
+			nowState = locked;
+		if (imu.Acc_lpf.z > (1.7 * ACC_1G))
+		{
+			startCnt = 0;
+			nowState = goingUP;
+			rc.Command[ROLL] = 0;
+			rc.Command[PITCH] = 0;
+			rc.Command[YAW] = 0;
+			upThrottle += 0.02 * (imu.Acc_lpf.z - 1.7 * ACC_1G);
+			upThrottle = constrain_int16(upThrottle, RC_MINCHECK, RC_MAXCHECK);
+		}
+		break;
+	case goingUP:
+	case goingDown:
 		rc.Command[ROLL] = 0;
 		rc.Command[PITCH] = 0;
 		rc.Command[YAW] = 0;
+		break;
+	case shutDown:
+		if (rc.rawData[AUX2] > RC_MINCHECK)
+			nowState = locked;
+		break;
+	default:
+		break;
 	}
 
 	//计算角度误差值
@@ -58,7 +86,7 @@ void FTC_FlyControl::Attitude_Outter_Loop(void)
 	//得到外环PID输出
 	RateError[ROLL] = pid[PIDANGLE].get_p(errorAngle[ROLL]) - Gyro_ADC.x;
 	RateError[PITCH] = pid[PIDANGLE].get_p(errorAngle[PITCH]) - Gyro_ADC.y;
-	RateError[YAW] = ((int32_t)(yawRate) * rc.Command[YAW]) / 32 - Gyro_ADC.z;		
+	RateError[YAW] = ((int32_t)(yawRate) * rc.Command[YAW]) / 32 - Gyro_ADC.z;
 }
 
 //飞行器姿态内环控制
@@ -67,10 +95,35 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 	int32_t PIDTerm[3];
 	float tiltAngle = constrain_float( max(abs(imu.angle.x), abs(imu.angle.y)), 0 ,20);
 	
+	//My modification
+	if (nowState != shutDown && nowState > locked && rc.rawData[THROTTLE] > RC_MINCHECK)
+		nowState = shutDown;
+
+	switch (nowState)
+	{
+	case goingUP:
+		useThrottle = upThrottle;
+		// rc.rawData[THROTTLE] = upThrottle;
+		startCnt++;
+		if (startCnt > 800)
+			nowState = goingDown;
+		break;
+	case goingDown:
+		useThrottle = downThrottle;
+		// rc.rawData[THROTTLE] = downThrottle;
+		startCnt++;
+		if (startCnt > 1800)
+			nowState = shutDown;
+		break;
+	default:
+		useThrottle = rc.Command[THROTTLE];
+		break;
+	}
+
 	for(u8 i=0; i<3;i++)
 	{
 		//当油门低于检查值时积分清零
-		if ((rc.rawData[THROTTLE]) < RC_MINCHECK)	
+		if (fc.nowState != goingDown && fc.nowState != goingUP && (rc.rawData[THROTTLE]) < RC_MINCHECK)	
 			pid[i].reset_I();
 		
 	 	//得到内环PID输出
@@ -78,41 +131,13 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 	}
 	
 	PIDTerm[YAW] = -constrain_int32(PIDTerm[YAW], -300 - abs(rc.Command[YAW]), +300 + abs(rc.Command[YAW]));
-
-	if (startedFlag == 0 && imu.Acc.z > (float)(1.5 * ACC_1G) && ftc.f.ARMED)
-	{
-		startCnt = 0;
-		startedFlag = 1;
-
-		upThrottle = 1400;
-		downThrottle = 1260;
-	}
-
-	if (rc.rawData[THROTTLE] > RC_MINCHECK + 100)
-	{
-		//startCnt = 20000;
-		startedFlag = 1;
-	}
-
-	if (startCnt < 1000)
-	{
-		startCnt++;
-		rc.Command[THROTTLE] = upThrottle;
-		rc.rawData[THROTTLE] = upThrottle;
-	}
-	else if (startCnt < 2000)
-	{
-		startCnt++;
-		rc.Command[THROTTLE] = downThrottle;
-		rc.rawData[THROTTLE] = downThrottle;
-	}
-
+	
 	//油门倾斜补偿
-	if(!ftc.f.ALTHOLD)
-		rc.Command[THROTTLE] = (rc.Command[THROTTLE] - 1000) / cosf(radians(tiltAngle)) + 1000;
+	//if(!ftc.f.ALTHOLD)
+	useThrottle = (useThrottle - 1000) / cosf(radians(tiltAngle)) + 1000;
 
 	//PID输出转为电机控制量
-	motor.writeMotor(rc.Command[THROTTLE], PIDTerm[ROLL], PIDTerm[PITCH], PIDTerm[YAW]);
+	motor.writeMotor(useThrottle, PIDTerm[ROLL], PIDTerm[PITCH], PIDTerm[YAW]);
 }
 
 //飞行器高度外环控制

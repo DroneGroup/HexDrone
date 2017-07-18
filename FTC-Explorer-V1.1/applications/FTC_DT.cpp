@@ -215,7 +215,7 @@ void FTC_DT::Data_Exchange(void)
 		// 						rc.rawData[AUX1],rc.rawData[AUX2],rc.rawData[AUX3],
 		// 						rc.rawData[AUX4],rc.rawData[AUX5],rc.rawData[AUX6]);
 		Send_RCData(rc.rawData[THROTTLE],rc.rawData[YAW],rc.rawData[ROLL],rc.rawData[PITCH],
-								rc.rawData[AUX1],rc.rawData[AUX2],fc.startedFlag,
+								rc.rawData[AUX1],rc.rawData[AUX2],fc.nowState,
 								fc.startCnt,rc.rawData[AUX5],rc.rawData[AUX6]);
 	}	
 /////////////////////////////////////////////////////////////////////////////////////	
