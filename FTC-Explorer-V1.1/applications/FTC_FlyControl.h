@@ -27,7 +27,7 @@ class FTC_FlyControl
 		standBy,
 		goingUP,
 		goingDown,
-		shutDown
+		autoUpEnd
 	};
 	//only for debug
 	uint16_t startCnt;

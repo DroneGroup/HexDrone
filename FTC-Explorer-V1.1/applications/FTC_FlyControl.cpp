@@ -66,7 +66,7 @@ void FTC_FlyControl::Attitude_Outter_Loop(void)
 		rc.Command[PITCH] = 0;
 		rc.Command[YAW] = 0;
 		break;
-	case shutDown:
+	case autoUpEnd:
 		if (rc.rawData[AUX2] > RC_MINCHECK)
 			nowState = locked;
 		break;
@@ -96,24 +96,23 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 	float tiltAngle = constrain_float(max(abs(imu.angle.x), abs(imu.angle.y)), 0, 20);
 
 	//My modification
-	if (nowState != shutDown && nowState > locked && rc.rawData[THROTTLE] > RC_MINCHECK)
-		nowState = shutDown;
+	//Manually taking control
+	if (nowState != autoUpEnd && nowState > locked && rc.rawData[THROTTLE] > RC_MINCHECK)
+		nowState = autoUpEnd;
 
 	switch (nowState)
 	{
 	case goingUP:
 		useThrottle = upThrottle;
-		// rc.rawData[THROTTLE] = upThrottle;
 		startCnt++;
 		if (startCnt > 800)
 			nowState = goingDown;
 		break;
 	case goingDown:
 		useThrottle = downThrottle;
-		// rc.rawData[THROTTLE] = downThrottle;
 		startCnt++;
 		if (startCnt > 1800)
-			nowState = shutDown;
+			nowState = autoUpEnd;
 		break;
 	default:
 		useThrottle = rc.Command[THROTTLE];

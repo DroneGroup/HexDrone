@@ -15,7 +15,7 @@ FTC_DT dt;
 void FTC_DT::Data_Receive_Anl(u8 *data_buf, u8 num)
 {
 	u8 sum = 0;
-	u8 nohead = 1; //1为开启无头模式
+	const u8 nohead = 1; //1为开启无头模式
 	int32_t pitch, roll;
 
 	for (u8 i = 0; i < (num - 1); i++)
