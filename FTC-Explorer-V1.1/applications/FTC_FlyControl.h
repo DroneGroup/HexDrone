@@ -27,12 +27,13 @@ class FTC_FlyControl
 		standBy,
 		goingUP,
 		goingDown,
+		slowLand,
 		autoUpEnd
 	};
-	//only for debug
-	uint16_t startCnt;
+	//only for DEBUG to put in public
+	uint16_t startCnt;	
 	ThrowToTakeOffState nowState;
-	//for debug
+	//for DEBUG
 
 	FTC_PID pid[PIDITEMS];
 
@@ -73,7 +74,10 @@ class FTC_FlyControl
 
 	uint16_t upThrottle;
 	uint16_t downThrottle;
+	uint16_t slowLandThrottle;
 	uint16_t useThrottle;
+
+	uint16_t timeIncrease;
 };
 
 extern FTC_FlyControl fc;

@@ -20,6 +20,7 @@ FTC_FlyControl::FTC_FlyControl()
 	nowState = locked;
 	upThrottle = 1500;
 	downThrottle = 1250;
+	slowLandThrottle = 1400;
 }
 
 //重置PID参数
@@ -43,7 +44,7 @@ void FTC_FlyControl::Attitude_Outter_Loop(void)
 	switch (nowState)
 	{
 	case locked:
-		if (ftc.f.ARMED)
+		if (ftc.f.ARMED && rc.rawData[AUX2] < RC_MINCHECK)
 			nowState = standBy;
 		break;
 	case standBy:
@@ -56,12 +57,24 @@ void FTC_FlyControl::Attitude_Outter_Loop(void)
 			rc.Command[ROLL] = 0;
 			rc.Command[PITCH] = 0;
 			rc.Command[YAW] = 0;
-			upThrottle += 0.02 * (imu.Acc_lpf.z - 1.7 * ACC_1G);
-			upThrottle = constrain_int16(upThrottle, RC_MINCHECK, RC_MAXCHECK);
+			//upThrottle += 0.01 * (imu.Acc_lpf.z - 1.7 * ACC_1G);
+			//upThrottle = constrain_int16(upThrottle, RC_MINCHECK, RC_MAXCHECK);
+			timeIncrease = 0.05 * (imu.Acc_lpf.z - 1.7 * ACC_1G);
+			timeIncrease = constrain_int16(timeIncrease, 0, 1000);
+		}
+		else if (rc.rawData[AUX2] > RC_MINCHECK)
+		{
+			startCnt = 0;
+			nowState = goingUP;
+			rc.Command[ROLL] = 0;
+			rc.Command[PITCH] = 0;
+			rc.Command[YAW] = 0;
+			timeIncrease = 0;
 		}
 		break;
 	case goingUP:
 	case goingDown:
+	case slowLand:
 		rc.Command[ROLL] = 0;
 		rc.Command[PITCH] = 0;
 		rc.Command[YAW] = 0;
@@ -105,14 +118,28 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 	case goingUP:
 		useThrottle = upThrottle;
 		startCnt++;
-		if (startCnt > 800)
+		if (startCnt > 800 + timeIncrease)
+		{
 			nowState = goingDown;
+			startCnt = 0;
+		}
 		break;
 	case goingDown:
 		useThrottle = downThrottle;
 		startCnt++;
-		if (startCnt > 1800)
+		if (startCnt > 800 + timeIncrease)
+		{
+			nowState = slowLand;
+			startCnt = 0;
+		}
+		break;
+	case slowLand:
+		useThrottle = slowLandThrottle;
+		startCnt++;
+		if (startCnt > 200)
+		{
 			nowState = autoUpEnd;
+		}
 		break;
 	default:
 		useThrottle = rc.Command[THROTTLE];
