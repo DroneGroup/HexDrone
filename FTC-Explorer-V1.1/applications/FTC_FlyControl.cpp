@@ -19,7 +19,7 @@ FTC_FlyControl::FTC_FlyControl()
 
 	nowState = locked;
 	upThrottle = 1500;
-	downThrottle = 1250;
+	downThrottle = 1350;
 	slowLandThrottle = 1400;
 }
 
@@ -118,7 +118,7 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 	case goingUP:
 		useThrottle = upThrottle;
 		startCnt++;
-		if (startCnt > 800 + timeIncrease)
+		if (startCnt > 1000 + timeIncrease)
 		{
 			nowState = goingDown;
 			startCnt = 0;
@@ -127,7 +127,7 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 	case goingDown:
 		useThrottle = downThrottle;
 		startCnt++;
-		if (startCnt > 800 + timeIncrease)
+		if (startCnt > 700 + timeIncrease)
 		{
 			nowState = slowLand;
 			startCnt = 0;
@@ -136,9 +136,10 @@ void FTC_FlyControl::Attitude_Inner_Loop(void)
 	case slowLand:
 		useThrottle = slowLandThrottle;
 		startCnt++;
-		if (startCnt > 200)
+		if (startCnt > 350)
 		{
 			nowState = autoUpEnd;
+			startCnt = 0;
 		}
 		break;
 	default:

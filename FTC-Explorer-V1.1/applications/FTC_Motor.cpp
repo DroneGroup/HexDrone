@@ -58,7 +58,11 @@ void FTC_Motor::writeMotor(uint16_t throttle, int32_t pidTermRoll, int32_t pidTe
 	if (!ftc.f.ARMED)
 		ResetPWM();
 
-	if (fc.nowState != fc.goingDown && fc.nowState != fc.goingUP && !ftc.f.ALTHOLD && rc.rawData[THROTTLE] < RC_MINCHECK)
+	if (fc.nowState != fc.goingDown &&
+		fc.nowState != fc.goingUP &&
+		fc.nowState != fc.slowLand &&
+		!ftc.f.ALTHOLD &&
+		rc.rawData[THROTTLE] < RC_MINCHECK)
 		ResetPWM();
 
 	if (abs(imu.angle.x) > 45 || abs(imu.angle.y) > 50)
