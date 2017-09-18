@@ -18,9 +18,9 @@ FTC_FlyControl::FTC_FlyControl()
 	PID_Reset();
 
 	nowState = locked;
-	upThrottle = 1500;
-	downThrottle = 1350;
-	slowLandThrottle = 1400;
+	upThrottle = 1750;
+	downThrottle = 1500;
+	slowLandThrottle = 1650;
 }
 
 //重置PID参数
@@ -67,7 +67,7 @@ void FTC_FlyControl::Attitude_Outter_Loop(void)
 			startCnt = 0;
 			nowState = goingUP;
 			rc.Command[ROLL] = 0;
-			rc.Command[PITCH] = 0;
+			rc.Command[PITCH] = -5;
 			rc.Command[YAW] = 0;
 			timeIncrease = 0;
 		}
