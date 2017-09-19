@@ -10,16 +10,15 @@ FTC_LED led;
 void FTC_LED::Init(void)
 {
 	//To do
-	GPIO_InitTypeDef  GPIO_InitStructure;
+	GPIO_InitTypeDef GPIO_InitStructure;
 
-	RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC  , ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 
-	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_13 | GPIO_Pin_14;			  
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_14;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
 
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
 }
 
 void FTC_LED::ON1(void)
@@ -29,8 +28,8 @@ void FTC_LED::ON1(void)
 }
 
 void FTC_LED::ON2(void)
-{		
-	//To do	
+{
+	//To do
 	GPIO_SetBits(GPIOC, GPIO_Pin_13);
 }
 
@@ -42,10 +41,8 @@ void FTC_LED::OFF1(void)
 
 void FTC_LED::OFF2(void)
 {
-	//To do	
+	//To do
 	GPIO_ResetBits(GPIOC, GPIO_Pin_13);
 }
 
-
 /******************* (C) COPYRIGHT 2015 FTC *****END OF FILE************/
-

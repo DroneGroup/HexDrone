@@ -11,24 +11,24 @@ int main(void)
 {
 	//初始化飞控板的硬件设置
 	FTC_Hexacopter_board_Init();
-	
+
 	//初始化参数
 	param.Init();
-	
+
 	//初始化IMU（惯性测量单元）
-	imu.Init();	
-	
+	imu.Init();
+
 	nav.Init();
 
 	pwm.out_Init(2000);
-	
+
 	//motor.writeMotor(0,0,0,0);
-	
-	while(1)
+
+	while (1)
 	{
 		FTC_Loop();
 	}
-	
+
 	return 0;
 }
 

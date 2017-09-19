@@ -24,19 +24,13 @@ void FTC_Motor::writeMotor(uint16_t throttle, int32_t pidTermRoll, int32_t pidTe
 	// motorPWM[4] = throttle + 0.000 * pidTermRoll + 1.0 * pidTermPitch - pidTermYaw;
 	// motorPWM[3] = throttle + 0.866 * pidTermRoll + 0.5 * pidTermPitch + pidTermYaw;
 
-	if (fc.startCnt < 1000)
-	{
-		throttle = 1300;
-		rc.rawData[THROTTLE] = 1300;
-	}
-
 	//六轴X型
-	motorPWM[2] = throttle - 0.5 * pidTermRoll + 0.866 *  pidTermPitch + pidTermYaw; //后右
-	motorPWM[1] = throttle - 0.5 * pidTermRoll - 0.866 *  pidTermPitch + pidTermYaw; //前右
-	motorPWM[0] = throttle + 0.5 * pidTermRoll + 0.866 *  pidTermPitch - pidTermYaw; //后左
-	motorPWM[3] = throttle + 0.5 * pidTermRoll - 0.866 *  pidTermPitch - pidTermYaw; //前左
-	motorPWM[5] = throttle - pidTermRoll - pidTermYaw;	//右
-	motorPWM[4] = throttle + pidTermRoll + pidTermYaw;	//左
+	motorPWM[2] = throttle - 0.5 * pidTermRoll + 0.866 * pidTermPitch + pidTermYaw; //后右
+	motorPWM[1] = throttle - 0.5 * pidTermRoll - 0.866 * pidTermPitch + pidTermYaw; //前右
+	motorPWM[0] = throttle + 0.5 * pidTermRoll + 0.866 * pidTermPitch - pidTermYaw; //后左
+	motorPWM[3] = throttle + 0.5 * pidTermRoll - 0.866 * pidTermPitch - pidTermYaw; //前左
+	motorPWM[5] = throttle - pidTermRoll - pidTermYaw;								//右
+	motorPWM[4] = throttle + pidTermRoll + pidTermYaw;								//左
 
 	// motorPWM[0] = 0.1667 * throttle +  0.2887 * pidTermRoll + -0.1667 * pidTermRoll + -0.1667 * pidTermYaw;
 	// motorPWM[1] = 0.1667 * throttle +  0.0000 * pidTermRoll + -0.3333 * pidTermRoll +  0.1667 * pidTermYaw;
@@ -49,25 +43,29 @@ void FTC_Motor::writeMotor(uint16_t throttle, int32_t pidTermRoll, int32_t pidTe
 	for (u8 i = 1; i < MAXMOTORS; i++)
 	{
 		if (motorPWM[i] > maxMotor)
-					maxMotor = motorPWM[i];
+			maxMotor = motorPWM[i];
 	}
-	
-	for (u8 i = 0; i < MAXMOTORS; i++) 
+
+	for (u8 i = 0; i < MAXMOTORS; i++)
 	{
-		if (maxMotor > MAXTHROTTLE)    
-			motorPWM[i] -= maxMotor - MAXTHROTTLE;	
+		if (maxMotor > MAXTHROTTLE)
+			motorPWM[i] -= maxMotor - MAXTHROTTLE;
 		//限制电机PWM的最小和最大值
 		motorPWM[i] = constrain_uint16(motorPWM[i], MINTHROTTLE, MAXTHROTTLE);
 	}
 
 	//如果未解锁，则将电机输出设置为最低
-	if(!ftc.f.ARMED)	
+	if (!ftc.f.ARMED)
 		ResetPWM();
 
-	if(!ftc.f.ALTHOLD && rc.rawData[THROTTLE] < RC_MINCHECK)
+	if (fc.nowState != fc.goingDown &&
+		fc.nowState != fc.goingUP &&
+		fc.nowState != fc.slowLand &&
+		!ftc.f.ALTHOLD &&
+		rc.rawData[THROTTLE] < RC_MINCHECK)
 		ResetPWM();
 
-	if(abs(imu.angle.x) > 45 || abs(imu.angle.y) > 50)
+	if (abs(imu.angle.x) > 45 || abs(imu.angle.y) > 50)
 	{
 		ResetPWM();
 		ftc.f.ARMED = 0;
@@ -75,22 +73,21 @@ void FTC_Motor::writeMotor(uint16_t throttle, int32_t pidTermRoll, int32_t pidTe
 
 	//写入电机PWM
 	pwm.SetPwm(motorPWM);
-	
 }
 
-void FTC_Motor::getPWM(int16_t* pwm)
+void FTC_Motor::getPWM(int16_t *pwm)
 {
 	*(pwm) = motorPWM[0];
-	*(pwm+1) = motorPWM[1];
-	*(pwm+2) = motorPWM[2];
-	*(pwm+3) = motorPWM[3];
-	*(pwm+4) = motorPWM[4];
-	*(pwm+5) = motorPWM[5];	
+	*(pwm + 1) = motorPWM[1];
+	*(pwm + 2) = motorPWM[2];
+	*(pwm + 3) = motorPWM[3];
+	*(pwm + 4) = motorPWM[4];
+	*(pwm + 5) = motorPWM[5];
 }
 
 void FTC_Motor::ResetPWM(void)
 {
-	for(u8 i=0; i< MAXMOTORS ; i++)
+	for (u8 i = 0; i < MAXMOTORS; i++)
 		motorPWM[i] = 1000;
 }
 

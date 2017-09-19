@@ -8,13 +8,11 @@
 class FTC_PWM
 {
 
-public:
+  public:
 	static void out_Init(uint16_t hz);
 	void SetPwm(int16_t pwm[MAXMOTORS]);
-	
 };
 
 extern FTC_PWM pwm;
 
 #endif
-

@@ -5,8 +5,7 @@
 
 class FTC_UART3
 {
-public:
-	
+  public:
 	u8 RxState3;
 
 	static void Init(u32 br_num);
@@ -14,7 +13,7 @@ public:
 
 	void Put_Char(unsigned char DataToSend);
 	void Put_String(unsigned char *Str);
-	void Put_Buf(unsigned char *DataToSend , u8 data_num);
+	void Put_Buf(unsigned char *DataToSend, u8 data_num);
 };
 
 extern FTC_UART3 uart3;

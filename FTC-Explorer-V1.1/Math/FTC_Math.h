@@ -9,7 +9,6 @@
 #include "FTC_Matrix3.h"
 #include "FTC_Quaternion.h"
 
-
 #define M_PI 3.141592653f
 #define DEG_TO_RAD 0.01745329f
 #define RAD_TO_DEG 57.29577951f
@@ -43,21 +42,13 @@ float sq(float v);
 float pythagorous2(float a, float b);
 
 //3维向量长度
-float pythagorous3(float a, float b, float c); 
+float pythagorous3(float a, float b, float c);
 
 //4维向量长度
 float pythagorous4(float a, float b, float c, float d);
-
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) > (b) ? (a) : (b))
 #define abs(x) ((x) > 0 ? (x) : -(x))
 
 #endif
-
-
-
-
-
-
-
