@@ -6,12 +6,11 @@
 
 class FTC_Scheduler
 {
-public:
+  public:
 	//构造函数
 	FTC_Scheduler();
 	//任务时基计数变量
-	uint16_t cnt_1ms,cnt_2ms,cnt_5ms,cnt_10ms,cnt_20ms;
-
+	uint16_t cnt_1ms, cnt_2ms, cnt_5ms, cnt_10ms, cnt_20ms;
 };
 
 void FTC_Loop(void);

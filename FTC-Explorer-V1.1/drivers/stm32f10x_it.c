@@ -57,10 +57,10 @@ void NMI_Handler(void)
   */
 void MemManage_Handler(void)
 {
-    /* Go to infinite loop when Memory Manage exception occurs */
-    while (1)
-    {
-    }
+  /* Go to infinite loop when Memory Manage exception occurs */
+  while (1)
+  {
+  }
 }
 
 /**
@@ -70,10 +70,10 @@ void MemManage_Handler(void)
   */
 void BusFault_Handler(void)
 {
-    /* Go to infinite loop when Bus Fault exception occurs */
-    while (1)
-    {
-    }
+  /* Go to infinite loop when Bus Fault exception occurs */
+  while (1)
+  {
+  }
 }
 
 /**
@@ -83,10 +83,10 @@ void BusFault_Handler(void)
   */
 void UsageFault_Handler(void)
 {
-    /* Go to infinite loop when Usage Fault exception occurs */
-    while (1)
-    {
-    }
+  /* Go to infinite loop when Usage Fault exception occurs */
+  while (1)
+  {
+  }
 }
 
 /**
@@ -109,18 +109,16 @@ void DebugMon_Handler(void)
 
 ARMAPI void SysTick_Handler(void)
 {
-	SysTick_IRQ();
+  SysTick_IRQ();
 }
-
 
 ARMAPI void USART1_IRQHandler(void)
 {
-
 }
 
 ARMAPI void USART3_IRQHandler(void)
 {
-	uart3.IRQ();
+  uart3.IRQ();
 }
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */
@@ -129,12 +127,8 @@ ARMAPI void USART3_IRQHandler(void)
 /*  file (startup_stm32f10x_xx.s).                                            */
 /******************************************************************************/
 
-
-
-
 /**
   * @}
   */
-
 
 /******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
